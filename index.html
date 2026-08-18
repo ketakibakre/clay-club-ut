@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Clay Club @ UT — Build the systems that find jobs, customers, and companies</title>
-<meta name="description" content="Clay Club @ UT teaches students to build the go-to-market systems behind modern recruiting, research, and outreach. Any major. No code required.">
+<title>Clay Club @ UT Austin — Find the right companies. Find the right people. Reach them.</title>
+<meta name="description" content="Learn how to use Clay to automate the research and outreach you already do for recruiting, student orgs, startups, and projects. Any major. No coding experience needed. Free for UT students.">
 
-<meta property="og:title" content="Clay Club @ UT">
-<meta property="og:description" content="Build the systems that find jobs, customers, and companies. Any major. No code required.">
+<meta property="og:title" content="Clay Club @ UT Austin">
+<meta property="og:description" content="Learn how to use Clay to automate the research and outreach you already do for recruiting, student orgs, startups, and projects. Any major. No coding needed.">
 <meta property="og:type" content="website">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,10 +22,10 @@
         colors: {
           ink:    '#16202B', /* cool ink — text + structure */
           slate:  '#5A6673', /* secondary text */
-          paper:  '#F7F8F9', /* off-white paper background */
-          rule:   '#DCE1E6', /* muted neutral — borders, grid lines, empty state */
-          orange: '#BF5700', /* UT burnt orange — ENRICHED STATE ONLY */
-          tint:   '#FBF6F1'  /* soft warm tint — card surfaces */
+          paper:  '#F7F8F9', /* off-white page background */
+          rule:   '#DCE1E6', /* borders and grid lines */
+          orange: '#BF5700', /* UT burnt orange — accent, used sparingly */
+          tint:   '#FDF4EC'  /* soft orange tint for "with Clay" surfaces */
         },
         fontFamily: {
           display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
@@ -40,82 +40,32 @@
 <style>
   html { scroll-behavior: smooth; }
 
-  /* Faint cell-grid texture — the "empty cell" motif, structural not decorative */
+  /* Faint grid texture behind the hero only */
   .grid-bg {
     background-image:
       linear-gradient(to right,  #DCE1E6 1px, transparent 1px),
       linear-gradient(to bottom, #DCE1E6 1px, transparent 1px);
-    background-size: 72px 72px;
+    background-size: 76px 76px;
     background-position: -1px -1px;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 85%);
+            mask-image: linear-gradient(to bottom, #000 0%, transparent 85%);
   }
-  .grid-fade { -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 82%);
-                       mask-image: linear-gradient(to bottom, #000 0%, transparent 82%); }
 
-  /* ---- Signature element: engineered cells filling in on scroll ---- */
-  .cell-text {
-    opacity: 0;
-    transform: translateY(3px);
-    transition: opacity .5s ease, transform .5s ease;
-  }
-  .cell.filled .cell-text { opacity: 1; transform: none; }
+  /* One subtle scroll reveal, used only on the "With Clay" column */
+  .reveal { opacity: 0; transform: translateY(6px); transition: opacity .45s ease, transform .45s ease; }
+  .reveal.shown { opacity: 1; transform: none; }
 
-  .cell-empty {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 0 1rem;
-    transition: opacity .3s ease;
-  }
-  .cell.filled .cell-empty { opacity: 0; pointer-events: none; }
-
-  .cell-empty i {
-    width: 5px; height: 5px; border-radius: 999px;
-    background: #C3CBD3;
-    animation: pulse 1.2s ease-in-out infinite;
-  }
-  .cell-empty i:nth-child(2) { animation-delay: .18s; }
-  .cell-empty i:nth-child(3) { animation-delay: .36s; }
-  @keyframes pulse { 0%, 100% { opacity: .35; } 50% { opacity: 1; } }
-
-  /* The fill itself: empty cell -> enriched cell */
-  .cell {
-    position: relative;
-    background: #fff;
-    border-left: 3px solid #DCE1E6;
-    transition: background-color .5s ease, border-color .5s ease;
-  }
-  .cell.filled { background: #FDF4EC; border-left-color: #BF5700; }
-
-  /* Accessibility: no motion, no staging — everything is simply filled */
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .cell-text { opacity: 1 !important; transform: none !important; transition: none; }
-    .cell-empty { display: none !important; }
-    .cell { background: #FDF4EC; border-left-color: #BF5700; transition: none; }
+    .reveal { opacity: 1 !important; transform: none !important; transition: none; }
     * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; }
   }
 
-  /* Visible keyboard focus on everything interactive */
-  a:focus-visible, button:focus-visible, input:focus-visible,
-  select:focus-visible, summary:focus-visible {
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
     outline: 2px solid #BF5700;
     outline-offset: 2px;
     border-radius: 4px;
   }
-
-  /* Expandable cards */
-  .card-body {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows .32s ease;
-  }
-  .card[data-open="true"] .card-body { grid-template-rows: 1fr; }
-  /* min-height:0 is required — grid items default to min-height:auto and won't collapse */
-  .card-body > div { overflow: hidden; min-height: 0; }
-  .card[data-open="true"] .card-plus { transform: rotate(45deg); }
-  .card-plus { transition: transform .28s ease; }
 
   select {
     -webkit-appearance: none; appearance: none;
@@ -125,6 +75,18 @@
   }
 
   input[type="checkbox"] { accent-color: #BF5700; }
+
+  /* Arrow connectors in the workflow, horizontal on large screens only */
+  @media (min-width: 1024px) {
+    .flow-step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -1.05rem;
+      top: 2.1rem;
+      color: #A9B3BD;
+      font-size: 1rem;
+    }
+  }
 </style>
 </head>
 
@@ -132,328 +94,483 @@
 
 <a href="#signup" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:m-3 focus:rounded focus:bg-ink focus:px-4 focus:py-3 focus:text-white">Skip to signup</a>
 
-<!-- ============================ 5.1  HERO ============================ -->
+<!-- ============================== 1. HERO ============================== -->
 <header class="relative overflow-hidden border-b border-rule">
-  <div class="grid-bg grid-fade absolute inset-0 opacity-[0.55]" aria-hidden="true"></div>
+  <div class="grid-bg absolute inset-0 opacity-60" aria-hidden="true"></div>
 
-  <div class="relative mx-auto max-w-5xl px-5 pt-10 pb-20 sm:pt-14 sm:pb-28">
+  <div class="relative mx-auto max-w-5xl px-5 pt-10 pb-20 sm:pt-16 sm:pb-28">
     <p class="font-mono text-[11px] sm:text-xs uppercase tracking-[0.18em] text-slate">
       Clay Club <span class="text-orange">@</span> UT Austin
     </p>
 
-    <h1 class="mt-8 font-display font-bold tracking-[-0.03em] leading-[1.03] text-[2.6rem] sm:text-6xl lg:text-7xl max-w-[16ch]">
-      Build the systems that find jobs, customers, and companies.
+    <h1 class="mt-8 max-w-[17ch] font-display text-[2.4rem] font-bold leading-[1.06] tracking-[-0.03em] sm:text-6xl lg:text-[4.2rem]">
+      Find the right companies. Find the right people. Reach them.
     </h1>
 
-    <p class="mt-6 max-w-[46ch] text-lg sm:text-xl text-slate leading-snug">
-      We teach students to build the go-to-market systems companies actually run on. Any major. No code required.
+    <p class="mt-7 max-w-[54ch] text-lg leading-relaxed text-slate sm:text-xl">
+      Learn how to use Clay to automate the research and outreach you already do for
+      recruiting, student orgs, startups, and projects.
     </p>
 
-    <a href="#signup"
-       class="mt-9 inline-flex min-h-[52px] items-center gap-2 rounded-lg bg-orange px-7 text-base font-semibold text-white transition hover:bg-[#A64A00]">
-      Get on the list
-      <span aria-hidden="true">↓</span>
-    </a>
+    <p class="mt-4 text-[17px] text-slate">
+      Any major. No coding experience needed. Free for UT students.
+    </p>
+
+    <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+      <a href="#signup"
+         class="inline-flex min-h-[52px] items-center justify-center rounded-lg bg-orange px-7 text-base font-semibold text-white transition hover:bg-[#A64A00]">
+        Join the first cohort
+      </a>
+      <a href="#build"
+         class="inline-flex min-h-[52px] items-center justify-center rounded-lg border border-rule bg-white px-7 text-base font-medium text-ink transition hover:border-slate">
+        See what we'll build ↓
+      </a>
+    </div>
   </div>
 </header>
 
 <main>
 
-<!-- =================== 5.2  BY HAND vs. ENGINEERED =================== -->
-<!-- Signature element: the "engineered" column enriches itself on scroll. -->
-<section class="border-b border-rule bg-white" aria-labelledby="compare-h">
-  <div class="mx-auto max-w-5xl px-5 py-16 sm:py-24">
+<!-- ========================= 2. WHAT IS GTM? =========================== -->
+<section class="border-b border-rule bg-white" aria-labelledby="gtm-h">
+  <div class="mx-auto max-w-5xl px-5 py-20 sm:py-28">
 
-    <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-slate">The difference</p>
-    <h2 id="compare-h" class="mt-3 font-display text-3xl sm:text-5xl font-bold tracking-[-0.025em] leading-[1.08] max-w-[20ch]">
-      Same task, done two ways.
+    <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-slate">What is GTM?</p>
+    <h2 id="gtm-h" class="mt-4 max-w-[20ch] font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.75rem]">
+      First, what does go-to-market actually mean?
     </h2>
-    <p class="mt-4 max-w-[52ch] text-slate">
-      Everyone recruiting does the work on the left. Almost nobody knows the work on the right is available to them.
+
+    <div class="mt-8 max-w-[62ch] space-y-5 text-[17px] leading-relaxed text-slate">
+      <p>
+        Go-to-market, or GTM, is how a company finds the people who might need its product
+        and figures out how to reach them.
+      </p>
+      <p>That usually means answering a few basic questions:</p>
+    </div>
+
+    <ol class="mt-10 max-w-[68ch] space-y-8">
+      <li class="flex gap-5">
+        <span class="mt-1 font-mono text-sm text-orange" aria-hidden="true">01</span>
+        <div>
+          <h3 class="font-display text-xl font-semibold tracking-[-0.01em]">Who should we talk to?</h3>
+          <p class="mt-2 text-[17px] leading-relaxed text-slate">Find the right companies, customers, or people.</p>
+        </div>
+      </li>
+      <li class="flex gap-5">
+        <span class="mt-1 font-mono text-sm text-orange" aria-hidden="true">02</span>
+        <div>
+          <h3 class="font-display text-xl font-semibold tracking-[-0.01em]">What do we know about them?</h3>
+          <p class="mt-2 text-[17px] leading-relaxed text-slate">
+            Research things like their industry, location, size, job openings, funding, or recent news.
+          </p>
+        </div>
+      </li>
+      <li class="flex gap-5">
+        <span class="mt-1 font-mono text-sm text-orange" aria-hidden="true">03</span>
+        <div>
+          <h3 class="font-display text-xl font-semibold tracking-[-0.01em]">Who is the right person to contact?</h3>
+          <p class="mt-2 text-[17px] leading-relaxed text-slate">
+            Find the person responsible and get accurate contact information.
+          </p>
+        </div>
+      </li>
+      <li class="flex gap-5">
+        <span class="mt-1 font-mono text-sm text-orange" aria-hidden="true">04</span>
+        <div>
+          <h3 class="font-display text-xl font-semibold tracking-[-0.01em]">What should we say?</h3>
+          <p class="mt-2 text-[17px] leading-relaxed text-slate">
+            Use what you found to write outreach that is actually relevant to them.
+          </p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="mt-12 max-w-[62ch] space-y-5 text-[17px] leading-relaxed text-slate">
+      <p>Companies have sales and growth teams doing this every day.</p>
+      <p>
+        Students do a version of the same thing when they recruit for internships, find sponsors
+        for an org, research companies, or reach out to alumni.
+      </p>
+      <p class="text-ink">The problem is that most of us do it manually.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= 3. WHAT CLAY DOES ========================= -->
+<section id="build" class="border-b border-rule scroll-mt-4" aria-labelledby="clay-h">
+  <div class="mx-auto max-w-5xl px-5 py-20 sm:py-28">
+
+    <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-slate">So where does Clay come in?</p>
+    <h2 id="clay-h" class="mt-4 font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.75rem]">
+      Clay turns that work into a system.
+    </h2>
+
+    <div class="mt-8 max-w-[62ch] space-y-5 text-[17px] leading-relaxed text-slate">
+      <p>Clay is a tool for finding, researching, and organizing information about companies and people.</p>
+      <p>
+        Instead of opening 50 LinkedIn tabs and copying everything into a spreadsheet, you can give
+        Clay a list and build a process that does much of the work for you.
+      </p>
+    </div>
+
+    <!-- The workflow: List -> Enrich -> Filter -> Research -> Reach out -->
+    <ol class="mt-12 grid gap-4 lg:grid-cols-5 lg:gap-7">
+      <li class="flow-step relative rounded-xl border border-rule bg-white p-5">
+        <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-orange">Step 1</p>
+        <h3 class="mt-3 font-display text-lg font-semibold tracking-[-0.01em]">Start with a list</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-slate">Companies, jobs, people, or anything else you want to research.</p>
+      </li>
+      <li class="flow-step relative rounded-xl border border-rule bg-white p-5">
+        <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-orange">Step 2</p>
+        <h3 class="mt-3 font-display text-lg font-semibold tracking-[-0.01em]">Add information</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-slate">Find things like company size, funding, location, job titles, emails, or recent news.</p>
+      </li>
+      <li class="flow-step relative rounded-xl border border-rule bg-white p-5">
+        <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-orange">Step 3</p>
+        <h3 class="mt-3 font-display text-lg font-semibold tracking-[-0.01em]">Filter</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-slate">Keep only the companies or people that actually match what you're looking for.</p>
+      </li>
+      <li class="flow-step relative rounded-xl border border-rule bg-white p-5">
+        <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-orange">Step 4</p>
+        <h3 class="mt-3 font-display text-lg font-semibold tracking-[-0.01em]">Research</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-slate">Use AI and other data sources to answer specific questions about each one.</p>
+      </li>
+      <li class="flow-step relative rounded-xl border border-rule bg-white p-5">
+        <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-orange">Step 5</p>
+        <h3 class="mt-3 font-display text-lg font-semibold tracking-[-0.01em]">Reach out</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-slate">Create personalized messages using the information you found.</p>
+      </li>
+    </ol>
+
+    <div class="mt-12 max-w-[62ch] space-y-5 text-[17px] leading-relaxed text-slate">
+      <p>
+        That process is what people mean when they talk about GTM engineering. You are taking work
+        that would normally be done manually and building a repeatable process for it.
+      </p>
+      <p class="text-ink">No code required.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========================== 4. BEFORE / AFTER ======================== -->
+<section class="border-b border-rule bg-white" aria-labelledby="why-h">
+  <div class="mx-auto max-w-5xl px-5 py-20 sm:py-28">
+
+    <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-slate">Why learn this?</p>
+    <h2 id="why-h" class="mt-4 font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.75rem]">
+      You're probably already doing this work.
+    </h2>
+    <p class="mt-4 max-w-[52ch] text-[17px] leading-relaxed text-slate">
+      The difference is whether you do every step yourself.
     </p>
 
-    <!-- Column headers (desktop) -->
-    <div class="mt-12 hidden md:grid grid-cols-2 gap-4 pb-3">
-      <p class="font-mono text-[11px] uppercase tracking-[0.16em] text-slate">By hand</p>
-      <p class="font-mono text-[11px] uppercase tracking-[0.16em] text-orange pl-4">Engineered</p>
+    <!-- Column headers, desktop only -->
+    <div class="mt-14 hidden md:grid md:grid-cols-2 md:gap-5 md:pl-[168px]">
+      <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-slate">Manually</p>
+      <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-orange">With Clay</p>
     </div>
 
-    <div id="compare" class="mt-6 md:mt-0 space-y-4">
+    <div id="compare" class="mt-4 divide-y divide-rule border-t border-rule">
 
       <!-- row -->
-      <div class="grid gap-3 md:grid-cols-2 md:gap-4">
-        <div class="rounded-lg border border-rule bg-paper p-4">
-          <p class="md:hidden font-mono text-[10px] uppercase tracking-[0.16em] text-slate mb-2">By hand</p>
-          <p class="text-[15px] sm:text-base text-slate">Scroll LinkedIn for three hours looking for startups that might be hiring.</p>
-        </div>
-        <div class="cell rounded-lg border border-rule p-4 min-h-[76px]">
-          <span class="cell-empty" aria-hidden="true"><i></i><i></i><i></i></span>
-          <span class="cell-text block">
-            <span class="md:hidden font-mono text-[10px] uppercase tracking-[0.16em] text-orange block mb-2">Engineered</span>
-            <span class="text-[15px] sm:text-base font-medium">Pull every Austin startup that raised a Series A in the last six months. Automatically.</span>
-          </span>
+      <div class="grid gap-3 py-6 md:grid-cols-[148px_1fr_1fr] md:items-start md:gap-5">
+        <h3 class="font-display text-lg font-semibold tracking-[-0.01em] md:pt-4">Finding companies</h3>
+        <p class="rounded-xl border border-rule bg-paper p-4 text-[15px] leading-relaxed text-slate">
+          <span class="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.14em] text-slate md:hidden">Manually</span>
+          Search LinkedIn, Google, Handshake, and company websites one at a time.
+        </p>
+        <div class="reveal rounded-xl border border-orange/35 bg-tint p-4">
+          <span class="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.14em] text-orange md:hidden">With Clay</span>
+          <p class="text-[15px] leading-relaxed">Build a list of companies that match exactly what you're looking for.</p>
+          <p class="mt-3 border-t border-orange/20 pt-3 font-mono text-[12px] leading-relaxed text-slate">
+            Find Austin startups that raised a Series A in the last six months.
+          </p>
         </div>
       </div>
 
       <!-- row -->
-      <div class="grid gap-3 md:grid-cols-2 md:gap-4">
-        <div class="rounded-lg border border-rule bg-paper p-4">
-          <p class="md:hidden font-mono text-[10px] uppercase tracking-[0.16em] text-slate mb-2">By hand</p>
-          <p class="text-[15px] sm:text-base text-slate">Guess at someone's email and hope it bounces gracefully.</p>
-        </div>
-        <div class="cell rounded-lg border border-rule p-4 min-h-[76px]">
-          <span class="cell-empty" aria-hidden="true"><i></i><i></i><i></i></span>
-          <span class="cell-text block">
-            <span class="md:hidden font-mono text-[10px] uppercase tracking-[0.16em] text-orange block mb-2">Engineered</span>
-            <span class="text-[15px] sm:text-base font-medium">Run the name through four data providers in order until one returns a verified address.</span>
-          </span>
-        </div>
-      </div>
-
-      <!-- row -->
-      <div class="grid gap-3 md:grid-cols-2 md:gap-4">
-        <div class="rounded-lg border border-rule bg-paper p-4">
-          <p class="md:hidden font-mono text-[10px] uppercase tracking-[0.16em] text-slate mb-2">By hand</p>
-          <p class="text-[15px] sm:text-base text-slate">Write 20 cold emails that all sound the same.</p>
-        </div>
-        <div class="cell rounded-lg border border-rule p-4 min-h-[76px]">
-          <span class="cell-empty" aria-hidden="true"><i></i><i></i><i></i></span>
-          <span class="cell-text block">
-            <span class="md:hidden font-mono text-[10px] uppercase tracking-[0.16em] text-orange block mb-2">Engineered</span>
-            <span class="text-[15px] sm:text-base font-medium">Generate 200, each one referencing something real about that specific person.</span>
-          </span>
+      <div class="grid gap-3 py-6 md:grid-cols-[148px_1fr_1fr] md:items-start md:gap-5">
+        <h3 class="font-display text-lg font-semibold tracking-[-0.01em] md:pt-4">Finding people</h3>
+        <p class="rounded-xl border border-rule bg-paper p-4 text-[15px] leading-relaxed text-slate">
+          <span class="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.14em] text-slate md:hidden">Manually</span>
+          Search through employees until you find someone who might be relevant.
+        </p>
+        <div class="reveal rounded-xl border border-orange/35 bg-tint p-4">
+          <span class="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.14em] text-orange md:hidden">With Clay</span>
+          <p class="text-[15px] leading-relaxed">Find the right people based on their company, team, role, seniority, or other criteria.</p>
+          <p class="mt-3 border-t border-orange/20 pt-3 font-mono text-[12px] leading-relaxed text-slate">
+            Find product managers at each company on my target list.
+          </p>
         </div>
       </div>
 
       <!-- row -->
-      <div class="grid gap-3 md:grid-cols-2 md:gap-4">
-        <div class="rounded-lg border border-rule bg-paper p-4">
-          <p class="md:hidden font-mono text-[10px] uppercase tracking-[0.16em] text-slate mb-2">By hand</p>
-          <p class="text-[15px] sm:text-base text-slate">Rebuild your company research doc from scratch every time you switch targets.</p>
-        </div>
-        <div class="cell rounded-lg border border-rule p-4 min-h-[76px]">
-          <span class="cell-empty" aria-hidden="true"><i></i><i></i><i></i></span>
-          <span class="cell-text block">
-            <span class="md:hidden font-mono text-[10px] uppercase tracking-[0.16em] text-orange block mb-2">Engineered</span>
-            <span class="text-[15px] sm:text-base font-medium">Build it once as a system, then re-run it on any list you point at it.</span>
-          </span>
+      <div class="grid gap-3 py-6 md:grid-cols-[148px_1fr_1fr] md:items-start md:gap-5">
+        <h3 class="font-display text-lg font-semibold tracking-[-0.01em] md:pt-4">Finding contact information</h3>
+        <p class="rounded-xl border border-rule bg-paper p-4 text-[15px] leading-relaxed text-slate">
+          <span class="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.14em] text-slate md:hidden">Manually</span>
+          Search around for an email or guess the company's email format.
+        </p>
+        <div class="reveal rounded-xl border border-orange/35 bg-tint p-4">
+          <span class="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.14em] text-orange md:hidden">With Clay</span>
+          <p class="text-[15px] leading-relaxed">Check multiple data sources until you find verified contact information.</p>
         </div>
       </div>
 
-    </div>
+      <!-- row -->
+      <div class="grid gap-3 py-6 md:grid-cols-[148px_1fr_1fr] md:items-start md:gap-5">
+        <h3 class="font-display text-lg font-semibold tracking-[-0.01em] md:pt-4">Research</h3>
+        <p class="rounded-xl border border-rule bg-paper p-4 text-[15px] leading-relaxed text-slate">
+          <span class="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.14em] text-slate md:hidden">Manually</span>
+          Open a bunch of tabs and take notes on every company.
+        </p>
+        <div class="reveal rounded-xl border border-orange/35 bg-tint p-4">
+          <span class="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.14em] text-orange md:hidden">With Clay</span>
+          <p class="text-[15px] leading-relaxed">Automatically research the same questions across an entire list.</p>
+          <p class="mt-3 border-t border-orange/20 pt-3 font-mono text-[12px] leading-relaxed text-slate">
+            What does this company sell, who are its customers, and has it launched anything recently?
+          </p>
+        </div>
+      </div>
 
-    <!-- Takeaway + the "engineering" defusal, one screen from first use -->
-    <div class="mt-10 border-t border-rule pt-8 max-w-[58ch]">
-      <p class="font-display text-xl sm:text-2xl font-semibold leading-snug tracking-[-0.015em]">
-        The person on the left is doing the motion. The person on the right is building the motion.
-      </p>
-      <p class="mt-3 text-slate">
-        That shift is the whole discipline. It's called GTM engineering, but the word is misleading —
-        the work happens in a spreadsheet, not a codebase. No CS degree. No CS classes. Every major welcome.
-      </p>
+      <!-- row -->
+      <div class="grid gap-3 py-6 md:grid-cols-[148px_1fr_1fr] md:items-start md:gap-5">
+        <h3 class="font-display text-lg font-semibold tracking-[-0.01em] md:pt-4">Outreach</h3>
+        <p class="rounded-xl border border-rule bg-paper p-4 text-[15px] leading-relaxed text-slate">
+          <span class="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.14em] text-slate md:hidden">Manually</span>
+          Write every message individually or send the same generic message to everyone.
+        </p>
+        <div class="reveal rounded-xl border border-orange/35 bg-tint p-4">
+          <span class="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.14em] text-orange md:hidden">With Clay</span>
+          <p class="text-[15px] leading-relaxed">Use your research to create personalized outreach for each person.</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- ================ 5.3  WHAT YOU'D ACTUALLY BUILD ================== -->
-<section class="border-b border-rule" aria-labelledby="build-h">
-  <div class="mx-auto max-w-5xl px-5 py-16 sm:py-24">
-    <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-slate">In practice</p>
-    <h2 id="build-h" class="mt-3 font-display text-3xl sm:text-5xl font-bold tracking-[-0.025em] leading-[1.08]">
-      What you'd actually build.
+<!-- ==================== 5. WHAT STUDENTS USE IT FOR ==================== -->
+<section class="border-b border-rule" aria-labelledby="use-h">
+  <div class="mx-auto max-w-5xl px-5 py-20 sm:py-28">
+
+    <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-slate">What would I use this for?</p>
+    <h2 id="use-h" class="mt-4 font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.75rem]">
+      Start with something you already care about.
     </h2>
 
-    <div class="mt-10 space-y-3">
+    <div class="mt-12 grid gap-5 lg:grid-cols-3">
 
-      <!-- card 1 -->
-      <div class="card rounded-xl border border-rule bg-white overflow-hidden" data-open="false">
-        <h3>
-          <button type="button" aria-expanded="false" aria-controls="card-1"
-                  class="flex w-full min-h-[64px] items-center justify-between gap-4 px-5 py-4 text-left">
-            <span>
-              <span class="block font-display text-lg sm:text-xl font-semibold tracking-[-0.01em]">Land the internship</span>
-              <span class="mt-1 block text-[15px] text-slate">Find the companies, find the person, say something real.</span>
-            </span>
-            <span class="card-plus shrink-0 font-mono text-xl text-orange" aria-hidden="true">+</span>
-          </button>
-        </h3>
-        <div id="card-1" class="card-body">
-          <div>
-            <div class="border-t border-rule bg-tint px-5 py-5 text-[15px] sm:text-base text-slate">
-              <p>
-                You pick a space — fintech in Austin, consumer brands, VC-backed seed startups — and build the
-                full list of companies in it. Then you find the actual person who owns hiring for the role you
-                want, not the generic careers inbox. Then you write to them about something specific and true:
-                a launch, a raise, a hire they just made. Most students send the same message to fifty companies.
-                You'll send fifty different messages, and you'll build the system that makes that possible in an
-                afternoon.
-              </p>
-            </div>
-          </div>
-        </div>
+      <div class="flex flex-col rounded-xl border border-rule bg-white p-6">
+        <h3 class="font-display text-xl font-semibold tracking-[-0.01em]">Get an internship</h3>
+        <ul class="mt-4 flex-1 space-y-2.5 text-[15px] leading-relaxed text-slate">
+          <li class="flex gap-2.5"><span class="text-orange" aria-hidden="true">·</span>Build a list of companies you want to work for.</li>
+          <li class="flex gap-2.5"><span class="text-orange" aria-hidden="true">·</span>Find relevant recruiters, hiring managers, alumni, or people on the team.</li>
+          <li class="flex gap-2.5"><span class="text-orange" aria-hidden="true">·</span>Research each company.</li>
+          <li class="flex gap-2.5"><span class="text-orange" aria-hidden="true">·</span>Find contact information.</li>
+          <li class="flex gap-2.5"><span class="text-orange" aria-hidden="true">·</span>Create personalized outreach.</li>
+        </ul>
+        <p class="mt-6 border-t border-rule pt-4 font-mono text-[12px] leading-relaxed text-slate">
+          <span class="text-orange">Example build:</span>
+          Find 100 startups hiring product interns and the right person at each company to contact.
+        </p>
       </div>
 
-      <!-- card 2 -->
-      <div class="card rounded-xl border border-rule bg-white overflow-hidden" data-open="false">
-        <h3>
-          <button type="button" aria-expanded="false" aria-controls="card-2"
-                  class="flex w-full min-h-[64px] items-center justify-between gap-4 px-5 py-4 text-left">
-            <span>
-              <span class="block font-display text-lg sm:text-xl font-semibold tracking-[-0.01em]">Run your org</span>
-              <span class="mt-1 block text-[15px] text-slate">The page you're on right now works this way.</span>
-            </span>
-            <span class="card-plus shrink-0 font-mono text-xl text-orange" aria-hidden="true">+</span>
-          </button>
-        </h3>
-        <div id="card-2" class="card-body">
-          <div>
-            <div class="border-t border-rule bg-tint px-5 py-5 text-[15px] sm:text-base text-slate">
-              <p>
-                When you submit the form below, your row lands in a table that fills in the rest by itself —
-                your major, your year, where the link that brought you here came from. We can see which channel
-                actually sends people who show up versus which one just felt busy. Every org on campus does this
-                part by hand in a Google Form and a group chat. It takes an afternoon to build once and it runs
-                every semester after that.
-              </p>
-            </div>
-          </div>
-        </div>
+      <div class="flex flex-col rounded-xl border border-rule bg-white p-6">
+        <h3 class="font-display text-xl font-semibold tracking-[-0.01em]">Grow your student org</h3>
+        <ul class="mt-4 flex-1 space-y-2.5 text-[15px] leading-relaxed text-slate">
+          <li class="flex gap-2.5"><span class="text-orange" aria-hidden="true">·</span>Find potential sponsors, speakers, partners, or members.</li>
+          <li class="flex gap-2.5"><span class="text-orange" aria-hidden="true">·</span>Research which ones are actually a fit.</li>
+          <li class="flex gap-2.5"><span class="text-orange" aria-hidden="true">·</span>Find the right contacts.</li>
+          <li class="flex gap-2.5"><span class="text-orange" aria-hidden="true">·</span>Build personalized outreach.</li>
+        </ul>
+        <p class="mt-6 border-t border-rule pt-4 font-mono text-[12px] leading-relaxed text-slate">
+          <span class="text-orange">Example build:</span>
+          Find 50 Austin companies that sponsor student organizations and the person responsible for university partnerships.
+        </p>
       </div>
 
-      <!-- card 3 -->
-      <div class="card rounded-xl border border-rule bg-white overflow-hidden" data-open="false">
-        <h3>
-          <button type="button" aria-expanded="false" aria-controls="card-3"
-                  class="flex w-full min-h-[64px] items-center justify-between gap-4 px-5 py-4 text-left">
-            <span>
-              <span class="block font-display text-lg sm:text-xl font-semibold tracking-[-0.01em]">Do the research</span>
-              <span class="mt-1 block text-[15px] text-slate">Market maps and competitor tracking, minus the 2am part.</span>
-            </span>
-            <span class="card-plus shrink-0 font-mono text-xl text-orange" aria-hidden="true">+</span>
-          </button>
-        </h3>
-        <div id="card-3" class="card-body">
-          <div>
-            <div class="border-t border-rule bg-tint px-5 py-5 text-[15px] sm:text-base text-slate">
-              <p>
-                Case competition on Monday, and you need every player in a category with headcount, funding, and
-                what they actually sell. By hand that's a night you don't get back. As a system it's a list, a
-                set of columns, and a re-run whenever the category changes. The same build works for a class
-                project, a consulting case, or the market map a founder asks you for in week one of an internship.
-              </p>
-            </div>
-          </div>
-        </div>
+      <div class="flex flex-col rounded-xl border border-rule bg-white p-6">
+        <h3 class="font-display text-xl font-semibold tracking-[-0.01em]">Research a market</h3>
+        <ul class="mt-4 flex-1 space-y-2.5 text-[15px] leading-relaxed text-slate">
+          <li class="flex gap-2.5"><span class="text-orange" aria-hidden="true">·</span>Build lists of companies in an industry.</li>
+          <li class="flex gap-2.5"><span class="text-orange" aria-hidden="true">·</span>Automatically collect information about each one.</li>
+          <li class="flex gap-2.5"><span class="text-orange" aria-hidden="true">·</span>Track competitors, funding, hiring, products, or other signals.</li>
+        </ul>
+        <p class="mt-6 border-t border-rule pt-4 font-mono text-[12px] leading-relaxed text-slate">
+          <span class="text-orange">Example build:</span>
+          Create a live database of AI startups in Austin and track when they raise money or start hiring.
+        </p>
       </div>
-
     </div>
+
+    <p class="mt-8 max-w-[62ch] text-[17px] leading-relaxed text-slate">
+      And once you understand how it works, you can use the same skills for sales, growth,
+      marketing, consulting, startups, and research.
+    </p>
   </div>
 </section>
 
-<!-- ===================== 5.4  WHAT THE CLUB IS ====================== -->
+<!-- ============================= 6. THE CLUB =========================== -->
 <section class="border-b border-rule bg-white" aria-labelledby="club-h">
-  <div class="mx-auto max-w-5xl px-5 py-16 sm:py-24">
+  <div class="mx-auto max-w-5xl px-5 py-20 sm:py-28">
+
     <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-slate">The club</p>
-    <h2 id="club-h" class="mt-3 font-display text-3xl sm:text-5xl font-bold tracking-[-0.025em] leading-[1.08]">
-      What this actually is.
+    <h2 id="club-h" class="mt-4 font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.75rem]">
+      We learn by building.
     </h2>
 
-    <div class="mt-10 grid gap-px overflow-hidden rounded-xl border border-rule bg-rule sm:grid-cols-2">
-
-      <div class="bg-white p-6">
-        <p class="font-mono text-[11px] uppercase tracking-[0.16em] text-orange">Format</p>
-        <p class="mt-3 text-[15px] sm:text-base text-slate">
-          Working sessions, not lectures. You bring a laptop and leave with something that runs.
-          Each session is one build, start to finish, on a real target you picked.
-        </p>
-      </div>
-
-      <div class="bg-white p-6">
-        <p class="font-mono text-[11px] uppercase tracking-[0.16em] text-orange">Cadence</p>
-        <p class="mt-3 text-[15px] sm:text-base text-slate">
-          Weekday evenings, weekly. The exact night isn't locked — we set it with the first cohort
-          around their schedules. That's what the availability question below is for.
-        </p>
-      </div>
-
-      <div class="bg-white p-6">
-        <p class="font-mono text-[11px] uppercase tracking-[0.16em] text-orange">Cohort size — 15</p>
-        <p class="mt-3 text-[15px] sm:text-base text-slate">
-          Fifteen is the number of people one person can actually get unstuck in two hours. Bigger than
-          that and it becomes a lecture where four people build and eleven watch. The cap is the format,
-          not a marketing tactic.
-        </p>
-      </div>
-
-      <div class="bg-white p-6">
-        <p class="font-mono text-[11px] uppercase tracking-[0.16em] text-orange">Cost</p>
-        <p class="mt-3 text-[15px] sm:text-base text-slate">
-          Free. Clay supports student clubs with access to the platform, so there are no dues and
-          nothing to buy.
-        </p>
-      </div>
+    <div class="mt-8 max-w-[62ch] space-y-5 text-[17px] leading-relaxed text-slate">
+      <p>
+        Clay Club is a weekly working session. Each week, we'll pick one problem and build the
+        solution together in Clay.
+      </p>
+      <p>
+        You bring your laptop. We explain the tools, build alongside you, and help when you get
+        stuck. The goal is that you leave every meeting with something that actually works.
+      </p>
     </div>
 
-    <!-- Borrowed proof, attributed. No invented outcomes. -->
-    <div class="mt-6 grid gap-3 sm:grid-cols-2">
-      <div class="rounded-xl border border-rule bg-paper p-6">
-        <p class="text-[15px] sm:text-base">
-          There are <span class="font-semibold">60+ Clay Clubs worldwide</span>, from Warsaw to Manila.
-          This is the UT Austin one.
-        </p>
-        <p class="mt-3 font-mono text-[11px] uppercase tracking-[0.14em] text-slate">Source: Clay</p>
+    <dl class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="rounded-xl border border-rule bg-paper p-5">
+        <dt class="font-display text-lg font-semibold tracking-[-0.01em]">Weekly</dt>
+        <dd class="mt-2 text-[15px] leading-relaxed text-slate">
+          One weekday evening each week. We'll choose the night based on the first cohort's schedules.
+        </dd>
       </div>
-      <div class="rounded-xl border border-rule bg-paper p-6">
-        <p class="text-[15px] sm:text-base">
-          Roughly <span class="font-semibold">400 GTM engineering roles</span> were posted this spring at a
-          <span class="font-semibold">~$160K median</span> — about 20% above traditional sales and marketing
-          ops roles.
+      <div class="rounded-xl border border-rule bg-paper p-5">
+        <dt class="font-display text-lg font-semibold tracking-[-0.01em]">15 students</dt>
+        <dd class="mt-2 text-[15px] leading-relaxed text-slate">
+          The first cohort is capped at 15 so everyone can get hands-on help.
+        </dd>
+      </div>
+      <div class="rounded-xl border border-rule bg-paper p-5">
+        <dt class="font-display text-lg font-semibold tracking-[-0.01em]">Free</dt>
+        <dd class="mt-2 text-[15px] leading-relaxed text-slate">
+          Clay provides student clubs with access to the platform. There are no dues.
+        </dd>
+      </div>
+      <div class="rounded-xl border border-rule bg-paper p-5">
+        <dt class="font-display text-lg font-semibold tracking-[-0.01em]">Any major</dt>
+        <dd class="mt-2 text-[15px] leading-relaxed text-slate">
+          No coding experience or technical background is required.
+        </dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<!-- ========================= 7. WHAT WE'LL COVER ======================= -->
+<section class="border-b border-rule" aria-labelledby="learn-h">
+  <div class="mx-auto max-w-5xl px-5 py-20 sm:py-28">
+
+    <h2 id="learn-h" class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.75rem]">
+      What you'll learn
+    </h2>
+
+    <ul class="mt-10 grid gap-x-10 gap-y-4 sm:grid-cols-2">
+      <li class="flex gap-3 border-b border-rule pb-4 text-[17px] leading-relaxed">
+        <span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>Building company and people lists
+      </li>
+      <li class="flex gap-3 border-b border-rule pb-4 text-[17px] leading-relaxed">
+        <span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>Finding and verifying contact information
+      </li>
+      <li class="flex gap-3 border-b border-rule pb-4 text-[17px] leading-relaxed">
+        <span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>Enriching data from multiple sources
+      </li>
+      <li class="flex gap-3 border-b border-rule pb-4 text-[17px] leading-relaxed">
+        <span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>Using AI to research companies
+      </li>
+      <li class="flex gap-3 border-b border-rule pb-4 text-[17px] leading-relaxed">
+        <span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>Filtering and scoring large lists
+      </li>
+      <li class="flex gap-3 border-b border-rule pb-4 text-[17px] leading-relaxed">
+        <span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>Writing personalized outreach at scale
+      </li>
+      <li class="flex gap-3 border-b border-rule pb-4 text-[17px] leading-relaxed">
+        <span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>Building workflows you can reuse
+      </li>
+      <li class="flex gap-3 border-b border-rule pb-4 text-[17px] leading-relaxed">
+        <span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>Turning a spreadsheet into a simple GTM system
+      </li>
+    </ul>
+
+    <div class="mt-12">
+      <a href="#signup" class="inline-flex min-h-[52px] items-center justify-center rounded-lg bg-orange px-7 text-base font-semibold text-white transition hover:bg-[#A64A00]">
+        Join the first cohort
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== 8. WHY THIS SKILL MATTERS ==================== -->
+<section class="border-b border-rule bg-white" aria-labelledby="matters-h">
+  <div class="mx-auto max-w-5xl px-5 py-20 sm:py-28">
+
+    <h2 id="matters-h" class="max-w-[22ch] font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.75rem]">
+      Companies are starting to hire people specifically to do this.
+    </h2>
+
+    <div class="mt-8 max-w-[62ch] space-y-5 text-[17px] leading-relaxed text-slate">
+      <p>GTM engineering sits between sales, marketing, operations, data, and AI.</p>
+      <p>
+        The role is still new, but companies are increasingly hiring people who know how to connect
+        tools, data, research, and AI to make growth teams more efficient.
+      </p>
+    </div>
+
+    <div class="mt-10 grid max-w-[62ch] gap-4 sm:grid-cols-2">
+      <div class="rounded-xl border border-rule bg-paper p-5">
+        <p class="text-[15px] leading-relaxed text-slate">
+          Around 400 GTM engineering roles were posted this spring, at a median salary of about
+          $160K.
         </p>
-        <p class="mt-3 font-mono text-[11px] uppercase tracking-[0.14em] text-slate">Source: Pave, cited by Clay</p>
+        <p class="mt-3 font-mono text-[11px] uppercase tracking-[0.12em] text-slate">Pave, cited by Clay</p>
+      </div>
+      <div class="rounded-xl border border-rule bg-paper p-5">
+        <p class="text-[15px] leading-relaxed text-slate">
+          There are 60+ Clay Clubs at schools around the world. This is the UT Austin one.
+        </p>
+        <p class="mt-3 font-mono text-[11px] uppercase tracking-[0.12em] text-slate">Clay</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ======================= 5.5  WHO IT'S FOR ======================== -->
+<!-- ========================== 9. WHO SHOULD JOIN ======================= -->
 <section class="border-b border-rule" aria-labelledby="who-h">
-  <div class="mx-auto max-w-5xl px-5 py-16 sm:py-24">
-    <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-slate">Who it's for</p>
-    <h2 id="who-h" class="mt-3 font-display text-3xl sm:text-5xl font-bold tracking-[-0.025em] leading-[1.08] max-w-[18ch]">
-      If you're wondering whether you're technical enough — you are.
+  <div class="mx-auto max-w-5xl px-5 py-20 sm:py-28">
+
+    <h2 id="who-h" class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.75rem]">
+      You do not need to be technical.
     </h2>
 
-    <div class="mt-9 max-w-[58ch] space-y-4 text-slate">
-      <p class="text-[15px] sm:text-lg">
-        Business, Marketing, MIS, Economics, Finance, Advertising, Government, anything. The people who get the
-        most out of this are usually the ones who are already organized and stubborn about detail — not the ones
-        who can code.
+    <div class="mt-8 max-w-[62ch] space-y-5 text-[17px] leading-relaxed text-slate">
+      <p>If you're comfortable using a spreadsheet, you can learn Clay.</p>
+      <p>
+        Business, marketing, MIS, economics, finance, advertising, government, engineering, CS,
+        liberal arts — it doesn't matter. Freshmen through grad students are welcome.
       </p>
-      <p class="text-[15px] sm:text-lg">
-        If you can build a decent spreadsheet, you can do all of it. There's no CS prerequisite, no course
-        requirement, and no GPA cutoff. Freshmen through grad students.
-      </p>
-      <p class="text-[15px] sm:text-lg">
-        The one thing that matters: you want to leave with something built, not with a line on your résumé.
-      </p>
+      <p>The club is for people who want to build useful things, not just attend meetings.</p>
     </div>
   </div>
 </section>
 
-<!-- ======================== 5.6  SIGNUP FORM ======================== -->
+<!-- ============================= 10. SIGNUP =========================== -->
 <section id="signup" class="border-b border-rule bg-white scroll-mt-4" aria-labelledby="signup-h">
-  <div class="mx-auto max-w-2xl px-5 py-16 sm:py-24">
+  <div class="mx-auto max-w-2xl px-5 py-20 sm:py-28">
 
-    <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-slate">Sign up</p>
-    <h2 id="signup-h" class="mt-3 font-display text-3xl sm:text-5xl font-bold tracking-[-0.025em] leading-[1.08]">
-      Get on the list.
+    <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-slate">Join</p>
+    <h2 id="signup-h" class="mt-4 font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.75rem]">
+      Join the first Clay Club cohort at UT.
     </h2>
-    <p class="mt-4 text-slate max-w-[46ch]">
-      Two questions are required. Everything else helps us build the first cohort around real schedules.
-    </p>
 
-    <!-- The single form. Two tiers, one boolean, one row per person. -->
-    <form id="signup-form" class="mt-10 space-y-6" novalidate>
+    <div class="mt-6 space-y-4 text-[17px] leading-relaxed text-slate">
+      <p>We're starting with 15 students so we can keep the sessions hands-on.</p>
+      <p>Fill out the form below to get on the list.</p>
+    </div>
+
+    <form id="signup-form" class="mt-12 space-y-6" novalidate>
 
       <input type="hidden" name="utm_source" id="utm_source" value="direct">
 
@@ -472,7 +589,6 @@
         <input id="email" name="email" type="email" required autocomplete="email" inputmode="email"
                placeholder="you@utexas.edu"
                class="mt-2 block w-full min-h-[52px] rounded-lg border border-rule bg-paper px-4 text-base text-ink placeholder:text-[#98A2AD] focus:border-orange focus:bg-white">
-        <p class="mt-2 text-sm text-slate">School email is easiest, but any works.</p>
       </div>
 
       <div class="grid gap-6 sm:grid-cols-2">
@@ -499,41 +615,43 @@
         <label for="goal" class="block font-mono text-[11px] uppercase tracking-[0.16em] text-slate">
           What do you want to get out of this?
         </label>
-        <input id="goal" name="goal" type="text" placeholder="One line is plenty."
+        <input id="goal" name="goal" type="text" placeholder="One line is fine."
                class="mt-2 block w-full min-h-[52px] rounded-lg border border-rule bg-paper px-4 text-base text-ink placeholder:text-[#98A2AD] focus:border-orange focus:bg-white">
       </div>
 
-      <!-- Tier 2: the commit box -->
       <div class="rounded-xl border border-rule bg-paper p-5">
         <label for="cohort_interest" class="flex cursor-pointer items-start gap-3">
           <input type="checkbox" id="cohort_interest" name="cohort_interest" value="yes"
                  class="mt-0.5 h-5 w-5 shrink-0 rounded border-rule">
           <span>
-            <span class="block font-medium text-ink">I want one of the 15 spots in the first cohort.</span>
-            <span class="mt-1 block text-sm text-slate">
-              Means you'd show up weekly and build. Leave it unchecked to just stay on the list — that's the normal choice.
+            <span class="block font-medium text-ink">I want to join the 15-person first cohort.</span>
+            <span class="mt-1.5 block text-[15px] leading-relaxed text-slate">
+              Check this if you can attend weekly working sessions. Leave it unchecked if you just
+              want updates about future Clay Club events.
             </span>
           </span>
         </label>
 
-        <!-- Progressive disclosure: revealed only when the box above is checked -->
+        <!-- Revealed only when the box above is checked -->
         <fieldset id="availability-group" class="mt-5 border-t border-rule pt-5" hidden>
           <legend class="font-mono text-[11px] uppercase tracking-[0.16em] text-slate">
-            When could you make it? Pick any.
+            Which evenings work for you?
           </legend>
-          <p class="mt-2 text-sm text-slate">Nothing's scheduled yet — this is how we pick the night.</p>
+          <p class="mt-2 text-[15px] leading-relaxed text-slate">
+            Pick any. This is how we'll choose the night.
+          </p>
           <div class="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
             <label class="flex min-h-[48px] cursor-pointer items-center gap-2 rounded-lg border border-rule bg-white px-3 text-[15px]">
-              <input type="checkbox" name="availability" value="Mon eve" class="h-4 w-4 rounded border-rule"> Mon eve
+              <input type="checkbox" name="availability" value="Mon eve" class="h-4 w-4 rounded border-rule"> Monday
             </label>
             <label class="flex min-h-[48px] cursor-pointer items-center gap-2 rounded-lg border border-rule bg-white px-3 text-[15px]">
-              <input type="checkbox" name="availability" value="Tue eve" class="h-4 w-4 rounded border-rule"> Tue eve
+              <input type="checkbox" name="availability" value="Tue eve" class="h-4 w-4 rounded border-rule"> Tuesday
             </label>
             <label class="flex min-h-[48px] cursor-pointer items-center gap-2 rounded-lg border border-rule bg-white px-3 text-[15px]">
-              <input type="checkbox" name="availability" value="Wed eve" class="h-4 w-4 rounded border-rule"> Wed eve
+              <input type="checkbox" name="availability" value="Wed eve" class="h-4 w-4 rounded border-rule"> Wednesday
             </label>
             <label class="flex min-h-[48px] cursor-pointer items-center gap-2 rounded-lg border border-rule bg-white px-3 text-[15px]">
-              <input type="checkbox" name="availability" value="Thu eve" class="h-4 w-4 rounded border-rule"> Thu eve
+              <input type="checkbox" name="availability" value="Thu eve" class="h-4 w-4 rounded border-rule"> Thursday
             </label>
             <label class="flex min-h-[48px] cursor-pointer items-center gap-2 rounded-lg border border-rule bg-white px-3 text-[15px]">
               <input type="checkbox" name="availability" value="Weekend" class="h-4 w-4 rounded border-rule"> Weekend
@@ -546,15 +664,14 @@
 
       <button type="submit" id="submit-btn"
               class="w-full min-h-[54px] rounded-lg bg-orange px-6 text-base font-semibold text-white transition hover:bg-[#A64A00] disabled:opacity-60">
-        Sign me up
+        Join Clay Club
       </button>
     </form>
 
-    <!-- Success state: replaces the form in place. No redirect, no modal. -->
-    <div id="confirmation" class="mt-10 rounded-xl border border-orange bg-tint p-7" hidden tabindex="-1">
-      <p class="font-mono text-[11px] uppercase tracking-[0.16em] text-orange">Row added</p>
-      <h3 class="mt-3 font-display text-2xl sm:text-3xl font-bold tracking-[-0.02em]">You're on the list.</h3>
-      <p id="confirmation-body" class="mt-3 text-slate"></p>
+    <!-- Replaces the form in place on submit -->
+    <div id="confirmation" class="mt-12 rounded-xl border border-orange/40 bg-tint p-7" hidden tabindex="-1">
+      <h3 class="font-display text-2xl font-bold tracking-[-0.02em]">You're on the list.</h3>
+      <p id="confirmation-body" class="mt-3 text-[17px] leading-relaxed text-slate"></p>
     </div>
 
   </div>
@@ -562,8 +679,7 @@
 
 </main>
 
-<!-- =========================== 5.7  FOOTER ========================== -->
-<footer class="mx-auto max-w-5xl px-5 py-12">
+<footer class="mx-auto max-w-5xl px-5 py-14">
   <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
     <p class="font-mono text-[11px] uppercase tracking-[0.16em] text-slate">
       Clay Club <span class="text-orange">@</span> UT Austin
@@ -592,35 +708,24 @@ const SCRIPT_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
   const utm = new URLSearchParams(window.location.search).get('utm_source');
   document.getElementById('utm_source').value = (utm && utm.trim()) || 'direct';
 
-  /* --- Signature element: engineered cells fill in on scroll ---------- */
-  const cells = Array.from(document.querySelectorAll('#compare .cell'));
+  /* --- One subtle reveal on the "With Clay" column -------------------- */
+  const reveals = Array.from(document.querySelectorAll('#compare .reveal'));
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (reduced || !('IntersectionObserver' in window)) {
-    cells.forEach(c => c.classList.add('filled'));
+    reveals.forEach(el => el.classList.add('shown'));
   } else {
     const io = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
-        const i = cells.indexOf(entry.target);
-        setTimeout(() => entry.target.classList.add('filled'), Math.max(0, i) * 180 % 720 + 120);
+        entry.target.classList.add('shown');
         obs.unobserve(entry.target);
       });
-    }, { threshold: 0.45, rootMargin: '0px 0px -8% 0px' });
-    cells.forEach(c => io.observe(c));
+    }, { threshold: 0.3, rootMargin: '0px 0px -6% 0px' });
+    reveals.forEach(el => io.observe(el));
   }
 
-  /* --- Expandable cards: expand in place, no modal, no navigation ----- */
-  document.querySelectorAll('.card button[aria-expanded]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const card = btn.closest('.card');
-      const open = card.dataset.open === 'true';
-      card.dataset.open = open ? 'false' : 'true';
-      btn.setAttribute('aria-expanded', String(!open));
-    });
-  });
-
-  /* --- Progressive disclosure: availability follows the commit box ---- */
+  /* --- Availability appears only for cohort applicants ---------------- */
   const cohort = document.getElementById('cohort_interest');
   const availability = document.getElementById('availability-group');
   cohort.addEventListener('change', () => {
@@ -649,11 +754,11 @@ const SCRIPT_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
 
     if (!nameField.value.trim()) return showError('Add your name so we know who you are.');
     if (!emailField.value.trim() || !emailField.checkValidity()) {
-      return showError('That email doesn’t look right — mind checking it?');
+      return showError('That email does not look right. Mind checking it?');
     }
 
     btn.disabled = true;
-    btn.textContent = 'Sending…';
+    btn.textContent = 'Sending...';
 
     const committed = cohort.checked;
 
@@ -683,14 +788,14 @@ const SCRIPT_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
           Object.fromEntries(body));
       }
     } catch (err) {
-      // Opaque responses mean we can't read success; network failures still land here.
+      // Opaque responses mean we can't read success; network failures land here.
       console.error(err);
     }
 
-    // Success is optimistic by necessity — the response is unreadable.
+    // Success is optimistic by necessity: the response is unreadable.
     confirmationBody.textContent = committed
-      ? 'You asked for a cohort spot, so you’re in the first group we sort through. We’ll email you this week with the night we landed on and what to bring.'
-      : 'Watch your email this week. We’ll send the first session details and how to grab a cohort spot if you change your mind.';
+      ? 'You asked for a spot in the first cohort. We will email you this week with the night we picked and what to bring.'
+      : 'We will email you this week with details about the first session and future events.';
 
     form.hidden = true;
     confirmation.hidden = false;
