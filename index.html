@@ -51,6 +51,42 @@
 
   .panel[hidden] { display: none; }
 
+  /* ---- Scroll motion -------------------------------------------------
+     One effect, used consistently: content lifts in as it enters view.
+     Staggering is driven by --d, set per element in JS.                */
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity .55s cubic-bezier(.22,.61,.36,1) var(--d, 0ms),
+                transform .55s cubic-bezier(.22,.61,.36,1) var(--d, 0ms);
+    will-change: opacity, transform;
+  }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* Reading progress, hairline under the nav */
+  #progress {
+    position: absolute;
+    left: 0; bottom: -1px;
+    height: 2px;
+    width: 100%;
+    transform: scaleX(var(--p, 0));
+    transform-origin: 0 50%;
+    background: #BF5700;
+    opacity: .85;
+  }
+
+  /* Active section in the nav. Uses text-decoration rather than a pseudo-element:
+     the link is inline-flex inside a scroll container, where an absolutely
+     positioned bar resolves to zero width and can be clipped. */
+  nav a[aria-current="true"] {
+    color: #16202B;
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: #BF5700;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 7px;
+  }
+
   /* Career chips */
   .chip[aria-pressed="true"] {
     border-color: #BF5700;
@@ -82,6 +118,9 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, dialog[open] { animation: none !important; transition: none !important; }
+    /* Nothing is allowed to stay invisible waiting for a scroll handler */
+    .reveal { opacity: 1 !important; transform: none !important; }
+    #progress { display: none; }
   }
 </style>
 </head>
@@ -92,6 +131,7 @@
 
 <!-- ============================== NAV ============================== -->
 <div class="sticky top-0 z-30 border-b border-rule bg-paper/95 backdrop-blur">
+  <div id="progress" aria-hidden="true"></div>
   <div class="mx-auto flex max-w-5xl items-center gap-4 px-5 py-3">
     <a href="#top" class="hidden shrink-0 font-mono text-[11px] uppercase tracking-[0.16em] text-ink lg:block">
       Clay Club <span class="text-orange">@</span> UT
@@ -159,7 +199,7 @@
 <section id="gtm" class="scroll-mt-[68px] border-b border-rule bg-white" aria-labelledby="gtm-h">
   <div class="mx-auto max-w-5xl px-5 py-14 sm:py-20">
 
-    <h2 id="gtm-h" class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
+    <h2 id="gtm-h" data-reveal class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
       So, what is GTM?
     </h2>
 
@@ -177,7 +217,7 @@
 
     <p class="mt-12 text-[17px] text-slate">A lot of careers work on different parts of that problem.</p>
 
-    <div class="mt-5 flex flex-wrap gap-2.5" role="group" aria-label="GTM careers">
+    <div class="mt-5 flex flex-wrap gap-2.5" role="group" data-reveal-stagger aria-label="GTM careers">
       <button type="button" class="chip min-h-[44px] rounded-lg border border-rule bg-paper px-4 text-[15px] font-medium text-slate transition hover:border-orange" data-role="sales" aria-pressed="false" aria-controls="role-panel">Sales</button>
       <button type="button" class="chip min-h-[44px] rounded-lg border border-rule bg-paper px-4 text-[15px] font-medium text-slate transition hover:border-orange" data-role="growth" aria-pressed="false" aria-controls="role-panel">Growth</button>
       <button type="button" class="chip min-h-[44px] rounded-lg border border-rule bg-paper px-4 text-[15px] font-medium text-slate transition hover:border-orange" data-role="revops" aria-pressed="false" aria-controls="role-panel">Revenue Operations</button>
@@ -200,11 +240,11 @@
 <section class="border-b border-rule" aria-labelledby="changed-h">
   <div class="mx-auto max-w-5xl px-5 py-14 sm:py-20">
 
-    <h2 id="changed-h" class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
+    <h2 id="changed-h" data-reveal class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
       The work is changing.
     </h2>
 
-    <div class="mt-12 grid gap-4 md:grid-cols-2 md:gap-5">
+    <div class="mt-12 grid gap-4 md:grid-cols-2 md:gap-5" data-reveal-stagger>
       <div class="rounded-xl border border-rule bg-white p-6">
         <p class="font-mono text-[11px] uppercase tracking-[0.16em] text-slate">Before</p>
         <ul class="mt-4 space-y-2.5 text-[16px] leading-relaxed text-slate">
@@ -250,7 +290,7 @@
 <section id="club" class="scroll-mt-[68px] border-b border-rule bg-white" aria-labelledby="club-h">
   <div class="mx-auto max-w-5xl px-5 py-14 sm:py-20">
 
-    <h2 id="club-h" class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
+    <h2 id="club-h" data-reveal class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
       We'll teach you how to build it.
     </h2>
 
@@ -263,7 +303,7 @@
       </p>
     </div>
 
-    <dl class="mt-12 grid gap-x-10 gap-y-8 border-t border-rule pt-10 sm:grid-cols-2">
+    <dl class="mt-12 grid gap-x-10 gap-y-8 border-t border-rule pt-10 sm:grid-cols-2" data-reveal-stagger>
       <div>
         <dt class="font-display text-lg font-semibold tracking-[-0.01em]">Learn the strategy</dt>
         <dd class="mt-2 text-[16px] leading-relaxed text-slate">
@@ -300,11 +340,11 @@
 <section id="learn" class="scroll-mt-[68px] border-b border-rule" aria-labelledby="learn-h">
   <div class="mx-auto max-w-5xl px-5 py-14 sm:py-20">
 
-    <h2 id="learn-h" class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
+    <h2 id="learn-h" data-reveal class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
       What you'll leave knowing
     </h2>
 
-    <div class="mt-10 grid gap-4 sm:grid-cols-2">
+    <div class="mt-10 grid gap-4 sm:grid-cols-2" data-reveal-stagger>
       <div class="rounded-xl border border-rule bg-white p-6">
         <h3 class="font-display text-lg font-semibold tracking-[-0.01em]">Find the right market</h3>
         <p class="mt-2 text-[16px] leading-relaxed text-slate">
@@ -346,75 +386,52 @@
 <section id="try" class="scroll-mt-[68px] border-b border-rule bg-white" aria-labelledby="try-h">
   <div class="mx-auto max-w-5xl px-5 py-14 sm:py-20">
 
-    <h2 id="try-h" class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
+    <h2 id="try-h" data-reveal class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
       And you can use it right now.
     </h2>
     <p class="mt-4 max-w-[58ch] text-[17px] leading-relaxed text-slate">
       The same skills companies use for GTM can solve problems students already have.
     </p>
 
-    <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-
+    <!-- Title plus the affordance only. The description and the workflow both
+         live in the modal, so the grid stays scannable in a couple of seconds. -->
+    <div class="mt-10 grid gap-3 sm:grid-cols-2" data-reveal-stagger>
       <button type="button" data-modal="use-internship"
-              class="rounded-xl border border-rule bg-paper p-5 text-left transition hover:border-orange">
-        <span class="block font-display text-lg font-semibold tracking-[-0.01em]">Land an internship</span>
-        <span class="mt-2 block text-[15px] leading-relaxed text-slate">
-          Build a list of companies you're actually interested in, find the right people, research them, and personalize your outreach.
-        </span>
-        <span class="mt-3 inline-block text-[14px] font-medium text-orange">See how →</span>
+              class="group flex min-h-[68px] items-center justify-between gap-4 rounded-xl border border-rule bg-paper px-5 py-4 text-left transition hover:border-orange hover:bg-tint">
+        <span class="font-display text-lg font-semibold tracking-[-0.01em]">Land an internship</span>
+        <span class="shrink-0 text-[14px] font-medium text-orange transition-transform group-hover:translate-x-0.5">See how →</span>
       </button>
 
       <button type="button" data-modal="use-startups"
-              class="rounded-xl border border-rule bg-paper p-5 text-left transition hover:border-orange">
-        <span class="block font-display text-lg font-semibold tracking-[-0.01em]">Find startups before everyone else</span>
-        <span class="mt-2 block text-[15px] leading-relaxed text-slate">
-          Build a list based on funding, hiring, location, industry, or other signals instead of scrolling LinkedIn.
-        </span>
-        <span class="mt-3 inline-block text-[14px] font-medium text-orange">See how →</span>
+              class="group flex min-h-[68px] items-center justify-between gap-4 rounded-xl border border-rule bg-paper px-5 py-4 text-left transition hover:border-orange hover:bg-tint">
+        <span class="font-display text-lg font-semibold tracking-[-0.01em]">Find startups before everyone else</span>
+        <span class="shrink-0 text-[14px] font-medium text-orange transition-transform group-hover:translate-x-0.5">See how →</span>
       </button>
 
       <button type="button" data-modal="use-sponsors"
-              class="rounded-xl border border-rule bg-paper p-5 text-left transition hover:border-orange">
-        <span class="block font-display text-lg font-semibold tracking-[-0.01em]">Get sponsors for your org</span>
-        <span class="mt-2 block text-[15px] leading-relaxed text-slate">
-          Find companies that might sponsor your student organization and the right person to contact.
-        </span>
-        <span class="mt-3 inline-block text-[14px] font-medium text-orange">See how →</span>
+              class="group flex min-h-[68px] items-center justify-between gap-4 rounded-xl border border-rule bg-paper px-5 py-4 text-left transition hover:border-orange hover:bg-tint">
+        <span class="font-display text-lg font-semibold tracking-[-0.01em]">Get sponsors for your org</span>
+        <span class="shrink-0 text-[14px] font-medium text-orange transition-transform group-hover:translate-x-0.5">See how →</span>
       </button>
 
-      <!-- The last three are hidden on phones until asked for -->
-      <button type="button" data-modal="use-network" data-extra
-              class="hidden rounded-xl border border-rule bg-paper p-5 text-left transition hover:border-orange sm:block">
-        <span class="block font-display text-lg font-semibold tracking-[-0.01em]">Network smarter</span>
-        <span class="mt-2 block text-[15px] leading-relaxed text-slate">
-          Find alumni or people with specific backgrounds instead of searching LinkedIn manually.
-        </span>
-        <span class="mt-3 inline-block text-[14px] font-medium text-orange">See how →</span>
+      <button type="button" data-modal="use-network"
+              class="group flex min-h-[68px] items-center justify-between gap-4 rounded-xl border border-rule bg-paper px-5 py-4 text-left transition hover:border-orange hover:bg-tint">
+        <span class="font-display text-lg font-semibold tracking-[-0.01em]">Network smarter</span>
+        <span class="shrink-0 text-[14px] font-medium text-orange transition-transform group-hover:translate-x-0.5">See how →</span>
       </button>
 
-      <button type="button" data-modal="use-industry" data-extra
-              class="hidden rounded-xl border border-rule bg-paper p-5 text-left transition hover:border-orange sm:block">
-        <span class="block font-display text-lg font-semibold tracking-[-0.01em]">Research an industry</span>
-        <span class="mt-2 block text-[15px] leading-relaxed text-slate">
-          Build your own database of companies and automatically collect the information you care about.
-        </span>
-        <span class="mt-3 inline-block text-[14px] font-medium text-orange">See how →</span>
+      <button type="button" data-modal="use-industry"
+              class="group flex min-h-[68px] items-center justify-between gap-4 rounded-xl border border-rule bg-paper px-5 py-4 text-left transition hover:border-orange hover:bg-tint">
+        <span class="font-display text-lg font-semibold tracking-[-0.01em]">Research an industry</span>
+        <span class="shrink-0 text-[14px] font-medium text-orange transition-transform group-hover:translate-x-0.5">See how →</span>
       </button>
 
-      <button type="button" data-modal="use-founder" data-extra
-              class="hidden rounded-xl border border-rule bg-paper p-5 text-left transition hover:border-orange sm:block">
-        <span class="block font-display text-lg font-semibold tracking-[-0.01em]">Build for your own startup</span>
-        <span class="mt-2 block text-[15px] leading-relaxed text-slate">
-          Find potential customers, competitors, partners, or users.
-        </span>
-        <span class="mt-3 inline-block text-[14px] font-medium text-orange">See how →</span>
+      <button type="button" data-modal="use-founder"
+              class="group flex min-h-[68px] items-center justify-between gap-4 rounded-xl border border-rule bg-paper px-5 py-4 text-left transition hover:border-orange hover:bg-tint">
+        <span class="font-display text-lg font-semibold tracking-[-0.01em]">Build for your own startup</span>
+        <span class="shrink-0 text-[14px] font-medium text-orange transition-transform group-hover:translate-x-0.5">See how →</span>
       </button>
     </div>
-
-    <button type="button" id="more-ideas"
-            class="mt-6 inline-flex min-h-[44px] items-center gap-1.5 text-[16px] font-medium text-orange hover:underline underline-offset-4 sm:hidden">
-      See more ideas <span aria-hidden="true">↓</span>
-    </button>
   </div>
 </section>
 
@@ -422,7 +439,7 @@
 <section class="border-b border-rule" aria-labelledby="whynow-h">
   <div class="mx-auto max-w-5xl px-5 py-16 sm:py-20">
 
-    <h2 id="whynow-h" class="font-display text-2xl font-bold leading-[1.15] tracking-[-0.02em] sm:text-3xl">
+    <h2 id="whynow-h" data-reveal class="font-display text-2xl font-bold leading-[1.15] tracking-[-0.02em] sm:text-3xl">
       Learn how sales is changing.
     </h2>
 
@@ -449,7 +466,7 @@
 <section id="signup" class="scroll-mt-[68px] border-b border-rule bg-white" aria-labelledby="signup-h">
   <div class="mx-auto max-w-2xl px-5 py-14 sm:py-20">
 
-    <h2 id="signup-h" class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
+    <h2 id="signup-h" data-reveal class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
       Learn GTM with us.
     </h2>
 
@@ -644,6 +661,12 @@ const SCRIPT_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
        </li>`).join('')}</ol>`;
   };
 
+  // Use case = what it is, then how it works. Both are depth, so both are here
+  // rather than on the card.
+  const useCase = (intro, steps) =>
+    `<p class="text-[16px] leading-relaxed text-slate">${intro}</p>
+     <div class="mt-5 border-t border-rule pt-5">${flow(steps)}</div>`;
+
   const CONTENT = {
     skills: {
       title: "Everything we'll cover",
@@ -655,27 +678,39 @@ const SCRIPT_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
     },
     'use-internship': {
       title: 'Land an internship',
-      html: flow('Find 100 startups hiring product interns → find recruiters, product leaders, and UT alumni → add contact information → research each company → create personalized outreach.')
+      html: useCase(
+        "Build a list of companies you're actually interested in, find the right people, research them, and personalize your outreach.",
+        'Find 100 startups hiring product interns → find recruiters, product leaders, and UT alumni → add contact information → research each company → create personalized outreach.')
     },
     'use-startups': {
       title: 'Find startups before everyone else',
-      html: flow('Find every Austin startup that raised funding in the last six months and see which ones are hiring.')
+      html: useCase(
+        'Build a list based on funding, hiring, location, industry, or other signals instead of scrolling LinkedIn.',
+        'Find every Austin startup that raised funding in the last six months and see which ones are hiring.')
     },
     'use-sponsors': {
       title: 'Get sponsors for your org',
-      html: flow('Find companies that recruit at UT → identify university recruiting or partnerships contacts → research their campus programs → build personalized outreach.')
+      html: useCase(
+        'Find companies that might sponsor your student organization and the right person to contact.',
+        'Find companies that recruit at UT → identify university recruiting or partnerships contacts → research their campus programs → build personalized outreach.')
     },
     'use-network': {
       title: 'Network smarter',
-      html: flow('Find UT alumni working in product at Series B–D startups and organize them by company, role, and location.')
+      html: useCase(
+        'Find alumni or people with specific backgrounds instead of searching LinkedIn manually.',
+        'Find UT alumni working in product at Series B–D startups and organize them by company, role, and location.')
     },
     'use-industry': {
       title: 'Research an industry',
-      html: flow('Build a map of AI startups in Austin with funding, founders, headcount, hiring, and industry.')
+      html: useCase(
+        'Build your own database of companies and automatically collect the information you care about.',
+        'Build a map of AI startups in Austin with funding, founders, headcount, hiring, and industry.')
     },
     'use-founder': {
       title: 'Build for your own startup',
-      html: flow('Define your ideal customer → find matching companies → research their needs → identify the right contacts → test outreach.')
+      html: useCase(
+        'Find potential customers, competitors, partners, or users.',
+        'Define your ideal customer → find matching companies → research their needs → identify the right contacts → test outreach.')
     }
   };
 
@@ -699,12 +734,84 @@ const SCRIPT_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
   modal.addEventListener('click', (e) => { if (e.target === modal) modal.close(); });
   modal.addEventListener('close', () => { if (lastFocused) lastFocused.focus(); });
 
-  /* --- Phones see three use cases until they ask for the rest --------- */
-  const moreBtn = document.getElementById('more-ideas');
-  moreBtn.addEventListener('click', () => {
-    document.querySelectorAll('[data-extra]').forEach(el => el.classList.remove('hidden'));
-    moreBtn.remove();
+  /* =====================================================================
+     Scroll behaviour: reveal on entry, reading progress, active nav link.
+     All three are skipped entirely under prefers-reduced-motion.
+     ===================================================================== */
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canObserve = 'IntersectionObserver' in window;
+
+  // Elements marked [data-reveal] animate themselves; [data-reveal-stagger]
+  // hands the animation to its children so a grid fills in one card at a time.
+  const revealTargets = [];
+  document.querySelectorAll('[data-reveal]').forEach(el => revealTargets.push([el, 0]));
+  document.querySelectorAll('[data-reveal-stagger]').forEach(group => {
+    [...group.children].forEach((child, i) => revealTargets.push([child, i]));
   });
+
+  const revealAll = () => revealTargets.forEach(([el]) => el.classList.add('in'));
+
+  if (reduced || !canObserve) {
+    revealAll();
+  } else {
+    revealTargets.forEach(([el, i]) => {
+      el.classList.add('reveal');
+      el.style.setProperty('--d', Math.min(i, 5) * 70 + 'ms');
+    });
+
+    const revealObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('in');
+        obs.unobserve(entry.target);          // reveal once, never re-hide
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    revealTargets.forEach(([el]) => revealObserver.observe(el));
+
+    // Anything already on screen at load reveals on the next frame rather than
+    // waiting on the observer, so the top of the page is never briefly blank.
+    requestAnimationFrame(() => {
+      revealTargets.forEach(([el]) => {
+        if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('in');
+      });
+    });
+
+    // Backstop: hidden content is worse than no animation. If the observer has
+    // not run by now (background tab, odd browser), just show everything.
+    setTimeout(revealAll, 5000);
+  }
+
+  // Reading progress bar under the nav
+  const progress = document.getElementById('progress');
+  if (!reduced) {
+    let ticking = false;
+    const updateProgress = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.setProperty('--p', max > 0 ? Math.min(window.scrollY / max, 1) : 0);
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(updateProgress); }
+    }, { passive: true });
+    updateProgress();
+  }
+
+  // Highlight whichever section you are currently reading
+  const navLinks = [...document.querySelectorAll('nav a[href^="#"]')];
+  if (canObserve && navLinks.length) {
+    const linkFor = {};
+    navLinks.forEach(a => { linkFor[a.getAttribute('href').slice(1)] = a; });
+    const spied = Object.keys(linkFor).map(id => document.getElementById(id)).filter(Boolean);
+    const visible = new Set();
+    const spy = new IntersectionObserver(entries => {
+      entries.forEach(e => e.isIntersecting ? visible.add(e.target.id) : visible.delete(e.target.id));
+      navLinks.forEach(a => a.removeAttribute('aria-current'));
+      // When two sections straddle the viewport, mark the higher one
+      const current = spied.find(s => visible.has(s.id));
+      if (current) linkFor[current.id].setAttribute('aria-current', 'true');
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    spied.forEach(s => spy.observe(s));
+  }
 
   /* --- Availability appears only for cohort applicants ---------------- */
   const cohort = document.getElementById('cohort_interest');
