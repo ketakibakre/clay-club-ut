@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Clay Club @ UT Austin — Learn how modern companies find and reach customers</title>
-<meta name="description" content="Sales and growth are changing. Learn how teams use data, AI, and automation to research markets, find the right people, and build repeatable GTM systems. Weekly hands-on builds in Clay.">
+<meta name="description" content="Learn how sales and growth teams use data, AI, and automation to run GTM. Weekly hands-on builds in Clay. Any major, no coding experience needed, free for UT students.">
 
 <meta property="og:title" content="Clay Club @ UT Austin">
 <meta property="og:description" content="Learn how modern companies find and reach customers. Weekly hands-on builds in Clay. Any major. No coding experience needed. Free for UT students.">
@@ -49,17 +49,12 @@
   .no-bar { scrollbar-width: none; -ms-overflow-style: none; }
   .no-bar::-webkit-scrollbar { display: none; }
 
-  .panel[hidden] { display: none; }
-
-  /* ---- Scroll motion -------------------------------------------------
-     One effect, used consistently: content lifts in as it enters view.
-     Staggering is driven by --d, set per element in JS.                */
+  /* ---- Scroll motion: content lifts in once as it enters view -------- */
   .reveal {
     opacity: 0;
     transform: translateY(12px);
     transition: opacity .55s cubic-bezier(.22,.61,.36,1) var(--d, 0ms),
                 transform .55s cubic-bezier(.22,.61,.36,1) var(--d, 0ms);
-    will-change: opacity, transform;
   }
   .reveal.in { opacity: 1; transform: none; }
 
@@ -75,9 +70,8 @@
     opacity: .85;
   }
 
-  /* Active section in the nav. Uses text-decoration rather than a pseudo-element:
-     the link is inline-flex inside a scroll container, where an absolutely
-     positioned bar resolves to zero width and can be clipped. */
+  /* Active section. text-decoration rather than a pseudo-element: the link is
+     inline-flex inside a scroll container, where a positioned bar collapses. */
   nav a[aria-current="true"] {
     color: #16202B;
     font-weight: 500;
@@ -85,13 +79,6 @@
     text-decoration-color: #BF5700;
     text-decoration-thickness: 2px;
     text-underline-offset: 7px;
-  }
-
-  /* Career chips */
-  .chip[aria-pressed="true"] {
-    border-color: #BF5700;
-    background: #FDF4EC;
-    color: #16202B;
   }
 
   dialog {
@@ -118,7 +105,6 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, dialog[open] { animation: none !important; transition: none !important; }
-    /* Nothing is allowed to stay invisible waiting for a scroll handler */
     .reveal { opacity: 1 !important; transform: none !important; }
     #progress { display: none; }
   }
@@ -132,7 +118,7 @@
 <!-- ============================== NAV ============================== -->
 <div class="sticky top-0 z-30 border-b border-rule bg-paper/95 backdrop-blur">
   <div id="progress" aria-hidden="true"></div>
-  <div class="mx-auto flex max-w-5xl items-center gap-4 px-5 py-3">
+  <div class="mx-auto flex max-w-[1180px] items-center gap-4 px-5 py-3 lg:px-8">
     <a href="#top" class="hidden shrink-0 font-mono text-[11px] uppercase tracking-[0.16em] text-ink lg:block">
       Clay Club <span class="text-orange">@</span> UT
     </a>
@@ -161,428 +147,359 @@
 
 <!-- ============================= 1. HERO ============================ -->
 <header id="top" class="border-b border-rule">
-  <div class="mx-auto max-w-5xl px-5 pt-12 pb-16 sm:pt-20 sm:pb-24">
-    <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-slate">
-      Clay Club <span class="text-orange">@</span> UT Austin
-    </p>
+  <div class="mx-auto max-w-[1180px] px-5 pt-14 pb-16 sm:pt-20 sm:pb-24 lg:px-8">
+    <div class="lg:max-w-[68%]">
+      <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-slate">
+        Clay Club <span class="text-orange">@</span> UT Austin
+      </p>
 
-    <h1 class="mt-7 max-w-[17ch] font-display text-[2.5rem] font-bold leading-[1.05] tracking-[-0.03em] sm:text-6xl lg:text-[3.9rem]">
-      Learn how modern companies find and reach customers.
-    </h1>
+      <h1 class="mt-7 font-display text-[2.5rem] font-bold leading-[1.05] tracking-[-0.03em] sm:text-6xl lg:text-[3.9rem]">
+        Learn how modern companies find and reach customers.
+      </h1>
 
-    <p class="mt-7 max-w-[58ch] text-lg leading-relaxed text-slate sm:text-xl">
-      Sales and growth are changing. Learn how teams use data, AI, and automation to research
-      markets, find the right people, and build repeatable GTM systems.
-    </p>
+      <p class="mt-7 max-w-[52ch] text-lg leading-relaxed text-slate sm:text-xl">
+        Learn how sales and growth teams use data, AI, and automation to run GTM.
+        Weekly hands-on builds in Clay.
+      </p>
 
-    <p class="mt-5 text-[17px] text-slate">
-      Weekly hands-on builds in Clay.<br class="hidden sm:block">
-      Any major. No coding experience needed. Free for UT students.
-    </p>
+      <p class="mt-5 font-mono text-[12px] uppercase tracking-[0.12em] text-slate sm:text-[13px]">
+        Any major · No coding experience needed · Free for UT students
+      </p>
 
-    <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
-      <a href="#signup"
-         class="inline-flex min-h-[52px] items-center justify-center rounded-lg bg-orange px-7 text-base font-semibold text-white transition hover:bg-[#A64A00]">
-        Join the first cohort
-      </a>
-      <a href="#learn"
-         class="inline-flex min-h-[52px] items-center justify-center rounded-lg border border-rule bg-white px-7 text-base font-medium text-ink transition hover:border-slate">
-        See what you'll learn ↓
-      </a>
+      <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <a href="#signup"
+           class="inline-flex min-h-[52px] items-center justify-center rounded-lg bg-orange px-7 text-base font-semibold text-white transition hover:bg-[#A64A00]">
+          Join the first cohort
+        </a>
+        <a href="#gtm"
+           class="inline-flex min-h-[52px] items-center justify-center rounded-lg border border-rule bg-white px-7 text-base font-medium text-ink transition hover:border-slate">
+          See how it works ↓
+        </a>
+      </div>
     </div>
   </div>
 </header>
 
 <main>
 
-<!-- ======================= 2. GTM + CAREERS ========================= -->
+<!-- ================= 2. WHAT IS GTM + HOW IT IS CHANGING ============ -->
 <section id="gtm" class="scroll-mt-[68px] border-b border-rule bg-white" aria-labelledby="gtm-h">
-  <div class="mx-auto max-w-5xl px-5 py-14 sm:py-20">
+  <div class="mx-auto max-w-[1180px] px-5 py-16 sm:py-20 lg:px-8">
 
     <h2 id="gtm-h" data-reveal class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
-      So, what is GTM?
+      What is GTM?
     </h2>
 
-    <p class="mt-7 max-w-[60ch] text-[17px] leading-relaxed text-slate">
-      Go-to-market, or GTM, is how a company finds the right customers and gets its product in front
-      of them. That means figuring out:
+    <p class="mt-6 max-w-[58ch] text-[17px] leading-relaxed text-slate">
+      Go-to-market, or GTM, is how a company figures out who to sell to, how to find them, and how to
+      reach them.
     </p>
 
-    <ul class="mt-6 grid max-w-[60ch] gap-2.5 sm:grid-cols-2">
-      <li class="flex gap-3 text-[17px] text-slate"><span class="mt-[0.62em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>Who should we sell to?</li>
-      <li class="flex gap-3 text-[17px] text-slate"><span class="mt-[0.62em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>How do we find them?</li>
-      <li class="flex gap-3 text-[17px] text-slate"><span class="mt-[0.62em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>What do they care about?</li>
-      <li class="flex gap-3 text-[17px] text-slate"><span class="mt-[0.62em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>How do we reach them?</li>
-    </ul>
-
-    <p class="mt-12 text-[17px] text-slate">A lot of careers work on different parts of that problem.</p>
-
-    <div class="mt-5 flex flex-wrap gap-2.5" role="group" data-reveal-stagger aria-label="GTM careers">
-      <button type="button" class="chip min-h-[44px] rounded-lg border border-rule bg-paper px-4 text-[15px] font-medium text-slate transition hover:border-orange" data-role="sales" aria-pressed="false" aria-controls="role-panel">Sales</button>
-      <button type="button" class="chip min-h-[44px] rounded-lg border border-rule bg-paper px-4 text-[15px] font-medium text-slate transition hover:border-orange" data-role="growth" aria-pressed="false" aria-controls="role-panel">Growth</button>
-      <button type="button" class="chip min-h-[44px] rounded-lg border border-rule bg-paper px-4 text-[15px] font-medium text-slate transition hover:border-orange" data-role="revops" aria-pressed="false" aria-controls="role-panel">Revenue Operations</button>
-      <button type="button" class="chip min-h-[44px] rounded-lg border border-rule bg-paper px-4 text-[15px] font-medium text-slate transition hover:border-orange" data-role="pmm" aria-pressed="false" aria-controls="role-panel">Product Marketing</button>
-      <button type="button" class="chip min-h-[44px] rounded-lg border border-rule bg-paper px-4 text-[15px] font-medium text-slate transition hover:border-orange" data-role="strategy" aria-pressed="false" aria-controls="role-panel">GTM Strategy</button>
-      <button type="button" class="chip min-h-[44px] rounded-lg border border-rule bg-paper px-4 text-[15px] font-medium text-slate transition hover:border-orange" data-role="engineering" aria-pressed="false" aria-controls="role-panel">GTM Engineering</button>
+    <!-- The four questions: plain text blocks, deliberately not cards -->
+    <div class="mt-12 grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4" data-reveal-stagger>
+      <div class="border-t-2 border-orange pt-4">
+        <p class="font-display text-lg font-semibold leading-snug tracking-[-0.01em]">Who should we sell to?</p>
+      </div>
+      <div class="border-t-2 border-orange pt-4">
+        <p class="font-display text-lg font-semibold leading-snug tracking-[-0.01em]">How do we find them?</p>
+      </div>
+      <div class="border-t-2 border-orange pt-4">
+        <p class="font-display text-lg font-semibold leading-snug tracking-[-0.01em]">What do they care about?</p>
+      </div>
+      <div class="border-t-2 border-orange pt-4">
+        <p class="font-display text-lg font-semibold leading-snug tracking-[-0.01em]">How do we reach them?</p>
+      </div>
     </div>
 
-    <p id="role-panel" class="mt-4 max-w-[60ch] text-[17px] leading-relaxed text-slate" role="status" aria-live="polite"></p>
-
-    <p class="mt-8 max-w-[60ch] text-[17px] leading-relaxed text-slate">
-      You don't need to know which one you want to do. They all involve some combination of
-      understanding customers, using data, researching markets, and figuring out how to grow a
-      business.
+    <p class="mt-12 max-w-[62ch] text-[17px] leading-relaxed text-slate">
+      Sales, growth, marketing, RevOps, product marketing, and GTM engineering all work on different
+      parts of this process.
     </p>
-  </div>
-</section>
 
-<!-- ======================== 3. WHAT CHANGED ========================= -->
-<section class="border-b border-rule" aria-labelledby="changed-h">
-  <div class="mx-auto max-w-5xl px-5 py-14 sm:py-20">
+    <button type="button" data-modal="careers"
+            class="mt-4 inline-flex min-h-[44px] items-center gap-1.5 text-[16px] font-medium text-orange hover:underline underline-offset-4">
+      Explore GTM careers <span aria-hidden="true">→</span>
+    </button>
 
-    <h2 id="changed-h" data-reveal class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
-      The work is changing.
-    </h2>
+    <!-- ---- Same section: how the work is changing ---- -->
+    <h3 id="changing" data-reveal class="mt-20 font-display text-2xl font-bold leading-[1.15] tracking-[-0.02em] sm:text-[2rem]">
+      How GTM is changing
+    </h3>
 
-    <div class="mt-12 grid gap-4 md:grid-cols-2 md:gap-5" data-reveal-stagger>
-      <div class="rounded-xl border border-rule bg-white p-6">
+    <div class="mt-8 grid gap-4 md:grid-cols-2 md:gap-6" data-reveal-stagger>
+      <div class="rounded-xl border border-rule bg-paper p-6 lg:p-8">
         <p class="font-mono text-[11px] uppercase tracking-[0.16em] text-slate">Before</p>
-        <ul class="mt-4 space-y-2.5 text-[16px] leading-relaxed text-slate">
-          <li>Research companies one at a time.</li>
-          <li>Search LinkedIn for the right person.</li>
-          <li>Copy information between tools.</li>
-          <li>Write outreach manually.</li>
-          <li>Repeat everything for the next company.</li>
+        <ul class="mt-5 space-y-3 text-[16px] leading-relaxed text-slate lg:text-[17px]">
+          <li>Research companies manually</li>
+          <li>Search LinkedIn for people</li>
+          <li>Copy data between tools</li>
+          <li>Write outreach one by one</li>
+          <li>Repeat the work</li>
         </ul>
       </div>
-      <div class="rounded-xl border border-orange/35 bg-tint p-6">
+      <div class="rounded-xl border border-orange/35 bg-tint p-6 lg:p-8">
         <p class="font-mono text-[11px] uppercase tracking-[0.16em] text-orange">Now</p>
-        <ul class="mt-4 space-y-2.5 text-[16px] leading-relaxed">
-          <li>Build a list.</li>
-          <li>Add data automatically.</li>
-          <li>Use AI to research each company.</li>
-          <li>Prioritize the best opportunities.</li>
-          <li>Turn the process into a workflow you can run again.</li>
+        <ul class="mt-5 space-y-3 text-[16px] font-medium leading-relaxed lg:text-[17px]">
+          <li>Build targeted lists</li>
+          <li>Add data automatically</li>
+          <li>Use AI for research</li>
+          <li>Prioritize the best opportunities</li>
+          <li>Build workflows you can reuse</li>
         </ul>
       </div>
     </div>
 
-    <p class="mt-10 max-w-[60ch] text-[17px] leading-relaxed text-slate">
-      That's the idea behind GTM engineering. Clay describes it as building automated revenue systems
-      using AI, data, and workflow automation.
+    <p class="mt-10 max-w-[58ch] text-[17px] leading-relaxed text-slate">
+      <span class="font-semibold text-ink">That's where Clay fits.</span>
+      Clay brings data, AI research, and automation together so teams can build these workflows in
+      one place.
     </p>
 
-    <div class="mt-10 max-w-[60ch] rounded-xl border border-rule bg-white p-6">
-      <h3 class="font-display text-xl font-semibold tracking-[-0.01em]">Where Clay fits</h3>
-      <p class="mt-3 text-[16px] leading-relaxed text-slate">
-        Clay brings company and people data, AI research, and workflow automation into one place.
-        Instead of just doing the task, you can build the system that does the task.
-      </p>
-      <a href="https://www.clay.com/" target="_blank" rel="noopener noreferrer"
-         class="mt-5 inline-flex min-h-[44px] items-center gap-1.5 text-[16px] font-medium text-orange hover:underline underline-offset-4">
-        Explore Clay <span aria-hidden="true">↗</span>
-      </a>
-    </div>
+    <a href="https://www.clay.com/" target="_blank" rel="noopener noreferrer"
+       class="mt-5 inline-flex min-h-[44px] items-center gap-1.5 text-[16px] font-medium text-orange hover:underline underline-offset-4">
+      Explore Clay <span aria-hidden="true">↗</span>
+    </a>
   </div>
 </section>
 
-<!-- =========================== 4. THE CLUB ========================== -->
-<section id="club" class="scroll-mt-[68px] border-b border-rule bg-white" aria-labelledby="club-h">
-  <div class="mx-auto max-w-5xl px-5 py-14 sm:py-20">
+<!-- ============================ 3. THE CLUB ========================= -->
+<section id="club" class="scroll-mt-[68px] border-b border-rule" aria-labelledby="club-h">
+  <div class="mx-auto max-w-[1180px] px-5 py-16 sm:py-20 lg:px-8">
 
     <h2 id="club-h" data-reveal class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
-      We'll teach you how to build it.
+      Learn it by building it.
     </h2>
 
-    <div class="mt-7 max-w-[60ch] space-y-4 text-[17px] leading-relaxed text-slate">
-      <p>Clay can do a lot. Figuring out where to start is the hard part.</p>
-      <p>
-        Clay Club is a weekly hands-on session where we learn one GTM concept and build it together.
-        You bring your laptop. We explain the idea, show you how the tools work, and help you build
-        your own version.
+    <p class="mt-6 max-w-[60ch] text-[17px] leading-relaxed text-slate">
+      Clay Club is a weekly hands-on session where we take one GTM problem and build the solution
+      together in Clay. We'll explain the strategy, show you the tools, and help you build your own
+      version.
+    </p>
+
+    <!-- Outcomes: minimal blocks, lighter than the use case cards below -->
+    <div class="mt-14 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4" data-reveal-stagger>
+      <div>
+        <span class="block h-1.5 w-1.5 rounded-full bg-orange" aria-hidden="true"></span>
+        <h3 class="mt-4 font-display text-lg font-semibold tracking-[-0.01em]">Find the right market</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-slate">Figure out who to target.</p>
+      </div>
+      <div>
+        <span class="block h-1.5 w-1.5 rounded-full bg-orange" aria-hidden="true"></span>
+        <h3 class="mt-4 font-display text-lg font-semibold tracking-[-0.01em]">Work with data</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-slate">Find and enrich company and people data.</p>
+      </div>
+      <div>
+        <span class="block h-1.5 w-1.5 rounded-full bg-orange" aria-hidden="true"></span>
+        <h3 class="mt-4 font-display text-lg font-semibold tracking-[-0.01em]">Use AI for research</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-slate">Research companies without doing it one by one.</p>
+      </div>
+      <div>
+        <span class="block h-1.5 w-1.5 rounded-full bg-orange" aria-hidden="true"></span>
+        <h3 class="mt-4 font-display text-lg font-semibold tracking-[-0.01em]">Build workflows</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-slate">Turn the process into something you can run again.</p>
+      </div>
+    </div>
+
+    <div class="mt-14 flex flex-col gap-4 border-t border-rule pt-6 sm:flex-row sm:items-center sm:justify-between">
+      <p class="font-mono text-[13px] tracking-[0.06em] text-slate">
+        Weekly · 15 students · Hands-on · Free
       </p>
+      <button type="button" data-modal="skills"
+              class="inline-flex min-h-[44px] items-center gap-1.5 text-[16px] font-medium text-orange hover:underline underline-offset-4">
+        See everything we'll cover <span aria-hidden="true">→</span>
+      </button>
     </div>
-
-    <dl class="mt-12 grid gap-x-10 gap-y-8 border-t border-rule pt-10 sm:grid-cols-2" data-reveal-stagger>
-      <div>
-        <dt class="font-display text-lg font-semibold tracking-[-0.01em]">Learn the strategy</dt>
-        <dd class="mt-2 text-[16px] leading-relaxed text-slate">
-          Understand why a GTM team would build something before learning how to build it.
-        </dd>
-      </div>
-      <div>
-        <dt class="font-display text-lg font-semibold tracking-[-0.01em]">Learn Clay</dt>
-        <dd class="mt-2 text-[16px] leading-relaxed text-slate">
-          Get comfortable finding data, using AI, enriching lists, and building workflows.
-        </dd>
-      </div>
-      <div>
-        <dt class="font-display text-lg font-semibold tracking-[-0.01em]">Build every week</dt>
-        <dd class="mt-2 text-[16px] leading-relaxed text-slate">
-          Every session ends with something that actually runs.
-        </dd>
-      </div>
-      <div>
-        <dt class="font-display text-lg font-semibold tracking-[-0.01em]">Get help</dt>
-        <dd class="mt-2 text-[16px] leading-relaxed text-slate">
-          The first cohort is capped at 15 so we can actually help when you get stuck.
-        </dd>
-      </div>
-    </dl>
-
-    <p class="mt-10 border-t border-rule pt-6 font-mono text-[13px] tracking-[0.06em] text-slate">
-      Weekly · 15 students · Free · Any major
-    </p>
   </div>
 </section>
 
-<!-- ====================== 5. WHAT YOU'LL LEARN ====================== -->
-<section id="learn" class="scroll-mt-[68px] border-b border-rule" aria-labelledby="learn-h">
-  <div class="mx-auto max-w-5xl px-5 py-14 sm:py-20">
-
-    <h2 id="learn-h" data-reveal class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
-      What you'll leave knowing
-    </h2>
-
-    <div class="mt-10 grid gap-4 sm:grid-cols-2" data-reveal-stagger>
-      <div class="rounded-xl border border-rule bg-white p-6">
-        <h3 class="font-display text-lg font-semibold tracking-[-0.01em]">Find the right market</h3>
-        <p class="mt-2 text-[16px] leading-relaxed text-slate">
-          Learn how companies decide who they should target.
-        </p>
-      </div>
-      <div class="rounded-xl border border-rule bg-white p-6">
-        <h3 class="font-display text-lg font-semibold tracking-[-0.01em]">Work with better data</h3>
-        <p class="mt-2 text-[16px] leading-relaxed text-slate">
-          Find, clean, enrich, and organize information about companies and people.
-        </p>
-      </div>
-      <div class="rounded-xl border border-rule bg-white p-6">
-        <h3 class="font-display text-lg font-semibold tracking-[-0.01em]">Use AI for research</h3>
-        <p class="mt-2 text-[16px] leading-relaxed text-slate">
-          Turn manual company research into repeatable workflows.
-        </p>
-      </div>
-      <div class="rounded-xl border border-rule bg-white p-6">
-        <h3 class="font-display text-lg font-semibold tracking-[-0.01em]">Automate GTM work</h3>
-        <p class="mt-2 text-[16px] leading-relaxed text-slate">
-          Connect the pieces into systems that can run again and again.
-        </p>
-      </div>
-    </div>
-
-    <p class="mt-8 max-w-[60ch] text-[17px] leading-relaxed text-slate">
-      Useful for sales, growth, marketing, strategy, consulting, startups, and operations.
-    </p>
-
-    <button type="button" data-modal="skills"
-            class="mt-6 inline-flex min-h-[44px] items-center gap-1.5 text-[16px] font-medium text-orange hover:underline underline-offset-4">
-      See everything we'll cover <span aria-hidden="true">→</span>
-    </button>
-  </div>
-</section>
-
-<!-- ======================= 6. STUDENT USE CASES ===================== -->
+<!-- ======================== 4. STUDENT USE CASES ==================== -->
 <section id="try" class="scroll-mt-[68px] border-b border-rule bg-white" aria-labelledby="try-h">
-  <div class="mx-auto max-w-5xl px-5 py-14 sm:py-20">
+  <div class="mx-auto max-w-[1180px] px-5 py-16 sm:py-20 lg:px-8">
 
     <h2 id="try-h" data-reveal class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
-      And you can use it right now.
+      Use it for something you care about.
     </h2>
-    <p class="mt-4 max-w-[58ch] text-[17px] leading-relaxed text-slate">
-      The same skills companies use for GTM can solve problems students already have.
+    <p class="mt-5 max-w-[52ch] text-[17px] leading-relaxed text-slate">
+      Practice the same skills on problems you already have.
     </p>
 
-    <!-- Title plus the affordance only. The description and the workflow both
-         live in the modal, so the grid stays scannable in a couple of seconds. -->
-    <div class="mt-10 grid gap-3 sm:grid-cols-2" data-reveal-stagger>
+    <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-reveal-stagger>
+
       <button type="button" data-modal="use-internship"
-              class="group flex min-h-[68px] items-center justify-between gap-4 rounded-xl border border-rule bg-paper px-5 py-4 text-left transition hover:border-orange hover:bg-tint">
-        <span class="font-display text-lg font-semibold tracking-[-0.01em]">Land an internship</span>
-        <span class="shrink-0 text-[14px] font-medium text-orange transition-transform group-hover:translate-x-0.5">See how →</span>
-      </button>
-
-      <button type="button" data-modal="use-startups"
-              class="group flex min-h-[68px] items-center justify-between gap-4 rounded-xl border border-rule bg-paper px-5 py-4 text-left transition hover:border-orange hover:bg-tint">
-        <span class="font-display text-lg font-semibold tracking-[-0.01em]">Find startups before everyone else</span>
-        <span class="shrink-0 text-[14px] font-medium text-orange transition-transform group-hover:translate-x-0.5">See how →</span>
-      </button>
-
-      <button type="button" data-modal="use-sponsors"
-              class="group flex min-h-[68px] items-center justify-between gap-4 rounded-xl border border-rule bg-paper px-5 py-4 text-left transition hover:border-orange hover:bg-tint">
-        <span class="font-display text-lg font-semibold tracking-[-0.01em]">Get sponsors for your org</span>
-        <span class="shrink-0 text-[14px] font-medium text-orange transition-transform group-hover:translate-x-0.5">See how →</span>
+              class="group flex h-full flex-col rounded-xl border border-rule bg-paper p-6 text-left transition hover:border-orange hover:bg-tint">
+        <span class="font-display text-xl font-semibold tracking-[-0.01em]">Land an internship</span>
+        <span class="mt-2 flex-1 text-[15px] leading-relaxed text-slate">Find companies and the right people to contact.</span>
+        <span class="mt-5 text-[14px] font-medium text-orange transition-transform group-hover:translate-x-0.5">See how →</span>
       </button>
 
       <button type="button" data-modal="use-network"
-              class="group flex min-h-[68px] items-center justify-between gap-4 rounded-xl border border-rule bg-paper px-5 py-4 text-left transition hover:border-orange hover:bg-tint">
-        <span class="font-display text-lg font-semibold tracking-[-0.01em]">Network smarter</span>
-        <span class="shrink-0 text-[14px] font-medium text-orange transition-transform group-hover:translate-x-0.5">See how →</span>
+              class="group flex h-full flex-col rounded-xl border border-rule bg-paper p-6 text-left transition hover:border-orange hover:bg-tint">
+        <span class="font-display text-xl font-semibold tracking-[-0.01em]">Network smarter</span>
+        <span class="mt-2 flex-1 text-[15px] leading-relaxed text-slate">Find alumni and people in roles you're interested in.</span>
+        <span class="mt-5 text-[14px] font-medium text-orange transition-transform group-hover:translate-x-0.5">See how →</span>
+      </button>
+
+      <button type="button" data-modal="use-startups"
+              class="group flex h-full flex-col rounded-xl border border-rule bg-paper p-6 text-left transition hover:border-orange hover:bg-tint">
+        <span class="font-display text-xl font-semibold tracking-[-0.01em]">Find startups</span>
+        <span class="mt-2 flex-1 text-[15px] leading-relaxed text-slate">Discover companies based on funding, hiring, industry, or location.</span>
+        <span class="mt-5 text-[14px] font-medium text-orange transition-transform group-hover:translate-x-0.5">See how →</span>
+      </button>
+
+      <button type="button" data-modal="use-sponsors"
+              class="group flex h-full flex-col rounded-xl border border-rule bg-paper p-6 text-left transition hover:border-orange hover:bg-tint">
+        <span class="font-display text-xl font-semibold tracking-[-0.01em]">Get org sponsors</span>
+        <span class="mt-2 flex-1 text-[15px] leading-relaxed text-slate">Find potential sponsors and the right contacts.</span>
+        <span class="mt-5 text-[14px] font-medium text-orange transition-transform group-hover:translate-x-0.5">See how →</span>
       </button>
 
       <button type="button" data-modal="use-industry"
-              class="group flex min-h-[68px] items-center justify-between gap-4 rounded-xl border border-rule bg-paper px-5 py-4 text-left transition hover:border-orange hover:bg-tint">
-        <span class="font-display text-lg font-semibold tracking-[-0.01em]">Research an industry</span>
-        <span class="shrink-0 text-[14px] font-medium text-orange transition-transform group-hover:translate-x-0.5">See how →</span>
+              class="group flex h-full flex-col rounded-xl border border-rule bg-paper p-6 text-left transition hover:border-orange hover:bg-tint">
+        <span class="font-display text-xl font-semibold tracking-[-0.01em]">Research an industry</span>
+        <span class="mt-2 flex-1 text-[15px] leading-relaxed text-slate">Build your own database of companies.</span>
+        <span class="mt-5 text-[14px] font-medium text-orange transition-transform group-hover:translate-x-0.5">See how →</span>
       </button>
 
       <button type="button" data-modal="use-founder"
-              class="group flex min-h-[68px] items-center justify-between gap-4 rounded-xl border border-rule bg-paper px-5 py-4 text-left transition hover:border-orange hover:bg-tint">
-        <span class="font-display text-lg font-semibold tracking-[-0.01em]">Build for your own startup</span>
-        <span class="shrink-0 text-[14px] font-medium text-orange transition-transform group-hover:translate-x-0.5">See how →</span>
+              class="group flex h-full flex-col rounded-xl border border-rule bg-paper p-6 text-left transition hover:border-orange hover:bg-tint">
+        <span class="font-display text-xl font-semibold tracking-[-0.01em]">Grow your startup</span>
+        <span class="mt-2 flex-1 text-[15px] leading-relaxed text-slate">Find customers, competitors, partners, or users.</span>
+        <span class="mt-5 text-[14px] font-medium text-orange transition-transform group-hover:translate-x-0.5">See how →</span>
       </button>
     </div>
   </div>
 </section>
 
-<!-- ============================ 7. WHY NOW ========================== -->
-<section class="border-b border-rule" aria-labelledby="whynow-h">
-  <div class="mx-auto max-w-5xl px-5 py-16 sm:py-20">
+<!-- ============================== 5. JOIN =========================== -->
+<section id="signup" class="scroll-mt-[68px] border-b border-rule" aria-labelledby="signup-h">
+  <div class="mx-auto max-w-[1180px] px-5 py-16 sm:py-20 lg:px-8">
+    <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
 
-    <h2 id="whynow-h" data-reveal class="font-display text-2xl font-bold leading-[1.15] tracking-[-0.02em] sm:text-3xl">
-      Learn how sales is changing.
-    </h2>
-
-    <div class="mt-6 max-w-[60ch] space-y-4 text-[17px] leading-relaxed text-slate">
-      <p>
-        A lot of sales and growth work used to depend on people doing research and outreach manually.
-        AI, better data, and automation are changing that.
-      </p>
-      <!-- "Clay calls this GTM engineering" is deliberately not repeated here; it is
-           already defined once in the "The work is changing" section above. -->
-      <p>
-        The valuable skill is increasingly not just doing the task. It is knowing how to build the
-        system behind it.
-      </p>
-      <p class="text-[15px]">
-        Around 400 GTM engineering roles were posted this spring, at a median salary of about $160K.
-        <span class="font-mono text-[12px] uppercase tracking-[0.12em]">(Source: Pave, cited by Clay)</span>
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ============================= 8. SIGNUP ========================== -->
-<section id="signup" class="scroll-mt-[68px] border-b border-rule bg-white" aria-labelledby="signup-h">
-  <div class="mx-auto max-w-2xl px-5 py-14 sm:py-20">
-
-    <h2 id="signup-h" data-reveal class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
-      Learn GTM with us.
-    </h2>
-
-    <div class="mt-6 max-w-[54ch] space-y-4 text-[17px] leading-relaxed text-slate">
-      <p>We're starting with 15 students so every session can stay hands-on.</p>
-      <p>Join the first cohort or sign up to hear about future Clay Club events.</p>
-    </div>
-
-    <form id="signup-form" class="mt-12 space-y-6" novalidate>
-
-      <input type="hidden" name="utm_source" id="utm_source" value="direct">
-
+      <!-- Left: the ask -->
       <div>
-        <label for="name" class="block font-mono text-[11px] uppercase tracking-[0.16em] text-slate">
-          Name <span class="text-orange">*</span>
-        </label>
-        <input id="name" name="name" type="text" required autocomplete="name"
-               class="mt-2 block w-full min-h-[52px] rounded-lg border border-rule bg-paper px-4 text-base text-ink placeholder:text-[#98A2AD] focus:border-orange focus:bg-white">
-      </div>
-
-      <div>
-        <label for="email" class="block font-mono text-[11px] uppercase tracking-[0.16em] text-slate">
-          Email <span class="text-orange">*</span>
-        </label>
-        <input id="email" name="email" type="email" required autocomplete="email" inputmode="email"
-               placeholder="you@utexas.edu"
-               class="mt-2 block w-full min-h-[52px] rounded-lg border border-rule bg-paper px-4 text-base text-ink placeholder:text-[#98A2AD] focus:border-orange focus:bg-white">
-      </div>
-
-      <div class="grid gap-6 sm:grid-cols-2">
-        <div>
-          <label for="major" class="block font-mono text-[11px] uppercase tracking-[0.16em] text-slate">Major</label>
-          <input id="major" name="major" type="text"
-                 class="mt-2 block w-full min-h-[52px] rounded-lg border border-rule bg-paper px-4 text-base text-ink focus:border-orange focus:bg-white">
+        <h2 id="signup-h" data-reveal class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
+          Learn GTM with us.
+        </h2>
+        <div class="mt-6 max-w-[46ch] space-y-4 text-[17px] leading-relaxed text-slate">
+          <p>We're starting with 15 students so every session can stay hands-on.</p>
+          <p>Join the first cohort or sign up for future Clay Club events.</p>
         </div>
-        <div>
-          <label for="year" class="block font-mono text-[11px] uppercase tracking-[0.16em] text-slate">Year</label>
-          <select id="year" name="year"
-                  class="mt-2 block w-full min-h-[52px] rounded-lg border border-rule bg-paper px-4 pr-10 text-base text-ink focus:border-orange focus:bg-white">
-            <option value="">—</option>
-            <option>Freshman</option>
-            <option>Sophomore</option>
-            <option>Junior</option>
-            <option>Senior</option>
-            <option>Grad</option>
-          </select>
-        </div>
+        <p class="mt-8 font-mono text-[13px] tracking-[0.06em] text-slate">
+          Weekly · 15 students · Hands-on · Free
+        </p>
       </div>
 
+      <!-- Right: the form -->
       <div>
-        <label for="goal" class="block font-mono text-[11px] uppercase tracking-[0.16em] text-slate">
-          What do you want to get out of this?
-        </label>
-        <input id="goal" name="goal" type="text" placeholder="One line is fine."
-               class="mt-2 block w-full min-h-[52px] rounded-lg border border-rule bg-paper px-4 text-base text-ink placeholder:text-[#98A2AD] focus:border-orange focus:bg-white">
-      </div>
+        <form id="signup-form" class="space-y-6" novalidate>
 
-      <div class="rounded-xl border border-rule bg-paper p-5">
-        <label for="cohort_interest" class="flex cursor-pointer items-start gap-3">
-          <input type="checkbox" id="cohort_interest" name="cohort_interest" value="yes"
-                 class="mt-0.5 h-5 w-5 shrink-0 rounded border-rule">
-          <span>
-            <span class="block font-medium text-ink">I want to join the 15-person first cohort.</span>
-            <span class="mt-1.5 block text-[15px] leading-relaxed text-slate">
-              Check this if you can attend weekly working sessions. Leave it unchecked if you just
-              want updates about future Clay Club events.
-            </span>
-          </span>
-        </label>
+          <input type="hidden" name="utm_source" id="utm_source" value="direct">
 
-        <fieldset id="availability-group" class="mt-5 border-t border-rule pt-5" hidden>
-          <legend class="font-mono text-[11px] uppercase tracking-[0.16em] text-slate">
-            Which evenings work for you?
-          </legend>
-          <p class="mt-2 text-[15px] leading-relaxed text-slate">
-            Pick any. This is how we'll choose the night.
-          </p>
-          <div class="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
-            <label class="flex min-h-[48px] cursor-pointer items-center gap-2 rounded-lg border border-rule bg-white px-3 text-[15px]">
-              <input type="checkbox" name="availability" value="Mon eve" class="h-4 w-4 rounded border-rule"> Monday
+          <div>
+            <label for="name" class="block font-mono text-[11px] uppercase tracking-[0.16em] text-slate">
+              Name <span class="text-orange">*</span>
             </label>
-            <label class="flex min-h-[48px] cursor-pointer items-center gap-2 rounded-lg border border-rule bg-white px-3 text-[15px]">
-              <input type="checkbox" name="availability" value="Tue eve" class="h-4 w-4 rounded border-rule"> Tuesday
-            </label>
-            <label class="flex min-h-[48px] cursor-pointer items-center gap-2 rounded-lg border border-rule bg-white px-3 text-[15px]">
-              <input type="checkbox" name="availability" value="Wed eve" class="h-4 w-4 rounded border-rule"> Wednesday
-            </label>
-            <label class="flex min-h-[48px] cursor-pointer items-center gap-2 rounded-lg border border-rule bg-white px-3 text-[15px]">
-              <input type="checkbox" name="availability" value="Thu eve" class="h-4 w-4 rounded border-rule"> Thursday
-            </label>
-            <label class="flex min-h-[48px] cursor-pointer items-center gap-2 rounded-lg border border-rule bg-white px-3 text-[15px]">
-              <input type="checkbox" name="availability" value="Weekend" class="h-4 w-4 rounded border-rule"> Weekend
-            </label>
+            <input id="name" name="name" type="text" required autocomplete="name"
+                   class="mt-2 block w-full min-h-[52px] rounded-lg border border-rule bg-white px-4 text-base text-ink placeholder:text-[#98A2AD] focus:border-orange">
           </div>
-        </fieldset>
+
+          <div>
+            <label for="email" class="block font-mono text-[11px] uppercase tracking-[0.16em] text-slate">
+              Email <span class="text-orange">*</span>
+            </label>
+            <input id="email" name="email" type="email" required autocomplete="email" inputmode="email"
+                   placeholder="you@utexas.edu"
+                   class="mt-2 block w-full min-h-[52px] rounded-lg border border-rule bg-white px-4 text-base text-ink placeholder:text-[#98A2AD] focus:border-orange">
+          </div>
+
+          <div class="grid gap-6 sm:grid-cols-2">
+            <div>
+              <label for="major" class="block font-mono text-[11px] uppercase tracking-[0.16em] text-slate">Major</label>
+              <input id="major" name="major" type="text"
+                     class="mt-2 block w-full min-h-[52px] rounded-lg border border-rule bg-white px-4 text-base text-ink focus:border-orange">
+            </div>
+            <div>
+              <label for="year" class="block font-mono text-[11px] uppercase tracking-[0.16em] text-slate">Year</label>
+              <select id="year" name="year"
+                      class="mt-2 block w-full min-h-[52px] rounded-lg border border-rule bg-white px-4 pr-10 text-base text-ink focus:border-orange">
+                <option value="">—</option>
+                <option>Freshman</option>
+                <option>Sophomore</option>
+                <option>Junior</option>
+                <option>Senior</option>
+                <option>Grad</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="goal" class="block font-mono text-[11px] uppercase tracking-[0.16em] text-slate">
+              What do you want to get out of this?
+            </label>
+            <input id="goal" name="goal" type="text" placeholder="One line is fine."
+                   class="mt-2 block w-full min-h-[52px] rounded-lg border border-rule bg-white px-4 text-base text-ink placeholder:text-[#98A2AD] focus:border-orange">
+          </div>
+
+          <div class="rounded-xl border border-rule bg-white p-5">
+            <label for="cohort_interest" class="flex cursor-pointer items-start gap-3">
+              <input type="checkbox" id="cohort_interest" name="cohort_interest" value="yes"
+                     class="mt-0.5 h-5 w-5 shrink-0 rounded border-rule">
+              <span>
+                <span class="block font-medium text-ink">I want to join the 15-person first cohort.</span>
+                <span class="mt-1.5 block text-[15px] leading-relaxed text-slate">
+                  I can attend weekly sessions and want to build with the first group.
+                </span>
+              </span>
+            </label>
+
+            <fieldset id="availability-group" class="mt-5 border-t border-rule pt-5" hidden>
+              <legend class="font-mono text-[11px] uppercase tracking-[0.16em] text-slate">
+                Which evenings work for you?
+              </legend>
+              <p class="mt-2 text-[15px] leading-relaxed text-slate">
+                Pick any. This is how we'll choose the night.
+              </p>
+              <div class="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
+                <label class="flex min-h-[48px] cursor-pointer items-center gap-2 rounded-lg border border-rule bg-paper px-3 text-[15px]">
+                  <input type="checkbox" name="availability" value="Mon eve" class="h-4 w-4 rounded border-rule"> Monday
+                </label>
+                <label class="flex min-h-[48px] cursor-pointer items-center gap-2 rounded-lg border border-rule bg-paper px-3 text-[15px]">
+                  <input type="checkbox" name="availability" value="Tue eve" class="h-4 w-4 rounded border-rule"> Tuesday
+                </label>
+                <label class="flex min-h-[48px] cursor-pointer items-center gap-2 rounded-lg border border-rule bg-paper px-3 text-[15px]">
+                  <input type="checkbox" name="availability" value="Wed eve" class="h-4 w-4 rounded border-rule"> Wednesday
+                </label>
+                <label class="flex min-h-[48px] cursor-pointer items-center gap-2 rounded-lg border border-rule bg-paper px-3 text-[15px]">
+                  <input type="checkbox" name="availability" value="Thu eve" class="h-4 w-4 rounded border-rule"> Thursday
+                </label>
+                <label class="flex min-h-[48px] cursor-pointer items-center gap-2 rounded-lg border border-rule bg-paper px-3 text-[15px]">
+                  <input type="checkbox" name="availability" value="Weekend" class="h-4 w-4 rounded border-rule"> Weekend
+                </label>
+              </div>
+            </fieldset>
+          </div>
+
+          <p id="form-error" class="text-[15px] text-orange" role="alert" hidden></p>
+
+          <button type="submit" id="submit-btn"
+                  class="w-full min-h-[54px] rounded-lg bg-orange px-6 text-base font-semibold text-white transition hover:bg-[#A64A00] disabled:opacity-60">
+            Join Clay Club
+          </button>
+        </form>
+
+        <div id="confirmation" class="rounded-xl border border-orange/40 bg-tint p-7" hidden tabindex="-1">
+          <h3 class="font-display text-2xl font-bold tracking-[-0.02em]">You're on the list.</h3>
+          <p id="confirmation-body" class="mt-3 text-[17px] leading-relaxed text-slate"></p>
+        </div>
       </div>
 
-      <p id="form-error" class="text-[15px] text-orange" role="alert" hidden></p>
-
-      <button type="submit" id="submit-btn"
-              class="w-full min-h-[54px] rounded-lg bg-orange px-6 text-base font-semibold text-white transition hover:bg-[#A64A00] disabled:opacity-60">
-        Join Clay Club
-      </button>
-    </form>
-
-    <div id="confirmation" class="mt-12 rounded-xl border border-orange/40 bg-tint p-7" hidden tabindex="-1">
-      <h3 class="font-display text-2xl font-bold tracking-[-0.02em]">You're on the list.</h3>
-      <p id="confirmation-body" class="mt-3 text-[17px] leading-relaxed text-slate"></p>
     </div>
-
   </div>
 </section>
 
 </main>
 
-<footer class="mx-auto max-w-5xl px-5 py-14">
+<footer class="mx-auto max-w-[1180px] px-5 py-12 lg:px-8">
   <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
     <p class="font-mono text-[11px] uppercase tracking-[0.16em] text-slate">
       Clay Club <span class="text-orange">@</span> UT Austin
@@ -624,50 +541,39 @@ const SCRIPT_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
   const utm = new URLSearchParams(window.location.search).get('utm_source');
   document.getElementById('utm_source').value = (utm && utm.trim()) || 'direct';
 
-  /* --- Career chips: one sentence, revealed on click ------------------ */
-  const ROLES = {
-    sales:       'Sales — finds potential customers, understands their needs, and helps them buy.',
-    growth:      'Growth — tests ways to find, acquire, and activate more customers.',
-    revops:      'Revenue Operations — builds the data, tools, and processes that sales and marketing teams use.',
-    pmm:         'Product Marketing — figures out who a product is for, how to position it, and why customers should care.',
-    strategy:    'GTM Strategy — decides which markets, customers, and opportunities a company should prioritize.',
-    engineering: 'GTM Engineering — uses data, AI, and automation to turn GTM work into repeatable systems.'
-  };
-
-  const rolePanel = document.getElementById('role-panel');
-  const chips = document.querySelectorAll('.chip');
-
-  chips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      const active = chip.getAttribute('aria-pressed') === 'true';
-      chips.forEach(c => c.setAttribute('aria-pressed', 'false'));
-      if (active) {
-        rolePanel.textContent = '';           // clicking the active chip clears it
-        return;
-      }
-      chip.setAttribute('aria-pressed', 'true');
-      rolePanel.textContent = ROLES[chip.dataset.role] || '';
-    });
-  });
-
-  /* --- Modal content -------------------------------------------------- */
-  // Renders "a → b → c" as numbered steps; a plain sentence stays a sentence.
+  /* =====================================================================
+     Modal content. All of the page's depth lives here rather than in the
+     markup, which is what keeps the visible page short.
+     ===================================================================== */
   const flow = (text) => {
     const parts = text.split('→').map(s => s.trim());
-    if (parts.length === 1) return `<p class="text-[16px] leading-relaxed">${text}</p>`;
     return `<ol class="space-y-3">${parts.map((s, i) =>
       `<li class="flex gap-3 text-[16px] leading-relaxed">
          <span class="font-mono text-[12px] text-orange pt-1">0${i + 1}</span><span>${s}</span>
        </li>`).join('')}</ol>`;
   };
 
-  // Use case = what it is, then how it works. Both are depth, so both are here
-  // rather than on the card.
-  const useCase = (intro, steps) =>
-    `<p class="text-[16px] leading-relaxed text-slate">${intro}</p>
-     <div class="mt-5 border-t border-rule pt-5">${flow(steps)}</div>`;
-
   const CONTENT = {
+    careers: {
+      title: 'GTM careers',
+      html: `<dl class="space-y-5">${[
+        ['Sales', 'Finds potential customers, understands their needs, and helps them buy.'],
+        ['Growth', 'Tests ways to acquire and activate more customers.'],
+        ['Revenue Operations', 'Builds the tools, data, and processes used by sales and marketing teams.'],
+        ['Product Marketing', 'Figures out who a product is for and how to position it.'],
+        ['GTM Strategy', 'Decides which customers, markets, and opportunities to prioritize.'],
+        ['GTM Engineering', 'Uses data, AI, and automation to turn GTM work into repeatable systems.']
+      ].map(([t, d]) => `<div>
+          <dt class="font-display text-base font-semibold">${t}</dt>
+          <dd class="mt-1 text-[16px] leading-relaxed text-slate">${d}</dd>
+        </div>`).join('')}</dl>
+        <p class="mt-6 border-t border-rule pt-4 text-[14px] leading-relaxed text-slate">
+          GTM engineering is the newest of these. Around 400 such roles were posted this spring, at a
+          median salary of about $160K.
+          <span class="font-mono text-[11px] uppercase tracking-[0.12em]">(Pave, cited by Clay)</span>
+        </p>`
+    },
+
     skills: {
       title: "Everything we'll cover",
       html: `<ul class="grid gap-x-10 gap-y-3 sm:grid-cols-2">${[
@@ -676,41 +582,30 @@ const SCRIPT_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
       ].map(s => `<li class="flex gap-3 text-[16px] text-slate">
           <span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange"></span>${s}</li>`).join('')}</ul>`
     },
+
     'use-internship': {
       title: 'Land an internship',
-      html: useCase(
-        "Build a list of companies you're actually interested in, find the right people, research them, and personalize your outreach.",
-        'Find 100 startups hiring product interns → find recruiters, product leaders, and UT alumni → add contact information → research each company → create personalized outreach.')
-    },
-    'use-startups': {
-      title: 'Find startups before everyone else',
-      html: useCase(
-        'Build a list based on funding, hiring, location, industry, or other signals instead of scrolling LinkedIn.',
-        'Find every Austin startup that raised funding in the last six months and see which ones are hiring.')
-    },
-    'use-sponsors': {
-      title: 'Get sponsors for your org',
-      html: useCase(
-        'Find companies that might sponsor your student organization and the right person to contact.',
-        'Find companies that recruit at UT → identify university recruiting or partnerships contacts → research their campus programs → build personalized outreach.')
+      html: flow('Find 100 startups hiring product interns → find recruiters, product leaders, and UT alumni → add verified contact information → research each company → write personalized outreach.')
     },
     'use-network': {
       title: 'Network smarter',
-      html: useCase(
-        'Find alumni or people with specific backgrounds instead of searching LinkedIn manually.',
-        'Find UT alumni working in product at Series B–D startups and organize them by company, role, and location.')
+      html: flow('Find UT alumni working in product at Series B–D startups → add their company, role, and location → filter to the people worth contacting → write a message that references their path.')
+    },
+    'use-startups': {
+      title: 'Find startups',
+      html: flow('Find every Austin startup that raised funding in the last six months → add headcount, industry, and open roles → filter to the ones hiring → track the list as it changes.')
+    },
+    'use-sponsors': {
+      title: 'Get org sponsors',
+      html: flow('Find companies that recruit at UT → identify university recruiting or partnerships contacts → research their campus programs → build personalized outreach.')
     },
     'use-industry': {
       title: 'Research an industry',
-      html: useCase(
-        'Build your own database of companies and automatically collect the information you care about.',
-        'Build a map of AI startups in Austin with funding, founders, headcount, hiring, and industry.')
+      html: flow('Build a list of AI startups in Austin → add funding, founders, headcount, and hiring → use AI to summarize what each one does → refresh the list on a schedule.')
     },
     'use-founder': {
-      title: 'Build for your own startup',
-      html: useCase(
-        'Find potential customers, competitors, partners, or users.',
-        'Define your ideal customer → find matching companies → research their needs → identify the right contacts → test outreach.')
+      title: 'Grow your startup',
+      html: flow('Define your ideal customer → find matching companies → research their needs → identify the right contacts → test outreach.')
     }
   };
 
@@ -736,13 +631,10 @@ const SCRIPT_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
 
   /* =====================================================================
      Scroll behaviour: reveal on entry, reading progress, active nav link.
-     All three are skipped entirely under prefers-reduced-motion.
      ===================================================================== */
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const canObserve = 'IntersectionObserver' in window;
 
-  // Elements marked [data-reveal] animate themselves; [data-reveal-stagger]
-  // hands the animation to its children so a grid fills in one card at a time.
   const revealTargets = [];
   document.querySelectorAll('[data-reveal]').forEach(el => revealTargets.push([el, 0]));
   document.querySelectorAll('[data-reveal-stagger]').forEach(group => {
@@ -763,25 +655,23 @@ const SCRIPT_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
         entry.target.classList.add('in');
-        obs.unobserve(entry.target);          // reveal once, never re-hide
+        obs.unobserve(entry.target);
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
     revealTargets.forEach(([el]) => revealObserver.observe(el));
 
-    // Anything already on screen at load reveals on the next frame rather than
-    // waiting on the observer, so the top of the page is never briefly blank.
+    // Anything already on screen at load reveals immediately, so the top of the
+    // page is never briefly blank.
     requestAnimationFrame(() => {
       revealTargets.forEach(([el]) => {
         if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('in');
       });
     });
 
-    // Backstop: hidden content is worse than no animation. If the observer has
-    // not run by now (background tab, odd browser), just show everything.
+    // Backstop: content stuck at opacity 0 is far worse than no animation.
     setTimeout(revealAll, 5000);
   }
 
-  // Reading progress bar under the nav
   const progress = document.getElementById('progress');
   if (!reduced) {
     let ticking = false;
@@ -796,7 +686,6 @@ const SCRIPT_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
     updateProgress();
   }
 
-  // Highlight whichever section you are currently reading
   const navLinks = [...document.querySelectorAll('nav a[href^="#"]')];
   if (canObserve && navLinks.length) {
     const linkFor = {};
@@ -806,7 +695,6 @@ const SCRIPT_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
     const spy = new IntersectionObserver(entries => {
       entries.forEach(e => e.isIntersecting ? visible.add(e.target.id) : visible.delete(e.target.id));
       navLinks.forEach(a => a.removeAttribute('aria-current'));
-      // When two sections straddle the viewport, mark the higher one
       const current = spied.find(s => visible.has(s.id));
       if (current) linkFor[current.id].setAttribute('aria-current', 'true');
     }, { rootMargin: '-20% 0px -70% 0px' });
