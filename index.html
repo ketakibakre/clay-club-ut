@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Clay Club @ UT Austin — Learn how companies find and reach customers</title>
-<meta name="description" content="Learn how sales, marketing, growth, and operations teams use data, AI, and automation to run go-to-market. Weekly hands-on builds in Clay. Any major. No coding experience needed. Free for UT students.">
+<title>Clay Club @ UT Austin — Learn how modern companies find and reach customers</title>
+<meta name="description" content="Sales and growth are changing. Learn how teams use data, AI, and automation to research markets, find the right people, and build repeatable GTM systems. Weekly hands-on builds in Clay.">
 
 <meta property="og:title" content="Clay Club @ UT Austin">
-<meta property="og:description" content="Learn how companies find and reach customers. Weekly hands-on builds in Clay. Any major. No coding needed. Free for UT students.">
+<meta property="og:description" content="Learn how modern companies find and reach customers. Weekly hands-on builds in Clay. Any major. No coding experience needed. Free for UT students.">
 <meta property="og:type" content="website">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,42 +46,23 @@
     border-radius: 4px;
   }
 
-  /* Hide the nav's horizontal scrollbar on mobile without disabling scrolling */
   .no-bar { scrollbar-width: none; -ms-overflow-style: none; }
   .no-bar::-webkit-scrollbar { display: none; }
 
-  /* Flow connectors: down arrow stacked, right arrow in a row */
-  .flow-step { position: relative; }
-  .flow-step:not(:last-child)::after {
-    content: "↓";
-    position: absolute;
-    left: 50%;
-    bottom: -1.35rem;
-    transform: translateX(-50%);
-    color: #A9B3BD;
-    font-size: .95rem;
-    line-height: 1;
-  }
-  @media (min-width: 1024px) {
-    .flow-step:not(:last-child)::after {
-      content: "→";
-      left: auto; bottom: auto;
-      right: -1.15rem; top: 50%;
-      transform: translateY(-50%);
-    }
-  }
-
-  /* Disclosure panels */
   .panel[hidden] { display: none; }
-  .disclosure-mark { transition: transform .2s ease; display: inline-block; }
-  button[aria-expanded="true"] .disclosure-mark { transform: rotate(90deg); }
 
-  /* Modal */
+  /* Career chips */
+  .chip[aria-pressed="true"] {
+    border-color: #BF5700;
+    background: #FDF4EC;
+    color: #16202B;
+  }
+
   dialog {
     padding: 0;
     border: none;
     border-radius: 14px;
-    max-width: 34rem;
+    max-width: 32rem;
     width: calc(100% - 2rem);
     color: #16202B;
     background: #fff;
@@ -112,22 +93,24 @@
 <!-- ============================== NAV ============================== -->
 <div class="sticky top-0 z-30 border-b border-rule bg-paper/95 backdrop-blur">
   <div class="mx-auto flex max-w-5xl items-center gap-4 px-5 py-3">
-    <a href="#top" class="hidden shrink-0 font-mono text-[11px] uppercase tracking-[0.16em] text-ink sm:block">
+    <a href="#top" class="hidden shrink-0 font-mono text-[11px] uppercase tracking-[0.16em] text-ink lg:block">
       Clay Club <span class="text-orange">@</span> UT
     </a>
     <nav aria-label="Sections" class="no-bar -mx-1 flex-1 overflow-x-auto px-1">
-      <!-- Short labels on phones so all four fit without a cut-off scroll edge -->
-      <ul class="flex items-center gap-5 whitespace-nowrap text-[14px] text-slate sm:gap-6">
+      <ul class="flex items-center gap-4 whitespace-nowrap text-[14px] text-slate sm:gap-6">
         <li><a href="#gtm" class="inline-flex min-h-[36px] items-center hover:text-ink">
-          <span class="sm:hidden">GTM</span><span class="hidden sm:inline">What is GTM</span>
-        </a></li>
-        <li><a href="#learn" class="inline-flex min-h-[36px] items-center hover:text-ink">
-          <span class="sm:hidden">Learn</span><span class="hidden sm:inline">What you'll learn</span>
+          <span class="sm:hidden">GTM</span><span class="hidden sm:inline">What is GTM?</span>
         </a></li>
         <li><a href="#club" class="inline-flex min-h-[36px] items-center hover:text-ink">
-          <span class="sm:hidden">Club</span><span class="hidden sm:inline">The club</span>
+          <span class="sm:hidden">Club</span><span class="hidden sm:inline">The Club</span>
         </a></li>
-        <li><a href="#careers" class="inline-flex min-h-[36px] items-center hover:text-ink">Careers</a></li>
+        <li><a href="#try" class="inline-flex min-h-[36px] items-center hover:text-ink">Try It</a></li>
+        <li>
+          <a href="https://www.clay.com/" target="_blank" rel="noopener noreferrer"
+             class="inline-flex min-h-[36px] items-center text-[13px] text-slate/80 hover:text-ink">
+            What is Clay? <span aria-hidden="true" class="ml-0.5">↗</span>
+          </a>
+        </li>
       </ul>
     </nav>
     <a href="#signup" class="shrink-0 rounded-lg bg-orange px-4 py-2.5 text-[14px] font-semibold text-white transition hover:bg-[#A64A00]">
@@ -138,22 +121,23 @@
 
 <!-- ============================= 1. HERO ============================ -->
 <header id="top" class="border-b border-rule">
-  <div class="mx-auto max-w-5xl px-5 pt-16 pb-20 sm:pt-24 sm:pb-28">
+  <div class="mx-auto max-w-5xl px-5 pt-12 pb-16 sm:pt-20 sm:pb-24">
     <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-slate">
       Clay Club <span class="text-orange">@</span> UT Austin
     </p>
 
-    <h1 class="mt-7 max-w-[16ch] font-display text-[2.5rem] font-bold leading-[1.05] tracking-[-0.03em] sm:text-6xl lg:text-[4rem]">
-      Learn how companies find and reach customers.
+    <h1 class="mt-7 max-w-[17ch] font-display text-[2.5rem] font-bold leading-[1.05] tracking-[-0.03em] sm:text-6xl lg:text-[3.9rem]">
+      Learn how modern companies find and reach customers.
     </h1>
 
-    <p class="mt-7 max-w-[56ch] text-lg leading-relaxed text-slate sm:text-xl">
-      Learn how sales, marketing, growth, and operations teams use data, AI, and automation to run
-      go-to-market.
+    <p class="mt-7 max-w-[58ch] text-lg leading-relaxed text-slate sm:text-xl">
+      Sales and growth are changing. Learn how teams use data, AI, and automation to research
+      markets, find the right people, and build repeatable GTM systems.
     </p>
 
-    <p class="mt-4 max-w-[56ch] text-[17px] text-slate">
-      Weekly hands-on builds in Clay. Any major. No coding experience needed. Free for UT students.
+    <p class="mt-5 text-[17px] text-slate">
+      Weekly hands-on builds in Clay.<br class="hidden sm:block">
+      Any major. No coding experience needed. Free for UT students.
     </p>
 
     <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -161,9 +145,9 @@
          class="inline-flex min-h-[52px] items-center justify-center rounded-lg bg-orange px-7 text-base font-semibold text-white transition hover:bg-[#A64A00]">
         Join the first cohort
       </a>
-      <a href="#gtm"
+      <a href="#learn"
          class="inline-flex min-h-[52px] items-center justify-center rounded-lg border border-rule bg-white px-7 text-base font-medium text-ink transition hover:border-slate">
-        What is GTM? ↓
+        See what you'll learn ↓
       </a>
     </div>
   </div>
@@ -171,341 +155,307 @@
 
 <main>
 
-<!-- ========================= 2. WHAT IS GTM? ======================== -->
+<!-- ======================= 2. GTM + CAREERS ========================= -->
 <section id="gtm" class="scroll-mt-[68px] border-b border-rule bg-white" aria-labelledby="gtm-h">
-  <div class="mx-auto max-w-5xl px-5 py-20 sm:py-24">
+  <div class="mx-auto max-w-5xl px-5 py-14 sm:py-20">
 
     <h2 id="gtm-h" class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
-      What is go-to-market?
-    </h2>
-
-    <div class="mt-7 max-w-[60ch]">
-      <p class="text-[17px] leading-relaxed text-slate">Go-to-market, or GTM, is how a company figures out:</p>
-      <ul class="mt-4 space-y-2.5 text-[17px] leading-relaxed text-slate">
-        <li class="flex gap-3"><span class="mt-[0.62em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>Who should buy its product</li>
-        <li class="flex gap-3"><span class="mt-[0.62em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>How to find those people</li>
-        <li class="flex gap-3"><span class="mt-[0.62em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>What to say to them</li>
-        <li class="flex gap-3"><span class="mt-[0.62em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>How to turn that into a repeatable process</li>
-      </ul>
-      <p class="mt-6 text-[17px] leading-relaxed text-slate">
-        Sales, marketing, growth, product marketing, revenue operations, and GTM strategy all work on
-        different parts of that problem.
-      </p>
-    </div>
-
-    <!-- How the functions relate -->
-    <div class="mt-14 rounded-2xl border border-rule bg-paper p-6 sm:p-10">
-      <div class="mx-auto max-w-lg">
-        <div class="rounded-lg border border-rule bg-white px-4 py-3 text-center">
-          <p class="font-display text-base font-semibold">Product</p>
-        </div>
-
-        <p class="py-2 text-center text-slate" aria-hidden="true">↓</p>
-
-        <div class="grid grid-cols-3 items-center gap-2 sm:gap-3">
-          <div class="rounded-lg border border-rule bg-white px-2 py-3 text-center sm:px-4">
-            <p class="font-display text-[14px] font-semibold sm:text-base">Marketing</p>
-          </div>
-          <div class="relative rounded-lg border border-rule bg-white px-2 py-3 text-center sm:px-4">
-            <p class="font-display text-[14px] font-semibold sm:text-base">Growth</p>
-          </div>
-          <div class="rounded-lg border border-rule bg-white px-2 py-3 text-center sm:px-4">
-            <p class="font-display text-[14px] font-semibold sm:text-base">Sales</p>
-          </div>
-        </div>
-
-        <p class="py-2 text-center text-slate" aria-hidden="true">↓</p>
-
-        <div class="rounded-lg border border-orange/40 bg-tint px-4 py-3 text-center">
-          <p class="font-display text-base font-semibold">Revenue Operations / GTM Systems</p>
-        </div>
-      </div>
-    </div>
-
-    <button type="button" data-modal="gtm-functions"
-            class="mt-8 inline-flex min-h-[44px] items-center gap-2 text-[16px] font-medium text-orange hover:underline underline-offset-4">
-      Explore GTM careers <span aria-hidden="true">→</span>
-    </button>
-  </div>
-</section>
-
-<!-- ==================== 3. WHAT IS GTM ENGINEERING? ================= -->
-<section class="border-b border-rule" aria-labelledby="eng-h">
-  <div class="mx-auto max-w-5xl px-5 py-20 sm:py-24">
-
-    <h2 id="eng-h" class="max-w-[24ch] font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
-      GTM engineering is how companies turn that work into systems.
+      So, what is GTM?
     </h2>
 
     <p class="mt-7 max-w-[60ch] text-[17px] leading-relaxed text-slate">
-      Instead of having people manually research companies, copy data between tools, and decide who to
-      contact one at a time, GTM engineers build systems that do much of that work automatically.
+      Go-to-market, or GTM, is how a company finds the right customers and gets its product in front
+      of them. That means figuring out:
     </p>
 
-    <!-- Compact rows on phones, a left-to-right row on large screens -->
-    <ol class="mt-12 grid gap-7 lg:mt-14 lg:grid-cols-6 lg:gap-5">
-      <li class="flow-step flex items-center gap-3 rounded-xl border border-rule bg-white px-4 py-3 lg:block lg:py-4">
-        <span class="font-mono text-[11px] text-orange">01</span>
-        <span class="text-[15px] font-medium leading-snug lg:mt-1.5 lg:block">Choose who to target</span>
-      </li>
-      <li class="flow-step flex items-center gap-3 rounded-xl border border-rule bg-white px-4 py-3 lg:block lg:py-4">
-        <span class="font-mono text-[11px] text-orange">02</span>
-        <span class="text-[15px] font-medium leading-snug lg:mt-1.5 lg:block">Find the companies</span>
-      </li>
-      <li class="flow-step flex items-center gap-3 rounded-xl border border-rule bg-white px-4 py-3 lg:block lg:py-4">
-        <span class="font-mono text-[11px] text-orange">03</span>
-        <span class="text-[15px] font-medium leading-snug lg:mt-1.5 lg:block">Add data</span>
-      </li>
-      <li class="flow-step flex items-center gap-3 rounded-xl border border-rule bg-white px-4 py-3 lg:block lg:py-4">
-        <span class="font-mono text-[11px] text-orange">04</span>
-        <span class="text-[15px] font-medium leading-snug lg:mt-1.5 lg:block">Find the right people</span>
-      </li>
-      <li class="flow-step flex items-center gap-3 rounded-xl border border-rule bg-white px-4 py-3 lg:block lg:py-4">
-        <span class="font-mono text-[11px] text-orange">05</span>
-        <span class="text-[15px] font-medium leading-snug lg:mt-1.5 lg:block">Research and prioritize</span>
-      </li>
-      <li class="flow-step flex items-center gap-3 rounded-xl border border-rule bg-white px-4 py-3 lg:block lg:py-4">
-        <span class="font-mono text-[11px] text-orange">06</span>
-        <span class="text-[15px] font-medium leading-snug lg:mt-1.5 lg:block">Reach out</span>
-      </li>
-    </ol>
+    <ul class="mt-6 grid max-w-[60ch] gap-2.5 sm:grid-cols-2">
+      <li class="flex gap-3 text-[17px] text-slate"><span class="mt-[0.62em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>Who should we sell to?</li>
+      <li class="flex gap-3 text-[17px] text-slate"><span class="mt-[0.62em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>How do we find them?</li>
+      <li class="flex gap-3 text-[17px] text-slate"><span class="mt-[0.62em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>What do they care about?</li>
+      <li class="flex gap-3 text-[17px] text-slate"><span class="mt-[0.62em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>How do we reach them?</li>
+    </ul>
 
-    <div class="mt-14 max-w-[60ch] space-y-4 text-[17px] leading-relaxed text-slate">
-      <p>
-        A GTM engineer might combine company data, AI research, contact information, scoring, and
-        outreach into one repeatable workflow.
-      </p>
-      <p>
-        This is where Clay comes in. Clay lets you build many of these systems without traditional
-        software development.
-      </p>
+    <p class="mt-12 text-[17px] text-slate">A lot of careers work on different parts of that problem.</p>
+
+    <div class="mt-5 flex flex-wrap gap-2.5" role="group" aria-label="GTM careers">
+      <button type="button" class="chip min-h-[44px] rounded-lg border border-rule bg-paper px-4 text-[15px] font-medium text-slate transition hover:border-orange" data-role="sales" aria-pressed="false" aria-controls="role-panel">Sales</button>
+      <button type="button" class="chip min-h-[44px] rounded-lg border border-rule bg-paper px-4 text-[15px] font-medium text-slate transition hover:border-orange" data-role="growth" aria-pressed="false" aria-controls="role-panel">Growth</button>
+      <button type="button" class="chip min-h-[44px] rounded-lg border border-rule bg-paper px-4 text-[15px] font-medium text-slate transition hover:border-orange" data-role="revops" aria-pressed="false" aria-controls="role-panel">Revenue Operations</button>
+      <button type="button" class="chip min-h-[44px] rounded-lg border border-rule bg-paper px-4 text-[15px] font-medium text-slate transition hover:border-orange" data-role="pmm" aria-pressed="false" aria-controls="role-panel">Product Marketing</button>
+      <button type="button" class="chip min-h-[44px] rounded-lg border border-rule bg-paper px-4 text-[15px] font-medium text-slate transition hover:border-orange" data-role="strategy" aria-pressed="false" aria-controls="role-panel">GTM Strategy</button>
+      <button type="button" class="chip min-h-[44px] rounded-lg border border-rule bg-paper px-4 text-[15px] font-medium text-slate transition hover:border-orange" data-role="engineering" aria-pressed="false" aria-controls="role-panel">GTM Engineering</button>
     </div>
 
-    <button type="button" data-modal="gtm-engineer-example"
-            class="mt-8 inline-flex min-h-[44px] items-center gap-2 text-[16px] font-medium text-orange hover:underline underline-offset-4">
-      See what a GTM engineer actually does <span aria-hidden="true">→</span>
-    </button>
+    <p id="role-panel" class="mt-4 max-w-[60ch] text-[17px] leading-relaxed text-slate" role="status" aria-live="polite"></p>
+
+    <p class="mt-8 max-w-[60ch] text-[17px] leading-relaxed text-slate">
+      You don't need to know which one you want to do. They all involve some combination of
+      understanding customers, using data, researching markets, and figuring out how to grow a
+      business.
+    </p>
   </div>
 </section>
 
-<!-- ======================= 4. WHAT YOU'LL LEARN ===================== -->
-<section id="learn" class="scroll-mt-[68px] border-b border-rule bg-white" aria-labelledby="learn-h">
-  <div class="mx-auto max-w-5xl px-5 py-20 sm:py-24">
+<!-- ======================== 3. WHAT CHANGED ========================= -->
+<section class="border-b border-rule" aria-labelledby="changed-h">
+  <div class="mx-auto max-w-5xl px-5 py-14 sm:py-20">
 
-    <h2 id="learn-h" class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
-      What you'll learn
+    <h2 id="changed-h" class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
+      The work is changing.
     </h2>
 
-    <div class="mt-12 grid gap-5 sm:grid-cols-2">
-      <div class="rounded-xl border border-rule bg-paper p-6">
-        <h3 class="font-display text-xl font-semibold tracking-[-0.01em]">Understand GTM</h3>
-        <p class="mt-2.5 text-[16px] leading-relaxed text-slate">
-          Learn how companies think about customers, markets, sales, and growth.
+    <div class="mt-12 grid gap-4 md:grid-cols-2 md:gap-5">
+      <div class="rounded-xl border border-rule bg-white p-6">
+        <p class="font-mono text-[11px] uppercase tracking-[0.16em] text-slate">Before</p>
+        <ul class="mt-4 space-y-2.5 text-[16px] leading-relaxed text-slate">
+          <li>Research companies one at a time.</li>
+          <li>Search LinkedIn for the right person.</li>
+          <li>Copy information between tools.</li>
+          <li>Write outreach manually.</li>
+          <li>Repeat everything for the next company.</li>
+        </ul>
+      </div>
+      <div class="rounded-xl border border-orange/35 bg-tint p-6">
+        <p class="font-mono text-[11px] uppercase tracking-[0.16em] text-orange">Now</p>
+        <ul class="mt-4 space-y-2.5 text-[16px] leading-relaxed">
+          <li>Build a list.</li>
+          <li>Add data automatically.</li>
+          <li>Use AI to research each company.</li>
+          <li>Prioritize the best opportunities.</li>
+          <li>Turn the process into a workflow you can run again.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="mt-10 max-w-[60ch] text-[17px] leading-relaxed text-slate">
+      That's the idea behind GTM engineering. Clay describes it as building automated revenue systems
+      using AI, data, and workflow automation.
+    </p>
+
+    <div class="mt-10 max-w-[60ch] rounded-xl border border-rule bg-white p-6">
+      <h3 class="font-display text-xl font-semibold tracking-[-0.01em]">Where Clay fits</h3>
+      <p class="mt-3 text-[16px] leading-relaxed text-slate">
+        Clay brings company and people data, AI research, and workflow automation into one place.
+        Instead of just doing the task, you can build the system that does the task.
+      </p>
+      <a href="https://www.clay.com/" target="_blank" rel="noopener noreferrer"
+         class="mt-5 inline-flex min-h-[44px] items-center gap-1.5 text-[16px] font-medium text-orange hover:underline underline-offset-4">
+        Explore Clay <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =========================== 4. THE CLUB ========================== -->
+<section id="club" class="scroll-mt-[68px] border-b border-rule bg-white" aria-labelledby="club-h">
+  <div class="mx-auto max-w-5xl px-5 py-14 sm:py-20">
+
+    <h2 id="club-h" class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
+      We'll teach you how to build it.
+    </h2>
+
+    <div class="mt-7 max-w-[60ch] space-y-4 text-[17px] leading-relaxed text-slate">
+      <p>Clay can do a lot. Figuring out where to start is the hard part.</p>
+      <p>
+        Clay Club is a weekly hands-on session where we learn one GTM concept and build it together.
+        You bring your laptop. We explain the idea, show you how the tools work, and help you build
+        your own version.
+      </p>
+    </div>
+
+    <dl class="mt-12 grid gap-x-10 gap-y-8 border-t border-rule pt-10 sm:grid-cols-2">
+      <div>
+        <dt class="font-display text-lg font-semibold tracking-[-0.01em]">Learn the strategy</dt>
+        <dd class="mt-2 text-[16px] leading-relaxed text-slate">
+          Understand why a GTM team would build something before learning how to build it.
+        </dd>
+      </div>
+      <div>
+        <dt class="font-display text-lg font-semibold tracking-[-0.01em]">Learn Clay</dt>
+        <dd class="mt-2 text-[16px] leading-relaxed text-slate">
+          Get comfortable finding data, using AI, enriching lists, and building workflows.
+        </dd>
+      </div>
+      <div>
+        <dt class="font-display text-lg font-semibold tracking-[-0.01em]">Build every week</dt>
+        <dd class="mt-2 text-[16px] leading-relaxed text-slate">
+          Every session ends with something that actually runs.
+        </dd>
+      </div>
+      <div>
+        <dt class="font-display text-lg font-semibold tracking-[-0.01em]">Get help</dt>
+        <dd class="mt-2 text-[16px] leading-relaxed text-slate">
+          The first cohort is capped at 15 so we can actually help when you get stuck.
+        </dd>
+      </div>
+    </dl>
+
+    <p class="mt-10 border-t border-rule pt-6 font-mono text-[13px] tracking-[0.06em] text-slate">
+      Weekly · 15 students · Free · Any major
+    </p>
+  </div>
+</section>
+
+<!-- ====================== 5. WHAT YOU'LL LEARN ====================== -->
+<section id="learn" class="scroll-mt-[68px] border-b border-rule" aria-labelledby="learn-h">
+  <div class="mx-auto max-w-5xl px-5 py-14 sm:py-20">
+
+    <h2 id="learn-h" class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
+      What you'll leave knowing
+    </h2>
+
+    <div class="mt-10 grid gap-4 sm:grid-cols-2">
+      <div class="rounded-xl border border-rule bg-white p-6">
+        <h3 class="font-display text-lg font-semibold tracking-[-0.01em]">Find the right market</h3>
+        <p class="mt-2 text-[16px] leading-relaxed text-slate">
+          Learn how companies decide who they should target.
         </p>
       </div>
-      <div class="rounded-xl border border-rule bg-paper p-6">
-        <h3 class="font-display text-xl font-semibold tracking-[-0.01em]">Work with data</h3>
-        <p class="mt-2.5 text-[16px] leading-relaxed text-slate">
-          Build and clean company and people datasets.
+      <div class="rounded-xl border border-rule bg-white p-6">
+        <h3 class="font-display text-lg font-semibold tracking-[-0.01em]">Work with better data</h3>
+        <p class="mt-2 text-[16px] leading-relaxed text-slate">
+          Find, clean, enrich, and organize information about companies and people.
         </p>
       </div>
-      <div class="rounded-xl border border-rule bg-paper p-6">
-        <h3 class="font-display text-xl font-semibold tracking-[-0.01em]">Use AI and automation</h3>
-        <p class="mt-2.5 text-[16px] leading-relaxed text-slate">
-          Use AI, data providers, and workflows to automate repetitive research.
+      <div class="rounded-xl border border-rule bg-white p-6">
+        <h3 class="font-display text-lg font-semibold tracking-[-0.01em]">Use AI for research</h3>
+        <p class="mt-2 text-[16px] leading-relaxed text-slate">
+          Turn manual company research into repeatable workflows.
         </p>
       </div>
-      <div class="rounded-xl border border-rule bg-paper p-6">
-        <h3 class="font-display text-xl font-semibold tracking-[-0.01em]">Build real systems</h3>
-        <p class="mt-2.5 text-[16px] leading-relaxed text-slate">
-          Turn a business problem into something that actually runs.
+      <div class="rounded-xl border border-rule bg-white p-6">
+        <h3 class="font-display text-lg font-semibold tracking-[-0.01em]">Automate GTM work</h3>
+        <p class="mt-2 text-[16px] leading-relaxed text-slate">
+          Connect the pieces into systems that can run again and again.
         </p>
       </div>
     </div>
 
     <p class="mt-8 max-w-[60ch] text-[17px] leading-relaxed text-slate">
-      These skills show up across growth, sales, marketing, operations, consulting, startups, and
-      strategy.
+      Useful for sales, growth, marketing, strategy, consulting, startups, and operations.
     </p>
 
-    <button type="button" aria-expanded="false" aria-controls="skill-list"
-            class="mt-6 inline-flex min-h-[44px] items-center gap-2 text-[16px] font-medium text-orange hover:underline underline-offset-4">
-      See the full skill list <span class="disclosure-mark" aria-hidden="true">→</span>
+    <button type="button" data-modal="skills"
+            class="mt-6 inline-flex min-h-[44px] items-center gap-1.5 text-[16px] font-medium text-orange hover:underline underline-offset-4">
+      See everything we'll cover <span aria-hidden="true">→</span>
     </button>
-
-    <div id="skill-list" class="panel mt-6 rounded-xl border border-rule bg-paper p-6" hidden>
-      <ul class="grid gap-x-10 gap-y-3 sm:grid-cols-2">
-        <li class="flex gap-3 text-[16px] text-slate"><span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>Data enrichment</li>
-        <li class="flex gap-3 text-[16px] text-slate"><span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>Company research</li>
-        <li class="flex gap-3 text-[16px] text-slate"><span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>Lead scoring</li>
-        <li class="flex gap-3 text-[16px] text-slate"><span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>Contact finding</li>
-        <li class="flex gap-3 text-[16px] text-slate"><span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>AI prompting</li>
-        <li class="flex gap-3 text-[16px] text-slate"><span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>Market research</li>
-        <li class="flex gap-3 text-[16px] text-slate"><span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>Outreach personalization</li>
-        <li class="flex gap-3 text-[16px] text-slate"><span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>Workflow automation</li>
-      </ul>
-    </div>
   </div>
 </section>
 
-<!-- ===================== 5. WHAT THE CLUB IS LIKE =================== -->
-<section id="club" class="scroll-mt-[68px] border-b border-rule" aria-labelledby="club-h">
-  <div class="mx-auto max-w-5xl px-5 py-20 sm:py-24">
+<!-- ======================= 6. STUDENT USE CASES ===================== -->
+<section id="try" class="scroll-mt-[68px] border-b border-rule bg-white" aria-labelledby="try-h">
+  <div class="mx-auto max-w-5xl px-5 py-14 sm:py-20">
 
-    <h2 id="club-h" class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
-      What happens at Clay Club?
+    <h2 id="try-h" class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
+      And you can use it right now.
     </h2>
+    <p class="mt-4 max-w-[58ch] text-[17px] leading-relaxed text-slate">
+      The same skills companies use for GTM can solve problems students already have.
+    </p>
 
-    <div class="mt-7 max-w-[60ch] space-y-4 text-[17px] leading-relaxed text-slate">
-      <p>
-        Clay Club is a weekly hands-on working session. Each week, we take one GTM problem and build
-        the solution together in Clay.
-      </p>
-      <p>
-        You bring your laptop. We explain the idea, build alongside you, and help when you get stuck.
-      </p>
+    <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+
+      <button type="button" data-modal="use-internship"
+              class="rounded-xl border border-rule bg-paper p-5 text-left transition hover:border-orange">
+        <span class="block font-display text-lg font-semibold tracking-[-0.01em]">Land an internship</span>
+        <span class="mt-2 block text-[15px] leading-relaxed text-slate">
+          Build a list of companies you're actually interested in, find the right people, research them, and personalize your outreach.
+        </span>
+        <span class="mt-3 inline-block text-[14px] font-medium text-orange">See how →</span>
+      </button>
+
+      <button type="button" data-modal="use-startups"
+              class="rounded-xl border border-rule bg-paper p-5 text-left transition hover:border-orange">
+        <span class="block font-display text-lg font-semibold tracking-[-0.01em]">Find startups before everyone else</span>
+        <span class="mt-2 block text-[15px] leading-relaxed text-slate">
+          Build a list based on funding, hiring, location, industry, or other signals instead of scrolling LinkedIn.
+        </span>
+        <span class="mt-3 inline-block text-[14px] font-medium text-orange">See how →</span>
+      </button>
+
+      <button type="button" data-modal="use-sponsors"
+              class="rounded-xl border border-rule bg-paper p-5 text-left transition hover:border-orange">
+        <span class="block font-display text-lg font-semibold tracking-[-0.01em]">Get sponsors for your org</span>
+        <span class="mt-2 block text-[15px] leading-relaxed text-slate">
+          Find companies that might sponsor your student organization and the right person to contact.
+        </span>
+        <span class="mt-3 inline-block text-[14px] font-medium text-orange">See how →</span>
+      </button>
+
+      <!-- The last three are hidden on phones until asked for -->
+      <button type="button" data-modal="use-network" data-extra
+              class="hidden rounded-xl border border-rule bg-paper p-5 text-left transition hover:border-orange sm:block">
+        <span class="block font-display text-lg font-semibold tracking-[-0.01em]">Network smarter</span>
+        <span class="mt-2 block text-[15px] leading-relaxed text-slate">
+          Find alumni or people with specific backgrounds instead of searching LinkedIn manually.
+        </span>
+        <span class="mt-3 inline-block text-[14px] font-medium text-orange">See how →</span>
+      </button>
+
+      <button type="button" data-modal="use-industry" data-extra
+              class="hidden rounded-xl border border-rule bg-paper p-5 text-left transition hover:border-orange sm:block">
+        <span class="block font-display text-lg font-semibold tracking-[-0.01em]">Research an industry</span>
+        <span class="mt-2 block text-[15px] leading-relaxed text-slate">
+          Build your own database of companies and automatically collect the information you care about.
+        </span>
+        <span class="mt-3 inline-block text-[14px] font-medium text-orange">See how →</span>
+      </button>
+
+      <button type="button" data-modal="use-founder" data-extra
+              class="hidden rounded-xl border border-rule bg-paper p-5 text-left transition hover:border-orange sm:block">
+        <span class="block font-display text-lg font-semibold tracking-[-0.01em]">Build for your own startup</span>
+        <span class="mt-2 block text-[15px] leading-relaxed text-slate">
+          Find potential customers, competitors, partners, or users.
+        </span>
+        <span class="mt-3 inline-block text-[14px] font-medium text-orange">See how →</span>
+      </button>
     </div>
 
-    <dl class="mt-12 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-rule pt-8 lg:grid-cols-4">
-      <div>
-        <dt class="font-display text-lg font-semibold">Weekly</dt>
-        <dd class="mt-1.5 text-[15px] leading-relaxed text-slate">One weekday evening.</dd>
-      </div>
-      <div>
-        <dt class="font-display text-lg font-semibold">15 students</dt>
-        <dd class="mt-1.5 text-[15px] leading-relaxed text-slate">Small first cohort so everyone can get help.</dd>
-      </div>
-      <div>
-        <dt class="font-display text-lg font-semibold">Hands-on</dt>
-        <dd class="mt-1.5 text-[15px] leading-relaxed text-slate">You build during every meeting.</dd>
-      </div>
-      <div>
-        <dt class="font-display text-lg font-semibold">Free</dt>
-        <dd class="mt-1.5 text-[15px] leading-relaxed text-slate">No dues. Clay provides platform access.</dd>
-      </div>
-    </dl>
-
-    <h3 class="mt-16 font-mono text-[11px] uppercase tracking-[0.18em] text-slate">Example sessions</h3>
-    <div class="mt-5 grid gap-4 sm:grid-cols-3">
-      <div class="rounded-xl border border-rule bg-white p-5">
-        <p class="font-display text-lg font-semibold tracking-[-0.01em]">Find your target market</p>
-        <p class="mt-2 text-[15px] leading-relaxed text-slate">
-          Build a list of companies that match a specific customer profile.
-        </p>
-      </div>
-      <div class="rounded-xl border border-rule bg-white p-5">
-        <p class="font-display text-lg font-semibold tracking-[-0.01em]">Find the right people</p>
-        <p class="mt-2 text-[15px] leading-relaxed text-slate">
-          Identify decision-makers and verified contacts.
-        </p>
-      </div>
-      <div class="rounded-xl border border-rule bg-white p-5">
-        <p class="font-display text-lg font-semibold tracking-[-0.01em]">Build a GTM workflow</p>
-        <p class="mt-2 text-[15px] leading-relaxed text-slate">
-          Combine research, data, scoring, and outreach.
-        </p>
-      </div>
-    </div>
-
-    <button type="button" aria-expanded="false" aria-controls="more-sessions"
-            class="mt-6 inline-flex min-h-[44px] items-center gap-2 text-[16px] font-medium text-orange hover:underline underline-offset-4">
-      See more session ideas <span class="disclosure-mark" aria-hidden="true">→</span>
+    <button type="button" id="more-ideas"
+            class="mt-6 inline-flex min-h-[44px] items-center gap-1.5 text-[16px] font-medium text-orange hover:underline underline-offset-4 sm:hidden">
+      See more ideas <span aria-hidden="true">↓</span>
     </button>
-
-    <div id="more-sessions" class="panel mt-6 rounded-xl border border-rule bg-white p-6" hidden>
-      <ul class="space-y-3 text-[16px] leading-relaxed text-slate">
-        <li class="flex gap-3"><span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>Score a list of companies so the best fits sort to the top.</li>
-        <li class="flex gap-3"><span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>Use AI to answer the same research question across 500 companies.</li>
-        <li class="flex gap-3"><span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>Track a signal, like hiring or funding, and update a list when it changes.</li>
-        <li class="flex gap-3"><span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>Write outreach that pulls in real details about each person.</li>
-        <li class="flex gap-3"><span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true"></span>Clean up a messy dataset and make it usable.</li>
-      </ul>
-    </div>
-
-    <p class="mt-10 text-[15px] text-slate">
-      Clay Club runs at 60+ schools worldwide. This is the UT Austin one.
-      <span class="font-mono text-[12px] uppercase tracking-[0.12em]">(Source: Clay)</span>
-    </p>
   </div>
 </section>
 
-<!-- ====================== 6. CAREERS + WHY NOW ====================== -->
-<section id="careers" class="scroll-mt-[68px] border-b border-rule bg-white" aria-labelledby="careers-h">
-  <div class="mx-auto max-w-5xl px-5 py-20 sm:py-24">
-
-    <h2 id="careers-h" class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
-      Why learn this now?
-    </h2>
-
-    <div class="mt-7 max-w-[60ch] space-y-4 text-[17px] leading-relaxed text-slate">
-      <p>AI and automation are changing how sales and marketing teams work.</p>
-      <p>
-        Companies increasingly need people who understand both the business side of GTM and the tools
-        used to automate it.
-      </p>
-    </div>
-
-    <p class="mt-12 font-mono text-[11px] uppercase tracking-[0.18em] text-slate">
-      Where this leads. Pick one to read more.
-    </p>
-    <div class="mt-5 flex flex-wrap gap-3">
-      <button type="button" data-modal="role-gtm-engineering" class="min-h-[48px] rounded-lg border border-rule bg-paper px-5 text-[15px] font-medium transition hover:border-orange hover:bg-tint">GTM Engineering</button>
-      <button type="button" data-modal="role-growth" class="min-h-[48px] rounded-lg border border-rule bg-paper px-5 text-[15px] font-medium transition hover:border-orange hover:bg-tint">Growth</button>
-      <button type="button" data-modal="role-revops" class="min-h-[48px] rounded-lg border border-rule bg-paper px-5 text-[15px] font-medium transition hover:border-orange hover:bg-tint">Revenue Operations</button>
-      <button type="button" data-modal="role-pmm" class="min-h-[48px] rounded-lg border border-rule bg-paper px-5 text-[15px] font-medium transition hover:border-orange hover:bg-tint">Product Marketing</button>
-      <button type="button" data-modal="role-sales-strategy" class="min-h-[48px] rounded-lg border border-rule bg-paper px-5 text-[15px] font-medium transition hover:border-orange hover:bg-tint">Sales Strategy</button>
-      <button type="button" data-modal="role-startup-ops" class="min-h-[48px] rounded-lg border border-rule bg-paper px-5 text-[15px] font-medium transition hover:border-orange hover:bg-tint">Startup Operations</button>
-    </div>
-
-    <p class="mt-10 max-w-[60ch] text-[15px] leading-relaxed text-slate">
-      As a data point on how new this is: around 400 GTM engineering roles were posted this spring, at
-      a median salary of about $160K.
-      <span class="font-mono text-[12px] uppercase tracking-[0.12em]">(Source: Pave, cited by Clay)</span>
-    </p>
-  </div>
-</section>
-
-<!-- ==================== SECONDARY USE CASES ======================== -->
-<section class="border-b border-rule" aria-labelledby="apply-h">
+<!-- ============================ 7. WHY NOW ========================== -->
+<section class="border-b border-rule" aria-labelledby="whynow-h">
   <div class="mx-auto max-w-5xl px-5 py-16 sm:py-20">
-    <h2 id="apply-h" class="font-display text-2xl font-bold leading-[1.15] tracking-[-0.02em] sm:text-3xl">
-      Use the skills on something useful to you.
+
+    <h2 id="whynow-h" class="font-display text-2xl font-bold leading-[1.15] tracking-[-0.02em] sm:text-3xl">
+      Learn how sales is changing.
     </h2>
 
-    <div class="mt-8 grid gap-4 sm:grid-cols-3">
-      <button type="button" data-modal="use-recruiting"
-              class="rounded-xl border border-rule bg-white p-5 text-left transition hover:border-orange">
-        <span class="block font-display text-lg font-semibold tracking-[-0.01em]">Recruiting</span>
-        <span class="mt-2 block text-[15px] leading-relaxed text-slate">Find companies, alumni, hiring managers, and contacts.</span>
-        <span class="mt-3 inline-block text-[14px] font-medium text-orange">See an example →</span>
-      </button>
-      <button type="button" data-modal="use-orgs"
-              class="rounded-xl border border-rule bg-white p-5 text-left transition hover:border-orange">
-        <span class="block font-display text-lg font-semibold tracking-[-0.01em]">Student orgs</span>
-        <span class="mt-2 block text-[15px] leading-relaxed text-slate">Find sponsors, speakers, and partners.</span>
-        <span class="mt-3 inline-block text-[14px] font-medium text-orange">See an example →</span>
-      </button>
-      <button type="button" data-modal="use-research"
-              class="rounded-xl border border-rule bg-white p-5 text-left transition hover:border-orange">
-        <span class="block font-display text-lg font-semibold tracking-[-0.01em]">Market research</span>
-        <span class="mt-2 block text-[15px] leading-relaxed text-slate">Build and track lists of companies in an industry.</span>
-        <span class="mt-3 inline-block text-[14px] font-medium text-orange">See an example →</span>
-      </button>
+    <div class="mt-6 max-w-[60ch] space-y-4 text-[17px] leading-relaxed text-slate">
+      <p>
+        A lot of sales and growth work used to depend on people doing research and outreach manually.
+        AI, better data, and automation are changing that.
+      </p>
+      <!-- "Clay calls this GTM engineering" is deliberately not repeated here; it is
+           already defined once in the "The work is changing" section above. -->
+      <p>
+        The valuable skill is increasingly not just doing the task. It is knowing how to build the
+        system behind it.
+      </p>
+      <p class="text-[15px]">
+        Around 400 GTM engineering roles were posted this spring, at a median salary of about $160K.
+        <span class="font-mono text-[12px] uppercase tracking-[0.12em]">(Source: Pave, cited by Clay)</span>
+      </p>
     </div>
   </div>
 </section>
 
-<!-- ============================= SIGNUP ============================= -->
+<!-- ============================= 8. SIGNUP ========================== -->
 <section id="signup" class="scroll-mt-[68px] border-b border-rule bg-white" aria-labelledby="signup-h">
-  <div class="mx-auto max-w-2xl px-5 py-20 sm:py-24">
+  <div class="mx-auto max-w-2xl px-5 py-14 sm:py-20">
 
     <h2 id="signup-h" class="font-display text-3xl font-bold leading-[1.12] tracking-[-0.025em] sm:text-[2.6rem]">
       Learn GTM with us.
     </h2>
 
     <div class="mt-6 max-w-[54ch] space-y-4 text-[17px] leading-relaxed text-slate">
-      <p>We're starting with a 15-person cohort so the sessions can stay hands-on.</p>
-      <p>Fill out the form to join the first cohort or hear about future Clay Club events.</p>
+      <p>We're starting with 15 students so every session can stay hands-on.</p>
+      <p>Join the first cohort or sign up to hear about future Clay Club events.</p>
     </div>
 
     <form id="signup-form" class="mt-12 space-y-6" novalidate>
@@ -621,7 +571,7 @@
       Clay Club <span class="text-orange">@</span> UT Austin
     </p>
     <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-[15px]">
-      <a href="https://www.clay.com" target="_blank" rel="noopener noreferrer"
+      <a href="https://www.clay.com/" target="_blank" rel="noopener noreferrer"
          class="inline-flex min-h-[44px] items-center text-slate underline underline-offset-4 hover:text-ink">clay.com</a>
       <!-- TODO: replace with the real club contact address -->
       <a href="mailto:clayclub@utexas.edu"
@@ -630,7 +580,6 @@
   </div>
 </footer>
 
-<!-- Single reusable modal, populated from the CONTENT map below -->
 <dialog id="modal" aria-labelledby="modal-title">
   <div class="max-h-[80vh] overflow-y-auto p-6 sm:p-7">
     <div class="flex items-start justify-between gap-4">
@@ -658,145 +607,78 @@ const SCRIPT_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
   const utm = new URLSearchParams(window.location.search).get('utm_source');
   document.getElementById('utm_source').value = (utm && utm.trim()) || 'direct';
 
-  /* =====================================================================
-     Modal content. Kept here rather than in the markup so the page stays
-     short and the depth is genuinely optional.
-     ===================================================================== */
-  const defList = (items) => `<dl class="space-y-5">${items.map(([t, d]) =>
-    `<div><dt class="font-display text-base font-semibold">${t}</dt>
-     <dd class="mt-1 text-[16px] leading-relaxed text-slate">${d}</dd></div>`).join('')}</dl>`;
+  /* --- Career chips: one sentence, revealed on click ------------------ */
+  const ROLES = {
+    sales:       'Sales — finds potential customers, understands their needs, and helps them buy.',
+    growth:      'Growth — tests ways to find, acquire, and activate more customers.',
+    revops:      'Revenue Operations — builds the data, tools, and processes that sales and marketing teams use.',
+    pmm:         'Product Marketing — figures out who a product is for, how to position it, and why customers should care.',
+    strategy:    'GTM Strategy — decides which markets, customers, and opportunities a company should prioritize.',
+    engineering: 'GTM Engineering — uses data, AI, and automation to turn GTM work into repeatable systems.'
+  };
 
-  const roleCard = (does, overlap, titles) => `
-    <div class="space-y-5">
-      <div>
-        <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-slate">What the role does</p>
-        <p class="mt-1.5 text-[16px] leading-relaxed">${does}</p>
-      </div>
-      <div>
-        <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-slate">Overlap with Clay Club</p>
-        <p class="mt-1.5 text-[16px] leading-relaxed">${overlap}</p>
-      </div>
-      <div>
-        <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-slate">Entry-level titles</p>
-        <p class="mt-1.5 text-[16px] leading-relaxed">${titles}</p>
-      </div>
-    </div>`;
+  const rolePanel = document.getElementById('role-panel');
+  const chips = document.querySelectorAll('.chip');
 
-  const steps = (title, intro, list) => `
-    <p class="text-[16px] leading-relaxed text-slate">${intro}</p>
-    <ol class="mt-5 space-y-3">${list.map((s, i) =>
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const active = chip.getAttribute('aria-pressed') === 'true';
+      chips.forEach(c => c.setAttribute('aria-pressed', 'false'));
+      if (active) {
+        rolePanel.textContent = '';           // clicking the active chip clears it
+        return;
+      }
+      chip.setAttribute('aria-pressed', 'true');
+      rolePanel.textContent = ROLES[chip.dataset.role] || '';
+    });
+  });
+
+  /* --- Modal content -------------------------------------------------- */
+  // Renders "a → b → c" as numbered steps; a plain sentence stays a sentence.
+  const flow = (text) => {
+    const parts = text.split('→').map(s => s.trim());
+    if (parts.length === 1) return `<p class="text-[16px] leading-relaxed">${text}</p>`;
+    return `<ol class="space-y-3">${parts.map((s, i) =>
       `<li class="flex gap-3 text-[16px] leading-relaxed">
          <span class="font-mono text-[12px] text-orange pt-1">0${i + 1}</span><span>${s}</span>
        </li>`).join('')}</ol>`;
+  };
 
   const CONTENT = {
-    'gtm-functions': {
-      title: 'The main GTM roles',
-      html: defList([
-        ['Sales', 'Talks to potential customers and runs the process from first conversation to closed deal.'],
-        ['Growth', 'Runs experiments to bring in more users or customers, usually through channels, pricing, and the product itself.'],
-        ['Revenue Operations', 'Owns the tools, data, and reporting that sales and marketing run on.'],
-        ['Product Marketing', 'Decides how a product is positioned, priced, and explained to the market.'],
-        ['GTM Strategy', 'Picks which markets and customer segments a company should go after, and how.'],
-        ['GTM Engineering', 'Builds the automated systems that find, research, and route potential customers.']
-      ])
+    skills: {
+      title: "Everything we'll cover",
+      html: `<ul class="grid gap-x-10 gap-y-3 sm:grid-cols-2">${[
+        'Data enrichment', 'Company research', 'Lead scoring', 'Contact finding',
+        'AI prompting', 'Market research', 'Outreach personalization', 'Workflow automation'
+      ].map(s => `<li class="flex gap-3 text-[16px] text-slate">
+          <span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-orange"></span>${s}</li>`).join('')}</ul>`
     },
-
-    'gtm-engineer-example': {
-      title: 'A GTM engineer at work',
-      html: steps('', 'Say a company sells software to restaurants and wants more customers in Texas. Instead of a person doing this by hand, a GTM engineer builds it once:', [
-        'Pull every restaurant group in Texas with more than five locations.',
-        'Add data on each one: size, locations, tech they already use, whether they are hiring.',
-        'Drop anyone who already uses a competitor, or who is too small to afford the product.',
-        'Use AI to read each website and answer one question: do they do catering?',
-        'Score what is left so the best fits sort to the top.',
-        'Find the operations lead at each company and write outreach that mentions something real about their business.'
-      ]) + `<p class="mt-5 text-[16px] leading-relaxed text-slate">
-        The whole thing runs again next month on new companies without redoing the work. That is the
-        job: building the process, not running it manually each time.</p>`
+    'use-internship': {
+      title: 'Land an internship',
+      html: flow('Find 100 startups hiring product interns → find recruiters, product leaders, and UT alumni → add contact information → research each company → create personalized outreach.')
     },
-
-    'role-gtm-engineering': {
-      title: 'GTM Engineering',
-      html: roleCard(
-        'Builds the systems that find potential customers, research them, and get them to the right salesperson automatically.',
-        'This is the most direct match. It is the same work we do in every session: lists, data, AI research, scoring, and outreach.',
-        'GTM Engineer, Growth Engineer, GTM Operations Associate.'
-      )
+    'use-startups': {
+      title: 'Find startups before everyone else',
+      html: flow('Find every Austin startup that raised funding in the last six months and see which ones are hiring.')
     },
-    'role-growth': {
-      title: 'Growth',
-      html: roleCard(
-        'Finds ways to bring in more users or customers, and tests them. Works across marketing, product, and data.',
-        'Growth work depends on being able to pull your own data and run experiments without waiting on someone else. That is most of what you practice here.',
-        'Growth Associate, Growth Marketing Analyst, Demand Generation Associate.'
-      )
+    'use-sponsors': {
+      title: 'Get sponsors for your org',
+      html: flow('Find companies that recruit at UT → identify university recruiting or partnerships contacts → research their campus programs → build personalized outreach.')
     },
-    'role-revops': {
-      title: 'Revenue Operations',
-      html: roleCard(
-        'Owns the systems, data, and reporting that sales and marketing teams run on. Keeps the pipeline accurate and the tools connected.',
-        'Cleaning messy data, connecting tools, and building processes other people rely on is exactly the RevOps day-to-day.',
-        'Revenue Operations Analyst, Sales Operations Analyst, GTM Systems Analyst.'
-      )
+    'use-network': {
+      title: 'Network smarter',
+      html: flow('Find UT alumni working in product at Series B–D startups and organize them by company, role, and location.')
     },
-    'role-pmm': {
-      title: 'Product Marketing',
-      html: roleCard(
-        'Decides how a product is positioned and explained, and who it is for. Works closely with sales on messaging.',
-        'Positioning starts with knowing the market. Building and researching company lists is how you learn a market quickly.',
-        'Product Marketing Associate, Market Research Analyst, Marketing Associate.'
-      )
+    'use-industry': {
+      title: 'Research an industry',
+      html: flow('Build a map of AI startups in Austin with funding, founders, headcount, hiring, and industry.')
     },
-    'role-sales-strategy': {
-      title: 'Sales Strategy',
-      html: roleCard(
-        'Decides which customers to go after, how to split up territories, and where the team should spend its time.',
-        'Segmenting and scoring a list of companies is the core skill, and we build one from scratch in the club.',
-        'Sales Strategy Analyst, Business Operations Analyst, Strategy and Operations Associate.'
-      )
-    },
-    'role-startup-ops': {
-      title: 'Startup Operations',
-      html: roleCard(
-        'At a small company, one person often owns finding customers, the tools, and the data all at once.',
-        'Startups hire people who can build something useful without a team behind them. That is what you practice every week.',
-        'Founding GTM Hire, Business Operations Associate, Chief of Staff (early stage).'
-      )
-    },
-
-    'use-recruiting': {
-      title: 'Recruiting',
-      html: steps('', 'Instead of applying to whatever shows up on Handshake, you build your own pipeline:', [
-        'Build a list of companies you would actually want to work at.',
-        'Add data on each one: size, funding, location, whether they are hiring interns.',
-        'Find the recruiter, hiring manager, or UT alumni on the team.',
-        'Find verified email addresses.',
-        'Write outreach that references something real about the company.'
-      ])
-    },
-    'use-orgs': {
-      title: 'Student orgs',
-      html: steps('', 'Sponsorship outreach usually means one person guessing at emails. It can work like this instead:', [
-        'Build a list of companies that sponsor student organizations or recruit at UT.',
-        'Add data to see which ones are a realistic fit for your org.',
-        'Find the person who owns university partnerships or campus recruiting.',
-        'Find their contact information.',
-        'Send each one a message about your org that is actually specific to them.'
-      ])
-    },
-    'use-research': {
-      title: 'Market research',
-      html: steps('', 'For a case competition, class project, or your own curiosity:', [
-        'Build a list of every company in an industry or city.',
-        'Collect the same information about each one automatically.',
-        'Use AI to answer a specific question across the whole list.',
-        'Track changes over time, like funding, hiring, or new products.'
-      ])
+    'use-founder': {
+      title: 'Build for your own startup',
+      html: flow('Define your ideal customer → find matching companies → research their needs → identify the right contacts → test outreach.')
     }
   };
 
-  /* --- Modal ---------------------------------------------------------- */
   const modal = document.getElementById('modal');
   const modalTitle = document.getElementById('modal-title');
   const modalBody = document.getElementById('modal-body');
@@ -814,25 +696,14 @@ const SCRIPT_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
   });
 
   document.getElementById('modal-close').addEventListener('click', () => modal.close());
+  modal.addEventListener('click', (e) => { if (e.target === modal) modal.close(); });
+  modal.addEventListener('close', () => { if (lastFocused) lastFocused.focus(); });
 
-  // Click outside the panel closes it
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) modal.close();
-  });
-
-  // Return focus to whatever opened the modal
-  modal.addEventListener('close', () => {
-    if (lastFocused) lastFocused.focus();
-  });
-
-  /* --- Inline disclosures --------------------------------------------- */
-  document.querySelectorAll('button[aria-controls][aria-expanded]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const panel = document.getElementById(btn.getAttribute('aria-controls'));
-      const open = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!open));
-      panel.hidden = open;
-    });
+  /* --- Phones see three use cases until they ask for the rest --------- */
+  const moreBtn = document.getElementById('more-ideas');
+  moreBtn.addEventListener('click', () => {
+    document.querySelectorAll('[data-extra]').forEach(el => el.classList.remove('hidden'));
+    moreBtn.remove();
   });
 
   /* --- Availability appears only for cohort applicants ---------------- */
