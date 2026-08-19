@@ -98,13 +98,12 @@
   .career-panel { animation: fadeUp .45s ease; }
   @keyframes fadeUp { from { opacity:0; transform: translateY(8px);} to {opacity:1; transform:none;} }
 
-  /* Availability chips — selected state uses colour AND a check, never colour alone */
+  /* Chips — selected state is an outline whose WEIGHT changes (inset ring), not just
+     its hue, so it stays legible without colour vision. Inset so nothing reflows. */
   .chip input { position:absolute; opacity:0; width:0; height:0; }
-  .chip span { display:inline-flex; align-items:center; gap:.4rem; }
+  .chip span { display:inline-flex; align-items:center; transition:box-shadow .12s, border-color .12s; }
   .chip input:focus-visible + span { outline:3px solid #1F1F1F; outline-offset:2px; }
-  .chip input:checked + span { background:#FCE9E3; border-color:#F26B4D; color:#1F1F1F; font-weight:500; }
-  .chip input:checked + span .tick { opacity:1; }
-  .chip .tick { opacity:0; }
+  .chip input:checked + span { border-color:#1F1F1F; box-shadow:inset 0 0 0 1px #1F1F1F; }
 
   dialog { padding:0; border:none; border-radius:20px; max-width:34rem;
            width:calc(100% - 2rem); color:#1F1F1F; background:#fff; }
@@ -473,7 +472,7 @@
         <p class="mt-1.5 text-[15px] leading-relaxed text-muted">Meet other students interested in GTM, sales, growth, startups, and AI.</p>
       </div>
 
-      <div>
+      <div class="lg:pr-24 2xl:pr-0">
         <svg class="h-9 w-9" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M5 10h14l-1.2 9.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z" fill="#F26B4D"/>
           <path d="M8.5 10a3.5 3.5 0 1 1 7 0" stroke="#F26B4D" stroke-width="2.2" stroke-linecap="round"/>
@@ -586,6 +585,10 @@
           startups, AI, and automation.
         </p>
         <p class="mt-4 font-display text-[19px] font-semibold text-ink">Free for UT students.</p>
+        <p class="mt-2 max-w-[42ch] text-[16px] leading-relaxed text-muted">
+          No application and no interview. Everyone who wants to join is welcome — come
+          learn with us and be part of the community.
+        </p>
 
         <!-- Small cluster, tilted opposite ways so it reads as arranged objects -->
         <div class="mt-auto hidden items-end gap-1 pt-10 lg:flex" aria-hidden="true">
@@ -606,6 +609,7 @@
             <div>
               <label for="name" class="block text-[13px] font-medium">Name <span class="text-brandDeep">*</span></label>
               <input id="name" name="name" type="text" required autocomplete="name"
+                     placeholder="Enter your full name"
                      class="mt-2 block w-full min-h-[50px] rounded-xl border border-line bg-white px-4 text-base placeholder:text-[#767676] focus:border-brand">
             </div>
             <div>
@@ -626,7 +630,8 @@
             <div>
               <label for="major" class="block text-[13px] font-medium">Major <span class="text-brandDeep">*</span></label>
               <input id="major" name="major" type="text" required
-                     class="mt-2 block w-full min-h-[50px] rounded-xl border border-line bg-white px-4 text-base focus:border-brand">
+                     placeholder="Enter your major"
+                     class="mt-2 block w-full min-h-[50px] rounded-xl border border-line bg-white px-4 text-base placeholder:text-[#767676] focus:border-brand">
             </div>
             <div>
               <label for="year" class="block text-[13px] font-medium">Year <span class="text-brandDeep">*</span></label>
@@ -639,16 +644,16 @@
             </div>
           </div>
 
-          <!-- Evenings only, centred. Native checkboxes so the values submit. -->
-          <fieldset class="text-center">
-            <legend class="w-full text-[13px] font-medium">What evenings are you available for meetings?</legend>
+          <!-- Native checkboxes so the values submit with the form. -->
+          <fieldset>
+            <legend class="text-[13px] font-medium">What evenings are you available for meetings?</legend>
             <p class="mt-1 text-[13px] text-muted">Pick any that work. This is how we schedule sessions.</p>
-            <div class="mt-3 flex flex-wrap justify-center gap-2" role="group" aria-label="Evenings you are available">
-              <label class="chip"><input type="checkbox" name="availability_days" value="Monday"><span class="min-h-[44px] cursor-pointer rounded-full border border-line bg-white px-4 text-[14px]"><svg class="tick h-3.5 w-3.5" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Monday</span></label>
-              <label class="chip"><input type="checkbox" name="availability_days" value="Tuesday"><span class="min-h-[44px] cursor-pointer rounded-full border border-line bg-white px-4 text-[14px]"><svg class="tick h-3.5 w-3.5" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Tuesday</span></label>
-              <label class="chip"><input type="checkbox" name="availability_days" value="Wednesday"><span class="min-h-[44px] cursor-pointer rounded-full border border-line bg-white px-4 text-[14px]"><svg class="tick h-3.5 w-3.5" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Wednesday</span></label>
-              <label class="chip"><input type="checkbox" name="availability_days" value="Thursday"><span class="min-h-[44px] cursor-pointer rounded-full border border-line bg-white px-4 text-[14px]"><svg class="tick h-3.5 w-3.5" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Thursday</span></label>
-              <label class="chip"><input type="checkbox" name="availability_days" value="Friday"><span class="min-h-[44px] cursor-pointer rounded-full border border-line bg-white px-4 text-[14px]"><svg class="tick h-3.5 w-3.5" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Friday</span></label>
+            <div class="mt-3 flex flex-wrap gap-2" role="group" aria-label="Evenings you are available">
+              <label class="chip"><input type="checkbox" name="availability_days" value="Monday"><span class="min-h-[44px] cursor-pointer rounded-full border border-line bg-white px-4 text-[14px]">Monday</span></label>
+              <label class="chip"><input type="checkbox" name="availability_days" value="Tuesday"><span class="min-h-[44px] cursor-pointer rounded-full border border-line bg-white px-4 text-[14px]">Tuesday</span></label>
+              <label class="chip"><input type="checkbox" name="availability_days" value="Wednesday"><span class="min-h-[44px] cursor-pointer rounded-full border border-line bg-white px-4 text-[14px]">Wednesday</span></label>
+              <label class="chip"><input type="checkbox" name="availability_days" value="Thursday"><span class="min-h-[44px] cursor-pointer rounded-full border border-line bg-white px-4 text-[14px]">Thursday</span></label>
+              <label class="chip"><input type="checkbox" name="availability_days" value="Friday"><span class="min-h-[44px] cursor-pointer rounded-full border border-line bg-white px-4 text-[14px]">Friday</span></label>
             </div>
           </fieldset>
 
@@ -657,13 +662,13 @@
               What do you want to get out of Clay Club? <span class="font-normal text-muted">(select all that apply)</span>
             </legend>
             <div class="mt-3 flex flex-wrap gap-2" role="group" aria-label="What you want from Clay Club">
-              <label class="chip"><input type="checkbox" name="goal" value="Learn GTM"><span class="min-h-[44px] cursor-pointer rounded-full border border-line bg-white px-4 text-[14px]"><svg class="tick h-3.5 w-3.5" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Learn GTM</span></label>
-              <label class="chip"><input type="checkbox" name="goal" value="Use Clay for recruiting"><span class="min-h-[44px] cursor-pointer rounded-full border border-line bg-white px-4 text-[14px]"><svg class="tick h-3.5 w-3.5" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Use Clay for recruiting</span></label>
-              <label class="chip"><input type="checkbox" name="goal" value="Land an internship"><span class="min-h-[44px] cursor-pointer rounded-full border border-line bg-white px-4 text-[14px]"><svg class="tick h-3.5 w-3.5" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Land an internship</span></label>
-              <label class="chip"><input type="checkbox" name="goal" value="Grow a startup"><span class="min-h-[44px] cursor-pointer rounded-full border border-line bg-white px-4 text-[14px]"><svg class="tick h-3.5 w-3.5" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Grow a startup</span></label>
-              <label class="chip"><input type="checkbox" name="goal" value="Learn AI and automation"><span class="min-h-[44px] cursor-pointer rounded-full border border-line bg-white px-4 text-[14px]"><svg class="tick h-3.5 w-3.5" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Learn AI and automation</span></label>
-              <label class="chip"><input type="checkbox" name="goal" value="Meet other students"><span class="min-h-[44px] cursor-pointer rounded-full border border-line bg-white px-4 text-[14px]"><svg class="tick h-3.5 w-3.5" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Meet other students</span></label>
-              <label class="chip"><input type="checkbox" name="goal" value="Research companies and markets"><span class="min-h-[44px] cursor-pointer rounded-full border border-line bg-white px-4 text-[14px]"><svg class="tick h-3.5 w-3.5" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Research companies and markets</span></label>
+              <label class="chip"><input type="checkbox" name="goal" value="Learn GTM"><span class="min-h-[44px] cursor-pointer rounded-full border border-line bg-white px-4 text-[14px]">Learn GTM</span></label>
+              <label class="chip"><input type="checkbox" name="goal" value="Use Clay for recruiting"><span class="min-h-[44px] cursor-pointer rounded-full border border-line bg-white px-4 text-[14px]">Use Clay for recruiting</span></label>
+              <label class="chip"><input type="checkbox" name="goal" value="Land an internship"><span class="min-h-[44px] cursor-pointer rounded-full border border-line bg-white px-4 text-[14px]">Land an internship</span></label>
+              <label class="chip"><input type="checkbox" name="goal" value="Grow a startup"><span class="min-h-[44px] cursor-pointer rounded-full border border-line bg-white px-4 text-[14px]">Grow a startup</span></label>
+              <label class="chip"><input type="checkbox" name="goal" value="Learn AI and automation"><span class="min-h-[44px] cursor-pointer rounded-full border border-line bg-white px-4 text-[14px]">Learn AI and automation</span></label>
+              <label class="chip"><input type="checkbox" name="goal" value="Meet other students"><span class="min-h-[44px] cursor-pointer rounded-full border border-line bg-white px-4 text-[14px]">Meet other students</span></label>
+              <label class="chip"><input type="checkbox" name="goal" value="Research companies and markets"><span class="min-h-[44px] cursor-pointer rounded-full border border-line bg-white px-4 text-[14px]">Research companies and markets</span></label>
             </div>
           </fieldset>
 
@@ -671,9 +676,9 @@
             <label for="comments" class="block text-[13px] font-medium">
               Anything else you want us to know? <span class="font-normal text-muted">(optional)</span>
             </label>
-            <textarea id="comments" name="comments" rows="3"
-                      placeholder="Questions, what you're hoping to build, anything at all."
-                      class="mt-2 block w-full rounded-xl border border-line bg-white px-4 py-3 text-base leading-relaxed placeholder:text-[#767676] focus:border-brand"></textarea>
+            <textarea id="comments" name="comments" rows="1"
+                      placeholder="Questions, ideas, anything at all."
+                      class="mt-2 block w-full min-h-[50px] resize-y rounded-xl border border-line bg-white px-4 py-3 text-base placeholder:text-[#767676] focus:border-brand"></textarea>
           </div>
 
           <p id="form-error" class="text-[14px] font-medium text-brandDeep" role="alert" hidden></p>
