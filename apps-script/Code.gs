@@ -26,7 +26,8 @@ const COLUMNS = [
   'year',
   'availability_days',
   'goal',
-  'utm_source'
+  'utm_source',
+  'comments'
 ];
 
 function doPost(e) {
@@ -48,7 +49,8 @@ function doPost(e) {
       p.year || '',
       p.availability_days || '',
       p.goal || '',
-      p.utm_source || 'direct'
+      p.utm_source || 'direct',
+      p.comments || ''
     ]);
 
     return json_({ ok: true });
@@ -98,7 +100,8 @@ function testAppend() {
       year: 'Sophomore',
       availability_days: 'Monday, Wednesday',
       goal: 'Learn GTM, Land an internship',
-      utm_source: 'manual-test'
+      utm_source: 'manual-test',
+      comments: 'Free-text feedback lands here.'
     }
   });
 }
