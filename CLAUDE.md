@@ -4,6 +4,13 @@ This file is the brief for this repo. Read it before writing code.
 Everything below is a decision, not a suggestion. If something here
 conflicts with a later instruction in chat, ask which wins.
 
+> **Rewritten 2026-08-19** to match the site as built. An earlier version
+> of this brief described a cohort model, a 15-person cap, seven page
+> sections, UT burnt orange, and a nine-column sheet. None of that is
+> true any more — those were deliberately removed, not lost. `NOTES.md`
+> holds the operational detail (deploy steps, sheet IDs, failure modes);
+> this file holds the intent. If the two disagree, `NOTES.md` wins.
+
 ---
 
 ## 1. Context
@@ -27,12 +34,8 @@ engineering support, no budget. Everything must be free tier.
 
 ### What success looks like
 - **Primary metric:** signups (form submissions).
-- **Secondary metric:** cohort-interest rate — what % of signups check
-  the commit box. This is the quality signal.
 - **Diagnostic metric:** signups by `utm_source`, so we learn which
   distribution channel actually converts vs. which one just felt busy.
-- Rough target for the first push: 60–100 total signups, 15–25 of which
-  check the cohort box.
 
 ### What this page is NOT
 It is not a member portal, a CRM, an event calendar, or an org homepage.
@@ -70,48 +73,40 @@ Instagram, direct word of mouth.
 
 ## 3. Product spec
 
-### The ask — two tiers, ONE form
-There is exactly one form on the page. It serves two intents:
+### The ask — one form, one tier
+There is exactly one form on the page and **one row per person**. There is
+no cohort tier, no commit checkbox, and no cap on membership. Everyone who
+wants in is in, and the page says so explicitly next to "Free for UT
+students." Do not reintroduce scarcity framing.
 
-1. **Soft interest** (primary, default) — low commitment, big list. This
-   is what most submitters are doing.
-2. **Cohort commitment** (secondary) — a single checkbox: *"I want one of
-   the 15 spots in the first cohort."*
+Do **not** build two forms, two pages, or a multi-step wizard.
 
-Do **not** build two forms, two pages, or a multi-step wizard. One form,
-one boolean, one row per person. Splitting them fragments attribution
-data and doubles maintenance for zero gain.
-
-### Progressive disclosure
-The `availability` field is hidden by default and revealed only when
-`cohort_interest` is checked. Rationale: it's irrelevant to soft
-signups and every visible field costs conversion. When shown, it doubles
-as a scheduling poll — meeting times are not locked yet, and this is how
-we decide them.
-
-### Form fields (exact)
+### Form fields (exact — 9 posted, plus a server-side timestamp)
 
 | Field | Type | Required | Notes |
 |---|---|---|---|
 | `name` | text | yes | |
-| `email` | email | yes | Prefer school email but don't enforce it |
-| `major` | text | no | Free text, not a dropdown — too many majors |
-| `year` | select | no | Freshman / Sophomore / Junior / Senior / Grad |
-| `cohort_interest` | checkbox | no | The commit tier |
-| `availability` | checkbox group | no | Hidden until `cohort_interest` is checked. Options: Mon eve / Tue eve / Wed eve / Thu eve / Weekend |
-| `goal` | text | no | One line: "what do you want to get out of this?" |
-| `utm_source` | hidden | — | Read from `?utm_source=` query param, default `"direct"` |
+| `email` | email | yes | Labelled "School email"; not enforced |
+| `ut_eid` | text | yes | |
+| `major` | text | yes | Free text, not a dropdown — too many majors |
+| `year` | select | yes | Freshman / Sophomore / Junior / Senior / Grad |
+| `availability_days` | checkbox group | no | Mon–Fri. Always visible |
+| `goal` | checkbox group | no | Seven fixed options, multi-select |
+| `comments` | textarea | no | One row tall, resizable |
+| `utm_source` | hidden | — | From `?utm_source=`, default `"direct"` |
 
-Keep it to this. Do not add phone number, LinkedIn URL, GPA, resume
-upload, or a "how did you hear about us" dropdown — `utm_source` already
-answers that last one without asking.
+Every field has a placeholder. Keep it to this list. Do not add phone
+number, LinkedIn URL, GPA, resume upload, or a "how did you hear about
+us" dropdown — `utm_source` already answers that last one without asking.
+
+`availability_days` and `goal` are repeated checkbox keys. The submit
+handler joins each into one comma-separated value before POSTing, because
+Apps Script's `e.parameter` keeps only the **first** value of a repeated
+key and would silently drop the rest.
 
 ### Success state
 On submit, replace the form in place with a short confirmation. Do not
-redirect, do not open a modal. The confirmation should tell them what
-happens next in concrete terms (e.g. "You're on the list. Watch your
-email this week."). If they checked the cohort box, the confirmation
-should acknowledge that specifically.
+redirect, do not open a modal.
 
 ---
 
@@ -123,26 +118,19 @@ the systems behind modern go-to-market." NOT "we're launching," NOT
 "we're starting this," NOT "coming this fall."
 
 Student-to-student. Direct, plain, a little informal. No corporate voice.
-No "unlock your potential," no "empower," no "leverage," no em-dash-laden
-LinkedIn cadence. Short sentences. Concrete nouns.
+No "unlock your potential," no "empower," no "leverage." Short sentences.
+Concrete nouns.
 
 ### Honesty constraints — these are hard rules
 - **No invented social proof.** There are no alumni outcomes, no member
   testimonials, no "students have landed roles at" claims. Do not write
   placeholder testimonials, not even lorem-ipsum ones — they have a way
   of shipping.
-- **Borrowed proof is allowed** and should be used, attributed to Clay:
-  - 60+ Clay Clubs exist worldwide, from Warsaw to Manila.
-  - ~400 GTM engineering roles were posted this spring at a ~$160K
-    median salary, roughly 20% above traditional sales/marketing ops
-    roles (per Pave, cited by Clay).
 - **No fake meeting times.** Logistics are not locked. Do not print
-  "Thursdays at 6." Say the cadence is being set with the first cohort,
-  or say nothing.
-- **The cohort cap of 15 must be justified**, not asserted. Tie it to
-  format: small enough that everyone actually ships something, rather
-  than sitting in a lecture. Unjustified scarcity reads as fake to
-  exactly the sharp students we want.
+  "Thursdays at 6." The `availability_days` field is how meeting times
+  get decided, which is why the form says so.
+- **No membership cap and no application.** There is no cohort, no
+  interview, and no limit. Saying otherwise would be a lie.
 
 ### Terminology rules
 - Spell out "go-to-market" on first use, then you may use GTM.
@@ -155,139 +143,101 @@ LinkedIn cadence. Short sentences. Concrete nouns.
 
 ## 5. Page structure
 
-Seven sections, in this order.
+Nav, five sections, footer — in this order.
 
 ### 5.1 Hero
-Headline, one-line subhead, one button that scrolls to `#signup`.
-Nothing else. No hero image, no stats bar, no logo wall.
+Eyebrow, headline, two short paragraphs, two buttons (`Join Clay Club`
+scrolls to `#signup`; `See how it works` scrolls down). A collage of Clay
+3D objects sits to the right on desktop.
 
-The headline names the **concrete skill**, not the category. "Learn GTM
-engineering" is a bad headline for a reader who doesn't know the term.
-Something closer to the shape of "Build the systems that find jobs,
-customers, and people" — write your own, but hold that standard.
+The headline names the **concrete skill**, not the category. Currently:
+"Learn how the future of **sales and growth** is being built."
 
-### 5.2 By hand vs. engineered
-The definition section. Two columns, 4–5 rows, showing the same task done
-manually and done as a system. This teaches by demonstration instead of
-explanation, and it is the most important section on the page.
+### 5.2 `#gtm` — "How companies find and reach customers."
+The definition section. Left column defines GTM in plain language and
+lists the four questions it answers. Right column is a rotating career
+panel — chips for Sales / Growth / RevOps / Product Marketing / GTM
+Strategy / GTM Engineering, each swapping the panel copy.
 
-Seed content (rewrite for voice, keep the structure):
+The career chips use a plain `[aria-selected="true"]` CSS rule, **not**
+JS-toggled Tailwind classes. See §7 for why.
 
-| By hand | Engineered |
-|---|---|
-| Scroll LinkedIn for three hours looking for startups that are hiring | Pull every Austin startup that raised a Series A in the last six months, automatically |
-| Guess at someone's email and hope it bounces gracefully | Run it through four data providers until one returns a verified hit |
-| Write 20 cold emails that all sound the same | Generate 200, each referencing something real about that specific person |
-| Rebuild your company research doc every time you switch targets | Build it once as a system and re-run it on any list |
+### 5.3 "How GTM is changing"
+Two cards, BEFORE and NOW, with an arrow between them. This teaches by
+demonstration instead of explanation and it is the most important section
+on the page. A third column lands the point and links to clay.com.
 
-The takeaway line, in your own words: the person doing the work by hand is
-doing the motion; the person building the system is building the motion.
-That shift is the whole discipline.
+### 5.4 `#club` — "What happens at Clay Club?"
+A six-item editorial grid: Workshops, Builds, Hackathons, Real use cases,
+Community events, Perks. Honest about logistics being set with the group.
 
-### 5.3 Three expandable cards — "What you'd actually build"
-Collapsed: title + one line. Click: expands **in place** with 3–4
-sentences. No modals, no routing, no page loads.
+### 5.5 `#try` — "Use it for something you care about."
+Six pastel cards, each a concrete thing a student could build. "Land an
+internship" is the highest-converting card; keep it first.
 
-1. **Land the internship** — build a list of every company in your target
-   space, find the right person, reach out with something real. This is
-   the highest-converting card; put it first.
-2. **Run your org** — the page you're on works this way. Signups flow
-   into a table that enriches and segments itself.
-3. **Do the research** — market maps, competitor tracking, the work you'd
-   otherwise do by hand at 2am before a case competition.
-
-### 5.4 What the club is
-Format, cadence, cohort size, what a session actually looks like. Honest
-about logistics being set with the first cohort.
-
-### 5.5 Who it's for
-Explicit and short. Any major. No CS background needed. If a reader is
-going to self-select out, it happens here — so this section exists
-specifically to stop that.
-
-### 5.6 Signup form
-Anchor `#signup`. See §3.
+### 5.6 `#signup`
+Pitch on the left, form on the right. See §3.
 
 ### 5.7 Footer
-Link to clay.com. Contact email. Nothing else.
+Contact email and Instagram, both real, plus a link to clay.com.
 
 ---
 
 ## 6. Design spec
 
 ### Direction
-The subject's own material is **tabular data** — rows, columns, cells,
-and the moment a blank cell fills itself in. That's where the visual
-language comes from. Not generic SaaS gradients, not a startup landing
-page template.
-
-The organizing idea: **empty cell → filled cell.** Sparse, precise,
-grid-derived. The page should feel like something built by someone
-competent, not something bought.
+Sparse, precise, grid-derived. The page should feel like something built
+by someone competent, not something bought. Not generic SaaS gradients,
+not a startup landing page template.
 
 ### Explicitly avoid
-These are the three looks that AI-generated design defaults to. Do not
-produce any of them:
-1. Cream background (~#F4F1EA) + high-contrast serif display + terracotta
-   accent.
+1. Cream background + high-contrast serif display + terracotta accent.
 2. Near-black background + one acid-green or vermilion accent.
-3. Broadsheet layout with hairline rules, zero border radius, dense
-   newspaper columns.
+3. Broadsheet layout with hairline rules and dense newspaper columns.
 
-Also avoid: purple-to-blue gradients, floating 3D blobs, glassmorphism,
-a stats bar of three big numbers under the hero.
+Also avoid: purple-to-blue gradients, floating 3D blobs, glassmorphism, a
+stats bar of three big numbers under the hero.
 
-### Color
-Build a 5-value token system. Direction, not a mandate — justify any
-departure:
-- A **cool ink/slate base** for text and structure (not pure black).
-- An **off-white paper** background (not cream — cream plus orange is
-  the default look listed above).
-- **UT burnt orange (#BF5700)** used *only* as the "enriched" state:
-  filled cells, the active state, the primary button. Tying the accent to
-  a meaning is the point. If orange is everywhere, it means nothing.
-- One **muted neutral** for borders, grid lines, and the empty state.
-- One **soft warm tint** for card backgrounds if needed.
+### Colour — roughly 90% neutral / 7% Clay Orange / 3% supporting pastels
+Tokens live in the `tailwind.config` block at the top of `index.html`.
 
-Burnt orange is justified here because it's institutionally true (UT), not
-decorative. Keep it disciplined and it won't read as the terracotta
-default.
+- **Neutrals** carry the page: `ink #1F1F1F`, `muted #5C5C5C`,
+  `page #FAF9F7`, `subtle #F3F1ED`, `line #E2E0DC`.
+- **Clay Orange `#F26B4D`** is a **fill colour only** — white on it is
+  3.01:1, so buttons take ink text, never white.
+- `brandText #DC583C` is for **large headline emphasis only**.
+  `brandDeep #C74A2E` is the only orange that passes for small text
+  (4.72:1 on white).
+- `faint #8A8A8A` is decorative only — never body copy.
+- Supporting pastels are for containers, icons and borders — never text.
+
+**There are exactly three orange headline phrases on the page.** Keep it
+that way. If a change adds a fourth, take one away.
+
+Note this is Clay Orange, not UT burnt orange. The brand being borrowed
+here is Clay's; the UT connection is carried by the longhorn, the tower,
+and the copy.
 
 ### Typography
-Three roles:
-- **Display** — a tight, confident grotesque for the headline. Not a
-  serif. Not Inter at 700.
-- **Body** — a clean, highly readable sans at comfortable size. Mobile
-  body text should not go below 16px.
-- **Utility/mono** — a monospace face for data-flavored elements: the
-  by-hand/engineered table, field labels, the `utm_source` easter egg if
-  you want one. Mono is genuinely justified here — it's the native
-  vernacular of spreadsheets and data work, not decoration.
-
-Google Fonts via CDN is fine.
-
-### Signature element
-Pick **one** memorable thing and spend the boldness there. Strong
-candidate: the by-hand/engineered comparison rendered as a table where the
-"engineered" column cells fill in on scroll, mimicking a Clay enrichment
-running. That's the subject's own behavior used as the page's signature.
-
-If you do this, everything else stays quiet. One bold move, not five.
+- **Display** — Space Grotesk, for headlines.
+- **Body** — Inter. Mobile body text never below 16px.
+- **Mono** — JetBrains Mono, for data-flavoured elements and eyebrows.
 
 ### Motion
-Restrained. A scroll-triggered reveal on the signature element, subtle
-hover states on cards and the button. Nothing else. Scattered animation
-is a tell that a page was generated rather than designed.
+Restrained. A scroll-triggered reveal (`data-reveal`) and subtle hover
+states. Nothing else. Scattered animation is a tell that a page was
+generated rather than designed.
 
 ### Quality floor — non-negotiable
-- **Mobile-first.** Design the phone layout first; desktop is the
-  adaptation. Most traffic is a vertical phone from an Instagram story.
+- **Mobile-first.** Most traffic is a vertical phone from an Instagram
+  story. Design the phone layout first; desktop is the adaptation.
 - Visible keyboard focus states on every interactive element.
 - `prefers-reduced-motion` respected.
 - Tap targets minimum 44px.
-- Real contrast ratios — burnt orange on white needs checking for body
-  text, and probably fails. Use it for large text and fills, not small
-  copy.
+- **State must never be signalled by colour alone.** The signup chips
+  encode selection as an outline whose *weight* changes (an inset ring),
+  not just its hue, so it survives without colour vision. Keep the ring
+  inset so selecting never reflows the row.
 
 ---
 
@@ -296,18 +246,25 @@ is a tell that a page was generated rather than designed.
 ### Stack
 - **Plain static HTML.** Single `index.html`. No framework, no build
   step, no bundler, no `package.json`.
-- **Tailwind via CDN** for styling. Inline `<style>` for anything Tailwind
-  can't express cleanly.
-- **Inline `<script>`** for the form logic. No external JS files, no
-  libraries, no jQuery.
+- **Tailwind via CDN.** Inline `<style>` for anything Tailwind can't
+  express cleanly.
+- **Inline `<script>`** for the form logic. No external JS, no libraries.
 - Deploys to **Vercel** automatically on push to `main`.
 
 Rationale for no build step: the operator is not a full-time engineer and
 a broken build at 11pm during recruiting week is a real risk. A single
 HTML file cannot fail to build.
 
+### Tailwind CDN caveat — this one bites
+The CDN build generates CSS by scanning the DOM, so **utilities added to
+elements by JavaScript at runtime are not reliably styled.** Anything
+state-dependent goes in a plain CSS rule keyed off an attribute
+(`[aria-selected="true"]`, `input:checked + span`), never a JS-toggled
+class.
+
 ### Form submission
-Posts to a **Google Apps Script web app** endpoint. Two implementation
+Posts to a **Google Apps Script web app**. `SCRIPT_URL` is at the top of
+the script block and is **live** — it is no longer a placeholder. Two
 details that are easy to get wrong and expensive to debug:
 
 ```js
@@ -318,7 +275,6 @@ details that are easy to get wrong and expensive to debug:
 // GOTCHA 2: Body MUST be URLSearchParams(new FormData(form)).
 // Raw FormData sends multipart/form-data, which Apps Script does not
 // reliably parse into e.parameter — rows arrive blank with no error.
-// URLSearchParams sends url-encoded, which it parses correctly.
 
 await fetch(SCRIPT_URL, {
   method: 'POST',
@@ -327,25 +283,28 @@ await fetch(SCRIPT_URL, {
 });
 ```
 
-Leave `SCRIPT_URL` as a clearly-marked placeholder constant at the top of
-the script block until the Apps Script is deployed.
+Because the response is unreadable, **a failed write looks identical to a
+success in the browser.** The only place errors surface is Apps Script →
+Executions. `NOTES.md` §5 lists the silent failure modes.
 
 ### UTM capture
 Read `?utm_source=` from `window.location.search` on page load and write
 it into the hidden input. Default to `"direct"` when absent. Do this
 before any user interaction so it's captured even on a fast submit.
 
-### Receiving end (Apps Script, for reference)
-Appends one row per submission to a sheet tab named `Signups`, in this
-column order:
+### Receiving end (Apps Script)
+`apps-script/Code.gs` appends one row per submission to the `Signups` tab
+in this column order:
 
 ```
-timestamp | name | email | major | year | cohort_interest |
-availability | goal | utm_source
+timestamp | name | email | ut_eid | major | year |
+availability_days | goal | utm_source | comments
 ```
 
-Column order is load-bearing — this sheet is the seed list for a Clay
-table downstream. Don't reorder it without updating the script.
+**Column order is load-bearing** — this sheet is the seed list for a Clay
+table downstream. Add new fields at the END. `timestamp` is written
+server-side; set both the spreadsheet and the Apps Script project to
+Central Time or it records in Pacific.
 
 ---
 
@@ -367,15 +326,13 @@ confirm first.
 - No calendar embed, no event list
 - No blog
 
-Member management, cohort tracking, and outreach are a later phase and
-they happen in Clay, not in this repo. The scope of this repo is: one
-page, one form, one row per person.
+Member management and outreach are a later phase and they happen in Clay,
+not in this repo. The scope of this repo is: one page, one form, one row
+per person.
 
 ---
 
 ## 9. Acceptance criteria
-
-The build is done when all of these are true:
 
 - [ ] Loads and is fully usable on a 375px-wide viewport
 - [ ] Every section from §5 is present, in order
@@ -383,25 +340,23 @@ The build is done when all of these are true:
       engineering"
 - [ ] "Engineering" is defused (any major, no CS degree) within one
       screen of first use
-- [ ] Cards expand in place — no modal, no navigation, no scroll jump
-- [ ] `availability` is hidden until `cohort_interest` is checked
 - [ ] `utm_source` populates from the query string; defaults to `direct`
 - [ ] Submit uses `no-cors` + `URLSearchParams`, and replaces the form
       with a confirmation in place
+- [ ] Repeated checkbox keys are joined before POSTing
 - [ ] Zero invented testimonials, outcomes, or member counts
-- [ ] Zero hardcoded meeting times
+- [ ] Zero hardcoded meeting times; no cap, cohort, or application
 - [ ] Keyboard-navigable with visible focus states
+- [ ] No interactive state relies on colour alone
 - [ ] `prefers-reduced-motion` respected
-- [ ] No build step required — `index.html` opens correctly from the
-      filesystem
+- [ ] No build step required — `index.html` opens from the filesystem
 
 ---
 
 ## 10. Working notes
 
-- Ship the ugly version first. Deploy, then iterate on copy against a
-  real screen. Copy that reads fine in an editor often reads wrong on a
-  phone.
+- Deploy, then iterate on copy against a real screen. Copy that reads
+  fine in an editor often reads wrong on a phone.
 - The form is the point. If a design decision and a conversion decision
   conflict, conversion wins.
 - When in doubt about copy, cut it. The reader is skimming on a phone
