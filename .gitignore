@@ -1,2 +1,8 @@
 .DS_Store
 **/.DS_Store
+
+# Clay brand source files — huge originals, kept local.
+# Web-sized copies that the site actually uses live in clay-assets/web/.
+Campus-Ambassador-Assets/Tiles + Badge/
+Campus-Ambassador-Assets/LinkedIn-Banners/
+Campus-Ambassador-Assets/Campus Ambassador profile-pic.png
