@@ -185,6 +185,15 @@ Contact email and Instagram, both real, plus a link to clay.com.
 
 ## 6. Design spec
 
+### The Clay brand sheet is the authority
+`Campus-Ambassador-Assets/Clay on Campus—Design-Dos-Donts.pdf` sets four
+rules and they outrank anything below: the logo needs a high-contrast
+background; only Poppins and Inter; no stock imagery, and Clay's tiles
+must never be rotated or stacked; stick to Clay's palette, 2–3 colours
+at a time. Clay's official lockup lives in `clay-assets/web/` — use it,
+unmodified and unrotated. `ut_clay_png_assets/web/clay logo.png` is a
+rearranged lockup and must not be used.
+
 ### Direction
 Sparse, precise, grid-derived. The page should feel like something built
 by someone competent, not something bought. Not generic SaaS gradients,
@@ -198,30 +207,40 @@ not a startup landing page template.
 Also avoid: purple-to-blue gradients, floating 3D blobs, glassmorphism, a
 stats bar of three big numbers under the hero.
 
-### Colour — roughly 90% neutral / 7% Clay Orange / 3% supporting pastels
-Tokens live in the `tailwind.config` block at the top of `index.html`.
+### Colour — Clay's own palette plus one burnt orange
+Governed by **`Campus-Ambassador-Assets/Clay on Campus—Design-Dos-Donts.pdf`**,
+which is Clay's brand sheet. Tokens live in `tailwind.config` at the top
+of `index.html`. Every colour on the page is from that sheet, from the
+burnt-orange family below, or a neutral. **Nothing else.**
 
 - **Neutrals** carry the page: `ink #1F1F1F`, `muted #5C5C5C`,
-  `page #FAF9F7`, `subtle #F3F1ED`, `line #E2E0DC`.
-- **Clay Orange `#F26B4D`** is a **fill colour only** — white on it is
-  3.01:1, so buttons take ink text, never white.
-- `brandText #DC583C` is for **large headline emphasis only**.
-  `brandDeep #C74A2E` is the only orange that passes for small text
-  (4.72:1 on white).
+  `page #FAF9F7`, `subtle #F3F1ED`, `line #E2E0DC`. The sheet permits
+  black and white, which is what these are.
+- **Clay's three families**, and only these, used for containers, icons
+  and borders — never body text:
+  - blue `#001433 #395AFA #429EFF #BEDFFE #F0F8FF`
+  - gold `#372201 #9E5802 #FDBE11 #FBE189 #FEFAE8`
+  - pink `#46022F #CC089E #FF70D2 #F8B9E4 #FFF0FA`
+  The sheet says stick to 2–3 colours at a time. Three families is the ceiling.
+- **Burnt orange `#BF5700`** is the accent. It is UT's own orange, and it
+  lands in Clay's gold family — 4.59:1 on white, matching the 5.1–5.5
+  band Clay's other saturated steps sit in.
+  - It passes for **small text on white**, so one token covers both text
+    and fills.
+  - **It takes WHITE text on it (4.59), never ink (3.59).** This is the
+    opposite of the old Clay Orange. Never put `text-ink` on `bg-brand`.
+  - Tints follow Clay's own rhythm: `brandBright #FF8A3D`,
+    `brandLight #FFD6B8`, `paleOrange #FFF4EC`, `brandHover/Deep #A34A00`.
 - `faint #8A8A8A` is decorative only — never body copy.
-- Supporting pastels are for containers, icons and borders — never text.
 
-**There are exactly three orange headline phrases on the page.** Keep it
-that way. If a change adds a fourth, take one away.
+If a change introduces a colour that is not on this list, it is wrong.
 
-Note this is Clay Orange, not UT burnt orange. The brand being borrowed
-here is Clay's; the UT connection is carried by the longhorn, the tower,
-and the copy.
-
-### Typography
-- **Display** — Space Grotesk, for headlines.
+### Typography — only two faces are permitted
+Clay's brand sheet: *"use either ① Poppins or ② Inter … do NOT use any
+other fonts."* Space Grotesk and JetBrains Mono were both removed for
+this reason. Do not reintroduce them or add a third face.
+- **Display** — Poppins, for headlines and the tracked-caps eyebrows.
 - **Body** — Inter. Mobile body text never below 16px.
-- **Mono** — JetBrains Mono, for data-flavoured elements and eyebrows.
 
 ### Motion
 Restrained. A scroll-triggered reveal (`data-reveal`) and subtle hover

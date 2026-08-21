@@ -152,10 +152,16 @@ Until step 3 is merged, the live site keeps discarding signups.
   reliably styled, because the CDN generates CSS by scanning the DOM. The career-chip
   selected state was moved to a plain `[aria-selected="true"]` CSS rule for this reason.
   Do not restyle it with JS-toggled classes.
-- **Colour system** is roughly 90% neutral / 7% Clay Orange / 3% supporting pastels.
-  Clay Orange `#F26B4D` is a fill colour only — white on it is 3.01:1, so buttons use
-  dark text; orange headline emphasis uses `#DC583C` and small orange marks `#C74A2E`.
-  There are exactly three coloured headline phrases on the page. Keep it that way.
+- **Colour and type are now governed by Clay's brand sheet**,
+  `Campus-Ambassador-Assets/Clay on Campus—Design-Dos-Donts.pdf`. Every colour is from
+  Clay's palette, the burnt-orange family, or a neutral. Accent is `#BF5700` — UT's own
+  burnt orange, which sits inside Clay's gold family at 4.59:1 on white. It takes
+  **white** text on it, never ink. Fonts are Poppins and Inter only; Space Grotesk and
+  JetBrains Mono were removed because the sheet forbids any other face.
+- **Clay's official logo** is `clay-assets/web/clay-logo-black.png`, used unrotated.
+  The old `ut_clay_png_assets/web/clay logo.png` is a rearranged lockup — do not use it.
+- **Clay tiles** (`clay-assets/web/tile*.png`) are used as list bullets. The sheet allows
+  scaling them but forbids rotating or stacking them.
 - **Contact details in the footer** are real: `clay.utexas@gmail.com` and
   `@texas.clay` (https://www.instagram.com/texas.clay/).
 - **There is no cohort cap.** All "15 students" / "first cohort" wording was removed

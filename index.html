@@ -12,7 +12,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="ut_clay_png_assets/web/bevo.png">
 
 <script src="https://cdn.tailwindcss.com"></script>
@@ -29,27 +29,42 @@
           subtle:     '#F3F1ED',
           line:       '#E2E0DC',
 
-          /* Clay Orange — the one accent that carries meaning */
-          brand:      '#F26B4D',  /* fills only: white on it is 3.01, so it takes ink text */
-          brandHover: '#E9583C',
-          brandText:  '#DC583C',  /* large headline emphasis only (3.63-3.82) */
-          brandDeep:  '#C74A2E',  /* small orange text: 4.72 on white */
-          paleOrange: '#FCE9E3',
+          /* Burnt orange — UT's own, and it sits in Clay's gold family.
+             4.59 on white, so it is safe for small text AND takes WHITE
+             text on it (ink on it is only 3.59). Never ink on brand. */
+          brand:      '#BF5700',
+          brandHover: '#A34A00',
+          brandText:  '#BF5700',
+          brandDeep:  '#A34A00',
+          brandBright:'#FF8A3D',
+          brandLight: '#FFD6B8',
+          paleOrange: '#FFF4EC',
 
-          /* Supporting palette: containers, icons and borders — never body text */
-          sBlue:      '#A9C5E8',
-          sGreen:     '#B8D8BE',
-          sYellow:    '#F2D675',
-          sLav:       '#C8B8E8',
-          paleBlue:   '#EDF3FB',
-          paleGreen:  '#EEF6F0',
-          paleYellow: '#FCF4DC',
-          paleLav:    '#F2EEFA'
+          /* Clay's own palette. Three families only — blue, gold, pink —
+             which keeps us inside the "2-3 colours at a time" rule.
+             Containers, icons and borders; never body text. */
+          clayNavy:   '#001433',
+          clayBlue:   '#395AFA',
+          sBlue:      '#429EFF',
+          paleBlue:   '#F0F8FF',
+          lightBlue:  '#BEDFFE',
+          clayBrown:  '#372201',
+          clayGold:   '#9E5802',
+          sYellow:    '#FDBE11',
+          paleYellow: '#FEFAE8',
+          lightYellow:'#FBE189',
+          clayPlum:   '#46022F',
+          clayPink:   '#CC089E',
+          sLav:       '#FF70D2',
+          paleLav:    '#FFF0FA',
+          lightPink:  '#F8B9E4',
+          sGreen:     '#FDBE11',
+          paleGreen:  '#FEFAE8'
         },
         fontFamily: {
-          display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+          display: ['Poppins', 'system-ui', 'sans-serif'],
           sans:    ['Inter', 'system-ui', 'sans-serif'],
-          mono:    ['"JetBrains Mono"', 'ui-monospace', 'monospace']
+          mono:    ['Poppins', 'system-ui', 'sans-serif']
         },
         maxWidth: { shell: '1280px' }
       }
@@ -70,6 +85,8 @@
   /* Clay objects: soft contact shadow, never a box */
   .clay-obj { filter: drop-shadow(0 14px 18px rgba(31,31,31,.14)); }
   .clay-obj-sm { filter: drop-shadow(0 8px 10px rgba(31,31,31,.12)); }
+  /* Clay tiles used as bullets. Never rotated, never stacked — brand rule. */
+  .clay-bullet { filter: drop-shadow(0 2px 3px rgba(31,31,31,.16)); }
 
   /* Reveal */
   .reveal { opacity: 0; transform: translateY(14px);
@@ -78,11 +95,11 @@
   .reveal.in { opacity: 1; transform: none; }
 
   #progress { position:absolute; left:0; bottom:-1px; height:2px; width:100%;
-              transform: scaleX(var(--p,0)); transform-origin:0 50%; background:#F26B4D; }
+              transform: scaleX(var(--p,0)); transform-origin:0 50%; background:#BF5700; }
 
   nav a[aria-current="true"] {
     color:#1F1F1F; font-weight:500;
-    text-decoration: underline; text-decoration-color:#F26B4D;
+    text-decoration: underline; text-decoration-color:#BF5700;
     text-decoration-thickness:2px; text-underline-offset:8px;
   }
 
@@ -90,8 +107,8 @@
      rather than JS-toggled utility classes: the Tailwind CDN generates classes
      by scanning the DOM, so utilities added at runtime are not reliable. */
   .career-tab[aria-selected="true"] {
-    background: #FCE9E3;
-    border-color: #F26B4D;
+    background: #FFF4EC;
+    border-color: #BF5700;
     font-weight: 600;
   }
   .career-panel[hidden] { display:none; }
@@ -114,7 +131,7 @@
   select { -webkit-appearance:none; appearance:none;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%235C5C5C' stroke-width='1.6' d='M1 1.5 6 6.5l5-5'/%3E%3C/svg%3E");
     background-repeat:no-repeat; background-position:right 1rem center; }
-  input[type="checkbox"] { accent-color:#F26B4D; }
+  input[type="checkbox"] { accent-color:#BF5700; }
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior:auto; }
@@ -153,7 +170,7 @@
     </nav>
 
     <div class="ml-auto flex items-center gap-2">
-      <a href="#signup" class="inline-flex min-h-[44px] items-center rounded-xl bg-brand px-5 text-[14px] font-semibold text-ink transition hover:bg-brandHover">Join</a>
+      <a href="#signup" class="inline-flex min-h-[44px] items-center rounded-xl bg-brand px-5 text-[14px] font-semibold text-white transition hover:bg-brandHover">Join</a>
       <button type="button" id="menu-btn" aria-expanded="false" aria-controls="mobile-menu"
               class="flex h-11 w-11 items-center justify-center rounded-xl border border-line md:hidden">
         <span class="sr-only">Menu</span>
@@ -203,7 +220,7 @@
 
         <div class="mt-6 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:items-center">
           <a href="#signup"
-             class="inline-flex min-h-[54px] items-center justify-center rounded-xl bg-brand px-8 text-base font-semibold text-ink transition hover:bg-brandHover">
+             class="inline-flex min-h-[54px] items-center justify-center rounded-xl bg-brand px-8 text-base font-semibold text-white transition hover:bg-brandHover">
             Join Clay Club
           </a>
           <a href="#gtm"
@@ -223,8 +240,8 @@
              row of icons above a mascot. -->
         <!-- Clay is the largest object in the composition: this is Clay Club,
              at UT. Bevo anchors the bottom but reads second. -->
-        <img src="ut_clay_png_assets/web/clay%20logo.png" alt="" aria-hidden="true" width="600" height="321"
-             class="clay-obj absolute left-[10%] top-[2%] z-40 w-[80%] -rotate-[3deg] sm:left-[14%] sm:w-[72%]">
+        <img src="clay-assets/web/clay-logo-black.png" alt="" aria-hidden="true" width="720" height="224"
+             class="clay-obj absolute left-[5%] top-[3%] z-40 w-[90%] sm:left-[8%] sm:w-[84%]">
 
         <img src="ut_clay_png_assets/web/ut%20letters.png" alt="" aria-hidden="true" width="700" height="467"
              class="clay-obj absolute left-[-2%] top-[62%] z-20 w-[27%] -rotate-[12deg] sm:left-[9%] sm:top-[40%] sm:w-[25%] sm:-rotate-[24deg]">
@@ -270,28 +287,28 @@
         <div class="mt-10 grid gap-x-8 gap-y-8 sm:mt-14 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4" data-reveal-stagger>
           <div>
             <svg class="h-9 w-9" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <circle cx="9" cy="8" r="3.2" fill="#F26B4D"/><circle cx="16.5" cy="9" r="2.4" fill="#F9B5A3"/>
-              <path d="M3.4 18.2c0-3 2.5-4.8 5.6-4.8s5.6 1.8 5.6 4.8z" fill="#F26B4D"/>
-              <path d="M15.2 13.9c2.6.2 4.4 1.8 4.4 4.3h-4.1z" fill="#F9B5A3"/>
+              <circle cx="9" cy="8" r="3.2" fill="#BF5700"/><circle cx="16.5" cy="9" r="2.4" fill="#FFD6B8"/>
+              <path d="M3.4 18.2c0-3 2.5-4.8 5.6-4.8s5.6 1.8 5.6 4.8z" fill="#BF5700"/>
+              <path d="M15.2 13.9c2.6.2 4.4 1.8 4.4 4.3h-4.1z" fill="#FFD6B8"/>
             </svg>
             <p class="mt-4 font-display text-[19px] font-semibold leading-snug text-ink">Who should we sell to?</p>
           </div>
           <div>
             <svg class="h-9 w-9" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <circle cx="10.5" cy="10.5" r="6.3" fill="#FDDDD4" stroke="#F26B4D" stroke-width="2.4"/>
-              <path d="M15.4 15.4 20 20" stroke="#F26B4D" stroke-width="2.8" stroke-linecap="round"/>
+              <circle cx="10.5" cy="10.5" r="6.3" fill="#FFD6B8" stroke="#BF5700" stroke-width="2.4"/>
+              <path d="M15.4 15.4 20 20" stroke="#BF5700" stroke-width="2.8" stroke-linecap="round"/>
             </svg>
             <p class="mt-4 font-display text-[19px] font-semibold leading-snug text-ink">How do we find them?</p>
           </div>
           <div>
             <svg class="h-9 w-9" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 20.5S3.6 15.4 3.6 9.6A4.4 4.4 0 0 1 12 7.7a4.4 4.4 0 0 1 8.4 1.9c0 5.8-8.4 10.9-8.4 10.9z" fill="#F26B4D"/>
+              <path d="M12 20.5S3.6 15.4 3.6 9.6A4.4 4.4 0 0 1 12 7.7a4.4 4.4 0 0 1 8.4 1.9c0 5.8-8.4 10.9-8.4 10.9z" fill="#BF5700"/>
             </svg>
             <p class="mt-4 font-display text-[19px] font-semibold leading-snug text-ink">What do they care about?</p>
           </div>
           <div>
             <svg class="h-9 w-9" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M21 3 2.5 10.4l7 2.4z" fill="#F26B4D"/><path d="M21 3 12 21l-2.5-8.2z" fill="#F9B5A3"/>
+              <path d="M21 3 2.5 10.4l7 2.4z" fill="#BF5700"/><path d="M21 3 12 21l-2.5-8.2z" fill="#FFD6B8"/>
             </svg>
             <p class="mt-4 font-display text-[19px] font-semibold leading-snug text-ink">How do we reach them?</p>
           </div>
@@ -365,7 +382,7 @@
         </div>
 
         <div class="flex justify-center py-2 sm:px-2 sm:py-0">
-          <span class="flex h-11 w-11 items-center justify-center rounded-full bg-brand text-ink" aria-hidden="true">
+          <span class="flex h-11 w-11 items-center justify-center rounded-full bg-brand text-white" aria-hidden="true">
             <svg class="h-4 w-4 rotate-90 sm:rotate-0" viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
         </div>
@@ -373,11 +390,11 @@
         <div class="rounded-2xl border border-brand/30 bg-paleOrange p-7">
           <p class="font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-ink">Now</p>
           <ul class="mt-5 space-y-3.5 text-[16px] font-medium leading-relaxed sm:text-[15px]">
-            <li class="flex gap-3"><svg class="mt-[5px] h-3.5 w-3.5 shrink-0" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="#C74A2E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Build the right list</li>
-            <li class="flex gap-3"><svg class="mt-[5px] h-3.5 w-3.5 shrink-0" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="#C74A2E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Add data automatically</li>
-            <li class="flex gap-3"><svg class="mt-[5px] h-3.5 w-3.5 shrink-0" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="#C74A2E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Use AI to research each company</li>
-            <li class="flex gap-3"><svg class="mt-[5px] h-3.5 w-3.5 shrink-0" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="#C74A2E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Prioritize the best opportunities</li>
-            <li class="flex gap-3"><svg class="mt-[5px] h-3.5 w-3.5 shrink-0" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="#C74A2E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Build workflows you can reuse</li>
+            <li class="flex items-start gap-3"><img src="clay-assets/web/tile-2.png" alt="" aria-hidden="true" width="96" height="96" class="clay-bullet mt-[1px] h-5 w-5 shrink-0">Build the right list</li>
+            <li class="flex items-start gap-3"><img src="clay-assets/web/tile-4.png" alt="" aria-hidden="true" width="96" height="96" class="clay-bullet mt-[1px] h-5 w-5 shrink-0">Add data automatically</li>
+            <li class="flex items-start gap-3"><img src="clay-assets/web/tile.png" alt="" aria-hidden="true" width="96" height="96" class="clay-bullet mt-[1px] h-5 w-5 shrink-0">Use AI to research each company</li>
+            <li class="flex items-start gap-3"><img src="clay-assets/web/tile-3.png" alt="" aria-hidden="true" width="96" height="96" class="clay-bullet mt-[1px] h-5 w-5 shrink-0">Prioritize the best opportunities</li>
+            <li class="flex items-start gap-3"><img src="clay-assets/web/tile-5.png" alt="" aria-hidden="true" width="96" height="96" class="clay-bullet mt-[1px] h-5 w-5 shrink-0">Build workflows you can reuse</li>
           </ul>
         </div>
       </div>
@@ -424,10 +441,10 @@
     <div class="relative z-10 mt-10 grid gap-x-12 gap-y-8 sm:mt-14 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-3" data-reveal-stagger>
       <div>
         <svg class="h-9 w-9" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <rect x="2.5" y="4.5" width="19" height="13" rx="2.5" fill="#F26B4D"/>
+          <rect x="2.5" y="4.5" width="19" height="13" rx="2.5" fill="#BF5700"/>
           <rect x="5.5" y="7.5" width="8" height="1.8" rx=".9" fill="#fff"/>
-          <rect x="5.5" y="11" width="11" height="1.8" rx=".9" fill="#FDDDD4"/>
-          <rect x="9" y="19" width="6" height="1.8" rx=".9" fill="#F26B4D"/>
+          <rect x="5.5" y="11" width="11" height="1.8" rx=".9" fill="#FFD6B8"/>
+          <rect x="9" y="19" width="6" height="1.8" rx=".9" fill="#BF5700"/>
         </svg>
         <h3 class="mt-4 font-display text-[19px] font-semibold">Workshops</h3>
         <p class="mt-1.5 text-[16px] leading-relaxed text-muted sm:text-[15px]">Learn Clay, GTM strategy, AI research, enrichment, and automation.</p>
@@ -435,8 +452,8 @@
 
       <div>
         <svg class="h-9 w-9" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M4 17.5 9 12l3.5 3.5L20 8" stroke="#F26B4D" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="20" cy="8" r="2.6" fill="#F26B4D"/>
+          <path d="M4 17.5 9 12l3.5 3.5L20 8" stroke="#BF5700" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="20" cy="8" r="2.6" fill="#BF5700"/>
         </svg>
         <h3 class="mt-4 font-display text-[19px] font-semibold">Builds</h3>
         <p class="mt-1.5 text-[16px] leading-relaxed text-muted sm:text-[15px]">Build real GTM workflows from start to finish.</p>
@@ -444,8 +461,8 @@
 
       <div>
         <svg class="h-9 w-9" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M12 2.5c3.6 1 6.5 4.2 6.5 8 0 2.6-1.3 4.6-3 6.2l-.7 3.3H9.2l-.7-3.3c-1.7-1.6-3-3.6-3-6.2 0-3.8 2.9-7 6.5-8z" fill="#F26B4D"/>
-          <rect x="9.2" y="20.4" width="5.6" height="1.6" rx=".8" fill="#F9B5A3"/>
+          <path d="M12 2.5c3.6 1 6.5 4.2 6.5 8 0 2.6-1.3 4.6-3 6.2l-.7 3.3H9.2l-.7-3.3c-1.7-1.6-3-3.6-3-6.2 0-3.8 2.9-7 6.5-8z" fill="#BF5700"/>
+          <rect x="9.2" y="20.4" width="5.6" height="1.6" rx=".8" fill="#FFD6B8"/>
         </svg>
         <h3 class="mt-4 font-display text-[19px] font-semibold">Hackathons</h3>
         <p class="mt-1.5 text-[16px] leading-relaxed text-muted sm:text-[15px]">Work in teams to solve GTM problems and build something fast.</p>
@@ -453,10 +470,10 @@
 
       <div>
         <svg class="h-9 w-9" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <rect x="3" y="5" width="18" height="14" rx="3" fill="#F26B4D"/>
+          <rect x="3" y="5" width="18" height="14" rx="3" fill="#BF5700"/>
           <rect x="6" y="8.5" width="5" height="1.7" rx=".85" fill="#fff"/>
-          <rect x="6" y="12" width="9" height="1.7" rx=".85" fill="#F9B5A3"/>
-          <rect x="6" y="15.5" width="7" height="1.7" rx=".85" fill="#F9B5A3"/>
+          <rect x="6" y="12" width="9" height="1.7" rx=".85" fill="#FFD6B8"/>
+          <rect x="6" y="15.5" width="7" height="1.7" rx=".85" fill="#FFD6B8"/>
         </svg>
         <h3 class="mt-4 font-display text-[19px] font-semibold">Real use cases</h3>
         <p class="mt-1.5 text-[16px] leading-relaxed text-muted sm:text-[15px]">Use Clay for recruiting, startups, student orgs, research, and more.</p>
@@ -464,9 +481,9 @@
 
       <div>
         <svg class="h-9 w-9" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <circle cx="8" cy="8.5" r="3.2" fill="#F26B4D"/><circle cx="16.4" cy="9.5" r="2.6" fill="#F9B5A3"/>
-          <path d="M2.4 18.8c0-3.1 2.5-5 5.6-5s5.6 1.9 5.6 5z" fill="#F26B4D"/>
-          <path d="M15 14.3c2.7.2 4.6 1.8 4.6 4.5h-4.3z" fill="#F9B5A3"/>
+          <circle cx="8" cy="8.5" r="3.2" fill="#BF5700"/><circle cx="16.4" cy="9.5" r="2.6" fill="#FFD6B8"/>
+          <path d="M2.4 18.8c0-3.1 2.5-5 5.6-5s5.6 1.9 5.6 5z" fill="#BF5700"/>
+          <path d="M15 14.3c2.7.2 4.6 1.8 4.6 4.5h-4.3z" fill="#FFD6B8"/>
         </svg>
         <h3 class="mt-4 font-display text-[19px] font-semibold">Community events</h3>
         <p class="mt-1.5 text-[16px] leading-relaxed text-muted sm:text-[15px]">Meet other students interested in GTM, sales, growth, startups, and AI.</p>
@@ -474,9 +491,9 @@
 
       <div class="lg:pr-24 2xl:pr-0">
         <svg class="h-9 w-9" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M5 10h14l-1.2 9.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z" fill="#F26B4D"/>
-          <path d="M8.5 10a3.5 3.5 0 1 1 7 0" stroke="#F26B4D" stroke-width="2.2" stroke-linecap="round"/>
-          <circle cx="12" cy="6" r="1.8" fill="#F9B5A3"/>
+          <path d="M5 10h14l-1.2 9.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z" fill="#BF5700"/>
+          <path d="M8.5 10a3.5 3.5 0 1 1 7 0" stroke="#BF5700" stroke-width="2.2" stroke-linecap="round"/>
+          <circle cx="12" cy="6" r="1.8" fill="#FFD6B8"/>
         </svg>
         <h3 class="mt-4 font-display text-[19px] font-semibold">Perks</h3>
         <p class="mt-1.5 text-[16px] leading-relaxed text-muted sm:text-[15px]">Free food, merch, and other event perks when available.</p>
@@ -499,7 +516,7 @@
       <button type="button" data-modal="use-internship"
               class="group flex h-full gap-4 rounded-2xl bg-paleOrange p-5 text-left transition hover:-translate-y-0.5">
         <span class="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white" aria-hidden="true">
-          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none"><rect x="3" y="7.5" width="18" height="12" rx="3" fill="#F26B4D"/><path d="M9 7.5V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5" stroke="#F26B4D" stroke-width="2"/><rect x="3" y="12" width="18" height="2.4" fill="#D9512F"/></svg>
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none"><rect x="3" y="7.5" width="18" height="12" rx="3" fill="#BF5700"/><path d="M9 7.5V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5" stroke="#BF5700" stroke-width="2"/><rect x="3" y="12" width="18" height="2.4" fill="#A34A00"/></svg>
         </span>
         <span class="min-w-0">
           <span class="block font-display text-[17px] font-semibold">Land an internship</span>
@@ -511,7 +528,7 @@
       <button type="button" data-modal="use-startups"
               class="group flex h-full gap-4 rounded-2xl bg-paleBlue p-5 text-left transition hover:-translate-y-0.5">
         <span class="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white" aria-hidden="true">
-          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none"><path d="M14 3c4 1 7 4 7 8l-4.5 4.5-5-5L16 6z" fill="#7FA8D8"/><path d="M11.5 10.5 6 16l2 2 5.5-5.5z" fill="#A9C5E8"/><path d="M5 17c-1.2 1.2-1.4 4-1.4 4s2.8-.2 4-1.4z" fill="#D9B23F"/></svg>
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none"><path d="M14 3c4 1 7 4 7 8l-4.5 4.5-5-5L16 6z" fill="#429EFF"/><path d="M11.5 10.5 6 16l2 2 5.5-5.5z" fill="#429EFF"/><path d="M5 17c-1.2 1.2-1.4 4-1.4 4s2.8-.2 4-1.4z" fill="#FDBE11"/></svg>
         </span>
         <span class="min-w-0">
           <span class="block font-display text-[17px] font-semibold">Find startups</span>
@@ -523,7 +540,7 @@
       <button type="button" data-modal="use-sponsors"
               class="group flex h-full gap-4 rounded-2xl bg-paleLav p-5 text-left transition hover:-translate-y-0.5">
         <span class="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white" aria-hidden="true">
-          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none"><circle cx="8" cy="8.5" r="3.2" fill="#A88FD4"/><circle cx="16.5" cy="9.5" r="2.6" fill="#C8B8E8"/><path d="M2.5 18.8c0-3.1 2.5-5 5.5-5s5.5 1.9 5.5 5z" fill="#A88FD4"/><path d="M15 14.3c2.7.2 4.5 1.8 4.5 4.5h-4.2z" fill="#C8B8E8"/></svg>
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none"><circle cx="8" cy="8.5" r="3.2" fill="#CC089E"/><circle cx="16.5" cy="9.5" r="2.6" fill="#F8B9E4"/><path d="M2.5 18.8c0-3.1 2.5-5 5.5-5s5.5 1.9 5.5 5z" fill="#CC089E"/><path d="M15 14.3c2.7.2 4.5 1.8 4.5 4.5h-4.2z" fill="#F8B9E4"/></svg>
         </span>
         <span class="min-w-0">
           <span class="block font-display text-[17px] font-semibold">Get org sponsors</span>
@@ -535,7 +552,7 @@
       <button type="button" data-modal="use-network"
               class="group flex h-full gap-4 rounded-2xl bg-paleYellow p-5 text-left transition hover:-translate-y-0.5">
         <span class="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white" aria-hidden="true">
-          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none"><circle cx="7.5" cy="8" r="3" fill="#D9B23F"/><circle cx="16" cy="8" r="3" fill="#B08A22"/><path d="M2 18.5c0-3 2.4-4.9 5.5-4.9s5.5 1.9 5.5 4.9z" fill="#D9B23F"/><path d="M11.5 18.5c0-3 2.4-4.9 5.5-4.9s5.5 1.9 5.5 4.9z" fill="#B08A22"/></svg>
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none"><circle cx="7.5" cy="8" r="3" fill="#FDBE11"/><circle cx="16" cy="8" r="3" fill="#9E5802"/><path d="M2 18.5c0-3 2.4-4.9 5.5-4.9s5.5 1.9 5.5 4.9z" fill="#FDBE11"/><path d="M11.5 18.5c0-3 2.4-4.9 5.5-4.9s5.5 1.9 5.5 4.9z" fill="#9E5802"/></svg>
         </span>
         <span class="min-w-0">
           <span class="block font-display text-[17px] font-semibold">Network smarter</span>
@@ -547,7 +564,7 @@
       <button type="button" data-modal="use-industry"
               class="group flex h-full gap-4 rounded-2xl bg-paleGreen p-5 text-left transition hover:-translate-y-0.5">
         <span class="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white" aria-hidden="true">
-          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="12" width="4.2" height="8" rx="1.6" fill="#B8D8BE"/><rect x="9.9" y="7" width="4.2" height="13" rx="1.6" fill="#79B085"/><rect x="16.3" y="3.5" width="4.2" height="16.5" rx="1.6" fill="#5E9670"/></svg>
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="12" width="4.2" height="8" rx="1.6" fill="#FBE189"/><rect x="9.9" y="7" width="4.2" height="13" rx="1.6" fill="#FDBE11"/><rect x="16.3" y="3.5" width="4.2" height="16.5" rx="1.6" fill="#9E5802"/></svg>
         </span>
         <span class="min-w-0">
           <span class="block font-display text-[17px] font-semibold">Research an industry</span>
@@ -559,7 +576,7 @@
       <button type="button" data-modal="use-founder"
               class="group flex h-full gap-4 rounded-2xl bg-subtle p-5 text-left transition hover:-translate-y-0.5">
         <span class="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white" aria-hidden="true">
-          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none"><path d="M12 12c0-4 2.6-7 6.5-7 0 4-2.5 7-6.5 7z" fill="#F26B4D"/><path d="M12 13c0-3.2-2.2-5.6-5.5-5.6 0 3.3 2.2 5.6 5.5 5.6z" fill="#8ED9AC"/><rect x="10.8" y="12" width="2.4" height="8.5" rx="1.2" fill="#D9512F"/></svg>
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none"><path d="M12 12c0-4 2.6-7 6.5-7 0 4-2.5 7-6.5 7z" fill="#BF5700"/><path d="M12 13c0-3.2-2.2-5.6-5.5-5.6 0 3.3 2.2 5.6 5.5 5.6z" fill="#FBE189"/><rect x="10.8" y="12" width="2.4" height="8.5" rx="1.2" fill="#A34A00"/></svg>
         </span>
         <span class="min-w-0">
           <span class="block font-display text-[17px] font-semibold">Grow your startup</span>
@@ -684,7 +701,7 @@
           <p id="form-error" class="text-[14px] font-medium text-brandDeep" role="alert" hidden></p>
 
           <button type="submit" id="submit-btn"
-                  class="min-h-[54px] w-full rounded-xl bg-brand px-6 text-base font-semibold text-ink transition hover:bg-brandHover disabled:opacity-60 sm:w-auto sm:px-10">
+                  class="min-h-[54px] w-full rounded-xl bg-brand px-6 text-base font-semibold text-white transition hover:bg-brandHover disabled:opacity-60 sm:w-auto sm:px-10">
             Join Clay Club
           </button>
         </form>
