@@ -159,7 +159,9 @@ Until step 3 is merged, the live site keeps discarding signups.
   **white** text on it, never ink. Fonts are Poppins and Inter only; Space Grotesk and
   JetBrains Mono were removed because the sheet forbids any other face.
 - **Clay's official logo** is `clay-assets/web/clay-logo-black.png`, used unrotated.
-  The old `ut_clay_png_assets/web/clay logo.png` is a rearranged lockup — do not use it.
+  The old rearranged lockup that used to live in `ut_clay_png_assets/` has been deleted,
+  so there is no non-compliant Clay mark left in the repo. Take new Clay assets from
+  `Campus-Ambassador-Assets/Logos/`, never from a rearranged copy.
 - **Clay tiles** (`clay-assets/web/tile*.png`) are used as list bullets. The sheet allows
   scaling them but forbids rotating or stacking them.
 - **Contact details in the footer** are real: `clay.utexas@gmail.com` and
