@@ -191,8 +191,9 @@ rules and they outrank anything below: the logo needs a high-contrast
 background; only Poppins and Inter; no stock imagery, and Clay's tiles
 must never be rotated or stacked; stick to Clay's palette, 2–3 colours
 at a time. Clay's official lockup lives in `clay-assets/web/` — use it,
-unmodified and unrotated. `ut_clay_png_assets/web/clay logo.png` is a
-rearranged lockup and must not be used.
+unmodified and unrotated. A rearranged lockup used to sit in
+`ut_clay_png_assets/`; it has been deleted. Source any new Clay mark from
+`Campus-Ambassador-Assets/Logos/`, never a rearranged copy.
 
 ### Direction
 Sparse, precise, grid-derived. The page should feel like something built
